@@ -4,23 +4,17 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\UrusanModel;
-use App\Models\BidangUrusanModel;
-use App\Models\ProgramModel;
 use App\Models\KegiatanModel;
 use App\Models\SubkegiatanModel;
 class SubkegiatanController extends BaseController
 {
-    protected $UrusanModel;
-    protected $ProgramModel;
-    protected $BidangUrusanModel;
+    // protected $UrusanModel;
+    // protected $ProgramModel;
+    // protected $BidangUrusanModel;
     protected $KegiatanModel;
     protected $SubkegiatanModel;
     public function __construct()
     {
-        $this->UrusanModel = new UrusanModel();
-        $this->BidangUrusanModel = new BidangUrusanModel();
-        $this->ProgramModel = new ProgramModel();
         $this->KegiatanModel = new KegiatanModel();
         $this->SubkegiatanModel = new SubkegiatanModel();
 
@@ -37,7 +31,7 @@ class SubkegiatanController extends BaseController
     public function create()
     {
         $data = [
-            'urusan' => $this->UrusanModel->findAll(),
+            'kegiatan' => $this->KegiatanModel->findAll(),
         ];
         return view('subkegiatan/create', $data);
     }
@@ -45,15 +39,14 @@ class SubkegiatanController extends BaseController
     public function store()
     {
         $data = [
-            'id_urusan' => $this->request->getPost('id_urusan'),
-            'id_bidang_urusan' => $this->request->getPost('id_bidang_urusan'),
-            'id_program' => $this->request->getPost('id_program'),
+            // 'id_urusan' => $this->request->getPost('id_urusan'),
+            // 'id_bidang_urusan' => $this->request->getPost('id_bidang_urusan'),
+            // 'id_program' => $this->request->getPost('id_program'),
             'id_kegiatan' => $this->request->getPost('id_kegiatan'),
             'kode_subkegiatan' => $this->request->getPost('kode_subkegiatan'),
-            'nomenklatur_urusan_provinsi' => $this->request->getPost('nomenklatur_urusan_provinsi'),
-            'kinerja' => $this->request->getPost('kinerja'),
-            'indikator' => $this->request->getPost('indikator'),
-            'satuan' => $this->request->getPost('satuan'),
+            'nama_subkegiatan' => $this->request->getPost('nama_subkegiatan'),
+            'bidang' => $this->request->getPost('bidang'),
+            'kode_bidang' => $this->request->getPost('kode_bidang'),
         ];
 
         $this->SubkegiatanModel->insert($data);
@@ -66,10 +59,10 @@ class SubkegiatanController extends BaseController
     {
         $data = [
             'subkegiatan' => $this->SubkegiatanModel->find($id),
-            'kegiatan' => $this->KegiatanModel->find($id),
-            'program' => $this->ProgramModel->find($id),
-            'bidang_urusan' => $this->BidangUrusanModel->findAll(),
-            'urusan' => $this->UrusanModel->findAll(),
+            'kegiatan' => $this->KegiatanModel->find(),
+            // 'program' => $this->ProgramModel->find($id),
+            // 'bidang_urusan' => $this->BidangUrusanModel->findAll(),
+            // 'urusan' => $this->UrusanModel->findAll(),
         ];
         return view('subkegiatan/edit', $data);
     }
@@ -82,10 +75,9 @@ class SubkegiatanController extends BaseController
             'id_program' => $this->request->getPost('id_program'),
             'id_kegiatan' => $this->request->getPost('id_kegiatan'),
             'kode_subkegiatan' => $this->request->getPost('kode_subkegiatan'),
-            'nomenklatur_urusan_provinsi' => $this->request->getPost('nomenklatur_urusan_provinsi'),
-            'kinerja' => $this->request->getPost('kinerja'),
-            'indikator' => $this->request->getPost('indikator'),
-            'satuan' => $this->request->getPost('satuan'),
+            'nama_subkegiatan' => $this->request->getPost('nama_subkegiatan'),
+            'bidang' => $this->request->getPost('bidang'),
+            'kode_bidang' => $this->request->getPost('kode_bidang'),
         ];
 
         $this->SubkegiatanModel->update($id, $data);
@@ -101,21 +93,21 @@ class SubkegiatanController extends BaseController
     }
 
     // AJAX METHOD FOR DEPENDENT DROPDOWN / CHAINED SELECT OPTION
-    public function getBidangUrusan($id)
-    {
-        $data = $this->BidangUrusanModel->where('id_urusan', $id)->findAll();
-        return json_encode($data);
-    }
+    // public function getBidangUrusan($id)
+    // {
+    //     $data = $this->BidangUrusanModel->where('id_urusan', $id)->findAll();
+    //     return json_encode($data);
+    // }
 
-    public function getProgram($id)
-    {
-        $data = $this->ProgramModel->where('id_bidang_urusan', $id)->findAll();
-        return json_encode($data);
-    }
+    // public function getProgram($id)
+    // {
+    //     $data = $this->ProgramModel->where('id_bidang_urusan', $id)->findAll();
+    //     return json_encode($data);
+    // }
 
-    public function getKegiatan($id)
-    {
-        $data = $this->KegiatanModel->where('id_program', $id)->findAll();
-        return json_encode($data);
-    }
+    // public function getKegiatan($id)
+    // {
+    //     $data = $this->KegiatanModel->where('id_program', $id)->findAll();
+    //     return json_encode($data);
+    // }
 }

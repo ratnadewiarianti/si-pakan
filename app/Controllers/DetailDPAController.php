@@ -29,9 +29,28 @@ class DetailDPAController extends BaseController
     $data = [
         'detaildpa' => $this->DetailDPAModel->getDetailDPA($id), // Mengirimkan ID
     ];
+    
+    if (!empty($data['detaildpa'])) {
+        foreach ($data['detaildpa'] as &$item) {
+            $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id']);
+            $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id']);
+        }
+    }
 
     return view('detaildpa/show', $data);
 }
+
+
+
+public function show1($id)
+    {
+        $data['detaildpa'] = $this->DetailDPAModel->getDetailDPA($id);
+        foreach ($data['detaildpa'] as &$rak) {
+            $totalRak = $this->DetailDPAModel->getTotalJumlah($rak['id']);
+            $rak['total_rak'] = $totalRak;
+        }
+        return view('detaildpa/show', $data);
+    }
 
 
 
@@ -59,7 +78,7 @@ class DetailDPAController extends BaseController
             'id_dpa' => $this->request->getPost('id_dpa'),
             'id_subkegiatan' => $this->request->getPost('id_subkegiatan'),
             'id_rekening' => $this->request->getPost('id_rekening'),
-            'jumlah' => $this->request->getPost('jumlah'),
+            // 'jumlah' => $this->request->getPost('jumlah'),
         ];
 
         $this->DetailDPAModel->insert($data);
@@ -97,8 +116,8 @@ class DetailDPAController extends BaseController
         $data = [
             'id_subkegiatan' => $this->request->getPost('id_subkegiatan'),
             'id_rekening' => $this->request->getPost('id_rekening'),
-            'jumlah' => $this->request->getPost('jumlah'),
-            'jumlah_perubahan' => $this->request->getPost('jumlah_perubahan'), // Tambahkan data jumlah_perubahan
+            // 'jumlah' => $this->request->getPost('jumlah'),
+            // 'jumlah_perubahan' => $this->request->getPost('jumlah_perubahan'), // Tambahkan data jumlah_perubahan
         ];
     
         // Update data detail DPA berdasarkan ID
@@ -110,12 +129,6 @@ class DetailDPAController extends BaseController
             return "Gagal memperbarui data.";
         }
     }
-    
-    
-
-    
-    
-
 
     public function destroy($id)
     {
@@ -131,48 +144,5 @@ class DetailDPAController extends BaseController
         // Redirect kembali ke halaman show dengan id_rakbelanja
         return redirect()->to("/detaildpa/show/$id_dpa");
     }
-
-
-    public function edit_jumlah_perubahan($id)
-{
-    // Ambil detail rak belanja berdasarkan ID
-    $detaildpa = $this->DetailDPAModel->find($id);
-
-    $data = [
-        'detaildpa' => $detaildpa,
-    ];
-
-    return view('detaildpa/jumlah_perubahan', $data);
-}
-
-public function update_jumlah_perubahan($id)
-{
-    // Validasi data yang dikirim dari formulir
-    $validationRules = [
-        'jumlah_perubahan' => 'required|numeric', // Sesuaikan dengan aturan validasi yang Anda butuhkan
-    ];
-
-    if (!$this->validate($validationRules)) {
-        // Jika validasi gagal, kembalikan pengguna ke halaman tambah jumlah perubahan dengan pesan kesalahan
-        return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-    }
-
-    $data = [
-        'jumlah_perubahan' => $this->request->getPost('jumlah_perubahan'),
-    ];
-
-    $this->DetailDPAModel->update($id, $data);
-
-    // Ambil ID DPA terkait dari data yang diubah
-    $detailDPA = $this->DetailDPAModel->find($id);
-    $id_dpa = $detailDPA['id_dpa'];
-
-    // Redirect kembali ke halaman show dengan menyertakan ID DPA
-    return redirect()->to("/detaildpa/show/{$id_dpa}");
-}
-
-
-
-
 
 }

@@ -8,7 +8,7 @@
                 <div class="col-12 col-xl-8 ">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Master</a></li>
-                        <li class="breadcrumb-item"><a href="/subkegiatan"> SubKegiatan</a></li>
+                        <li class="breadcrumb-item"><a href="/pajak">Pajak</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Data</li>
                     </ol>
                 </div>
@@ -25,10 +25,10 @@
                     <div class="card-body">
                         <div class="row mb-4">
                             <div class="col-10">
-                                <p class="card-title">Master Data SubKegiatan</p>
+                                <p class="card-title">Master Data Pajak</p>
                             </div>
                             <div class="col-2 text-end">
-                                <a class="btn btn-success btn-sm" href="/subkegiatan/create">Tambah Data</a>
+                                <a class="btn btn-success btn-sm" href="/pajak/create">Tambah Data</a>
                             </div>
                         </div>
                         <div class="row">
@@ -38,32 +38,28 @@
                                         <thead>
                                             <tr>
                                                 <th class="">No</th>
-                                                <th>Kode SubKegiatan</th>
-                                                <th>Uraian Subkegiatan</th>
-                                                <th>Bidang</th>
-                                                <th>Kode Bidang</th>
+                                                <th>Nama Pajak</th>
+                                                <th>Persen (%)</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if (!empty($subkegiatan)) : ?>
+                                            <?php if (!empty($pajak)) : ?>
                                                 <?php $no = 1; ?>
-                                                <?php foreach ($subkegiatan as $row) : ?>
+                                                <?php foreach ($pajak as $row) : ?>
                                                     <tr>
                                                         <td><?= $no++; ?></td>
-                                                        <td><?= $row['kode_subkegiatan1']; ?></td>
-                                                        <td><?= $row['nama_subkegiatan']; ?></td>
-                                                        <td><?= $row['bidang']; ?></td>
-                                                        <td><?= $row['kode_bidang']; ?></td>
+                                                        <td><?= $row['nama_pajak']; ?></td>
+                                                        <td><?= $row['persen']; ?></td>
                                                         <td>
-                                                            <a href="/subkegiatan/edit/<?= $row['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                                            <a href="/subkegiatan/delete/<?= $row['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                                            <a href="/pajak/edit/<?= $row['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                                            <a href="/pajak/delete/<?= $row['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php else : ?>
                                                 <tr>
-                                                    <td colspan="4" class="text-center">Tidak ada data Subkegiatan.</td>
+                                                    <td colspan="6" class="text-center">Tidak ada data pajak.</td>
                                                 </tr>
                                             <?php endif; ?>
 

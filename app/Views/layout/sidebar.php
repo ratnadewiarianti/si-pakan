@@ -26,6 +26,7 @@
                    <ul class="nav flex-column sub-menu">
                        <li class="nav-item <?= (strpos($uri, '/user/') !== false) ? 'active' : '' ?>"> <a class="nav-link" href="/user">User</a></li>
                        <li class="nav-item <?= (strpos($uri, '/karyawan/') !== false) ? 'active' : '' ?>"> <a class="nav-link" href="/karyawan">Karyawan</a></li>
+                       <li class="nav-item <?= (strpos($uri, '/pajak/') !== false) ? 'active' : '' ?>"> <a class="nav-link" href="/pajak">Pajak</a></li>
                        
                    </ul>
                </div>
@@ -120,7 +121,7 @@
                </a>
                <div class="collapse" id="ui-basic7">
                    <ul class="nav flex-column sub-menu">
-                       <li class="nav-item <?= (strpos($uri, '/penatausahaan/') !== false) ? 'active' : '' ?>"> <a class="nav-link" href="/penatausahaan">Penatausahaan</a></li>
+                       <li class="nav-item <?= (strpos($uri, '/bp_kas_tunai/') !== false) ? 'active' : '' ?>"> <a class="nav-link" href="/bp_kas_tunai">Buku Pembantu Kas Tunai</a></li>
                    </ul>
                </div>
                </li>

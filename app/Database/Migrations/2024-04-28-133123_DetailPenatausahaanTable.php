@@ -44,15 +44,13 @@ class DetailPenataushaanTable extends Migration
             ],
             'sudah_terima_dari' => [
                 'type' => 'VARCHAR',
-                'constraint' => 50
+                'constraint' => 200
             ],
             'uang_sebanyak' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50
+                'type' => 'TEXT',
             ],
             'untuk_pembayaran' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50
+                'type' => 'TEXT',
             ],
             'pajak_daerah' => [
                 'type' => 'VARCHAR',

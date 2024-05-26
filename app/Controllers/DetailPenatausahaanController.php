@@ -9,13 +9,18 @@ use App\Models\DetailPenatausahaanModel;
 use App\Models\DetailDPAModel;
 use App\Models\SubRincianObjekModel;
 use App\Models\KaryawanModel;
+use App\Models\PenatausahaanModel;
+use App\Models\KeteranganModel;
 class DetailPenatausahaanController extends BaseController
 {
+    protected $PenataUsahaanModel;
     protected $DetailDPAModel;
     protected $SubRincianObjekModel;
     protected $DetailPenatausahaanModel;
     protected $Detail2PenatausahaanModel;
     protected $KaryawanModel;
+    protected $KeteranganModel;
+
     public function __construct()
     {
         $this->DetailPenatausahaanModel= new DetailPenatausahaanModel();
@@ -23,6 +28,8 @@ class DetailPenatausahaanController extends BaseController
         $this->DetailDPAModel = new DetailDPAModel();
         $this->SubRincianObjekModel = new SubRincianObjekModel();
         $this->KaryawanModel = new KaryawanModel();
+        $this->PenataUsahaanModel = new PenataUsahaanModel();
+        $this->KeteranganModel = new KeteranganModel();
     }
 
 
@@ -245,6 +252,27 @@ public function tolak($id)
     }
 }
 
+    public function cetak($id)
+    {
+        $detailpenatausahaan = $this->DetailPenatausahaanModel->getDetailById($id);
+        $id_p = $detailpenatausahaan['id_penatausahaan'];
+        $idd = $detailpenatausahaan[ 'id_detail_dpa'];
+
+        $data = [
+            'detailpenatausahaan' =>  $detailpenatausahaan,
+            'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan', $id)->findAll(),
+            'penatausahaan' => $this->PenataUsahaanModel->getPenatausahaanById($id_p),
+            'kegiatan' => $this->DetailDPAModel->getKegiatan($idd),
+            'program' => $this->DetailDPAModel->getProgram($idd)
+        ];
+
+        foreach ($data['keterangan'] as &$ket) {
+            $total = $ket['jumlah'] * $ket['harga'];
+
+            $ket['total'] = $total;
+        }
+        return view('cetak/kwitansi',$data);
+    }
 
 
 

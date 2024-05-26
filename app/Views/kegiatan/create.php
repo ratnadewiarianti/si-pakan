@@ -8,7 +8,7 @@
                 <div class="col-12 col-xl-8 ">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Master</a></li>
-                        <li class="breadcrumb-item"><a href="/kegiatan">Sub Rincian Objek</a></li>
+                        <li class="breadcrumb-item"><a href="/kegiatan">Kegiatan</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Tambah</li>
                     </ol>
                 </div>
@@ -19,29 +19,18 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tambah Data Sub Rincian Objek</h4>
+                        <h4 class="card-title">Tambah Data Kegiatan</h4>
                         <form action="/kegiatan/store/" method="post">
                             <div class="form-group">
-                                <label>Kode urusan</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_urusan" id="id_urusan" required>
+                                <label>Program</label>
+                                <select class="form-control js-example-basic-single w-100" name="id_program" id="id_program" required>
                                     <option selected disabled>-</option>
-                                    <?php foreach ($urusan as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['kode_urusan']; ?> - <?= $key['nama_urusan']; ?></option>
+                                    <?php foreach ($program as $key) : ?>
+                                        <option value="<?= $key['id']; ?>"><?= $key['nama_program']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Kode bidang urusan</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_bidang_urusan" id="id_bidang_urusan" required>
-
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Kode program</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_program" id="id_program" required>
-
-                                </select>
-                            </div>
+                           
                             <div class="form-group">
                                 <label>Kode Kegiatan</label>
                                 <input type="text" name="kode_kegiatan" class="form-control" required>

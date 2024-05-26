@@ -22,53 +22,32 @@
                         <h4 class="card-title">Tambah Data Sub Kegiatan</h4>
                         <form action="/subkegiatan/store/" method="post">
                             <div class="form-group">
-                                <label>Kode urusan</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_urusan" id="id_urusan" required>
+                                <label>kegiatan</label>
+                                <select class="form-control js-example-basic-single w-100" name="id_kegiatan" id="id_kegiatan" required>
                                     <option selected disabled>-</option>
-                                    <?php foreach ($urusan as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['kode_urusan']; ?> - <?= $key['nama_urusan']; ?></option>
+                                    <?php foreach ($kegiatan as $key) : ?>
+                                        <option value="<?= $key['id']; ?>"><?= $key['nama_kegiatan']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Kode bidang urusan</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_bidang_urusan" id="id_bidang_urusan" required>
-
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Kode program</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_program" id="id_program" required>
-
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Kode kegiatan</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_kegiatan" id="id_kegiatan" required>
-
-                                </select>
-                            </div>
+                            
                             <div class="form-group">
                                 <label>Kode Subkegiatan</label>
                                 <input type="text" name="kode_subkegiatan" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label>Nomenklatur Urusan Provinsi</label>
-                                <input type="text" name="nomenklatur_urusan_provinsi" class="form-control" required>
+                                <label>Uraian Subkegiatan</label>
+                                <input type="text" name="nama_subkegiatan" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label>Kinerja</label>
-                                <input type="text" name="kinerja" class="form-control" required>
+                                <label>Bidang</label>
+                                <input type="text" name="bidang" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label>Indikator</label>
-                                <input type="text" name="indikator" class="form-control" required>
+                                <label>Kode Bidang</label>
+                                <input type="text" name="kode_bidang" class="form-control" required>
                             </div>
-                            <div class="form-group">
-                                <label>Satuan</label>
-                                <input type="text" name="satuan" class="form-control" required>
-                            </div>
+                          
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
                             <a href="<?= base_url('/kegiatan'); ?>" class="btn btn-danger">Batal</a>

@@ -37,7 +37,7 @@ class ProgramController extends BaseController
     public function create()
     {
         $data = [
-            'urusan' => $this->UrusanModel->findAll(),
+            'bidang_urusan' => $this->BidangUrusanModel->findAll(),
         ];
         return view('program/create', $data);
     }
@@ -45,7 +45,7 @@ class ProgramController extends BaseController
     public function store()
     {
         $data = [
-            'id_urusan' => $this->request->getPost('id_urusan'),
+            // 'id_urusan' => $this->request->getPost('id_urusan'),
             'id_bidang_urusan' => $this->request->getPost('id_bidang_urusan'),
             'kode_program' => $this->request->getPost('kode_program'),
             'nama_program' => $this->request->getPost('nama_program'),
@@ -62,7 +62,7 @@ class ProgramController extends BaseController
         $data = [
             'program' => $this->ProgramModel->find($id),
             'bidang_urusan' => $this->BidangUrusanModel->findAll(),
-            'urusan' => $this->UrusanModel->findAll(),
+            // 'urusan' => $this->UrusanModel->findAll(),
         ];
         return view('program/edit', $data);
     }
@@ -70,7 +70,7 @@ class ProgramController extends BaseController
     public function update($id)
     {
         $data = [
-            'id_urusan' => $this->request->getPost('id_urusan'),
+            // 'id_urusan' => $this->request->getPost('id_urusan'),
             'id_bidang_urusan' => $this->request->getPost('id_bidang_urusan'),
             'kode_program' => $this->request->getPost('kode_program'),
             'nama_program' => $this->request->getPost('nama_program'),
@@ -90,11 +90,11 @@ class ProgramController extends BaseController
 
 
     // AJAX METHOD FOR DEPENDENT DROPDOWN / CHAINED SELECT OPTION
-    public function getBidangUrusan($id)
-    {
-        $data = $this->BidangUrusanModel->where('id_urusan', $id)->findAll();
-        return json_encode($data);
-    }
+    // public function getBidangUrusan($id)
+    // {
+    //     $data = $this->BidangUrusanModel->where('id_urusan', $id)->findAll();
+    //     return json_encode($data);
+    // }
 
     
 }

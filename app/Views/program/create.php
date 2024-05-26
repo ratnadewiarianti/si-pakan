@@ -22,23 +22,23 @@
                         <h4 class="card-title">Tambah Data Program</h4>
                         <form action="/program/store/" method="post">
                             <div class="form-group">
-                                <label>Kode Urusan</label>
+                                <label>Bidang Urusan</label>
                                 <!-- <select class="form-control" name="id_urusan" id="id_urusan" required> -->
-                                <select class="form-control js-example-basic-single w-100" name="id_urusan" id="id_urusan" required>
+                                <select class="form-control js-example-basic-single w-100" name="id_bidang_urusan" id="id_bidang_urusan" required>
 
                                     <option selected disabled>-</option>
-                                    <?php foreach ($urusan as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['kode_urusan']; ?> - <?= $key['nama_urusan']; ?></option>
+                                    <?php foreach ($bidang_urusan as $key) : ?>
+                                        <option value="<?= $key['id']; ?>"><?= $key['nama_bidang_urusan']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label>Bidang Urusan</label>
                                 <select class="form-control js-example-basic-single w-100" name="id_bidang_urusan" id="id_bidang_urusan" required>
 
                                 </select>
                             </div>
-                           
+                            -->
                             <div class="form-group">
                                 <label>Kode Program</label>
                                 <input type="text" name="kode_program" class="form-control" required>

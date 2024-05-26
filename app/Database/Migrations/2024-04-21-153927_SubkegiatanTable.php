@@ -15,32 +15,20 @@ class SubkegiatanTable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true
             ],
-            'id_urusan' => [
-                'type' => 'INT', 'constraint' => 5, 'unsigned' => true
-            ],
-            'id_bidang_urusan' => [
-                'type' => 'INT', 'constraint' => 5, 'unsigned' => true
-            ],
-            'id_program' => [
-                'type' => 'INT', 'constraint' => 5, 'unsigned' => true
-            ],
             'id_kegiatan' => [
                 'type' => 'INT', 'constraint' => 5, 'unsigned' => true
             ],
             'kode_subkegiatan' => [
                 'type' => 'VARCHAR', 'constraint' => 50
             ],
-            'nomenklatur_urusan_provinsi' => [
+            'nama_subkegiatan' => [
                 'type' => 'VARCHAR', 'constraint' => 100
             ],
-            'kinerja' => [ 
-                'type' => 'LONGTEXT',
-            ],
-            'indikator' => [ 
-                'type' => 'LONGTEXT',
-            ],
-            'satuan' => [
+            'bidang' => [ 
                 'type' => 'VARCHAR', 'constraint' => 100
+            ],
+            'kode_bidang' => [ 
+                'type' => 'VARCHAR', 'constraint' => 50
             ],
             'created_at' => [
                 'type' => 'DATETIME',

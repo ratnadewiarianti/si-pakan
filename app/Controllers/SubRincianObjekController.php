@@ -37,7 +37,7 @@ class SubRincianObjekController extends BaseController
     public function create()
     {
         $data = [
-            'akun' => $this->AkunModel->findAll(),
+            'rincian_objek' => $this->RincianObjekModel->findAll(),
         ];
         return view('subrincian/create', $data);
     }
@@ -65,10 +65,10 @@ class SubRincianObjekController extends BaseController
         $data = [
             'subrincian' => $this->SubRincianObjekModel->find($id),
             'rincianobjek' => $this->RincianObjekModel->findAll(),
-            'objek' => $this->ObjekModel->findAll(),
-            'jenis' => $this->JenisModel->findAll(),
-            'kelompok' => $this->KelompokModel->findAll(),
-            'akun' => $this->AkunModel->findAll(),
+            // 'objek' => $this->ObjekModel->findAll(),
+            // 'jenis' => $this->JenisModel->findAll(),
+            // 'kelompok' => $this->KelompokModel->findAll(),
+            // 'akun' => $this->AkunModel->findAll(),
         ];
         return view('subrincian/edit', $data);
     }

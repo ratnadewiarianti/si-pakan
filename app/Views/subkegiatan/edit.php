@@ -8,7 +8,7 @@
                 <div class="col-12 col-xl-8 ">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Master</a></li>
-                        <li class="breadcrumb-item"><a href="/subkegiatan">Sub Rincian Objek</a></li>
+                        <li class="breadcrumb-item"><a href="/subkegiatan">Subkegiatan</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </div>
@@ -19,38 +19,13 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Edit Data Sub Rincian Objek</h4>
+                        <h4 class="card-title">Edit Data Subkegiatan</h4>
                         <form action="/subkegiatan/update/<?= $subkegiatan['id']; ?>" method="post">
                             <div class="form-group">
-                                <label>Kode Urusan</label>
-                                <select class="form-control" name="id_urusan" id="id_urusan" required>
-                                    <option selected disabled>-</option>
-                                    <?php foreach ($urusan as $key) : ?>
-                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $subkegiatan['id_urusan']) echo 'selected="selected"' ?>><?= $key['kode_urusan']; ?> - <?= $key['nama_urusan']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Kode Bidang Urusan</label>
-                                <select class="form-control" name="id_bidang_urusan" id="id_bidang_urusan" required>
-                                    <?php foreach ($bidang_urusan as $key) : ?>
-                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $subkegiatan['id_bidang_urusan']) echo 'selected="selected"' ?>><?= $key['kode_bidang_urusan']; ?> - <?= $key['nama_bidang_urusan']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Kode program</label>
-                                <select class="form-control" name="id_program" id="id_program" required>
-                                    <?php foreach ($program as $key) : ?>
-                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $subkegiatan['id_program']) echo 'selected="selected"' ?>><?= $key['kode_program1']; ?> - <?= $key['nama_program']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                                <div class="form-group">
                                 <label>Kode kegiatan</label>
-                                <select class="form-control" name="id_kegiatan" id="id_kegiatan" required>
+                                <select class="form-control js-example-basic-single w-100" name="id_kegiatan" id="id_kegiatan" required>
                                     <?php foreach ($kegiatan as $key) : ?>
-                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $subkegiatan['id_kegiatan']) echo 'selected="selected"' ?>><?= $key['kode_kegiatan1']; ?> - <?= $key['nama_kegiatan']; ?></option>
+                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $subkegiatan['id_kegiatan']) echo 'selected="selected"' ?>><?= $key['nama_kegiatan']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -58,10 +33,18 @@
                                 <label>Kode Sub Kegiatan</label>
                                 <input type="text" name="kode_subkegiatan" class="form-control" value="<?= $subkegiatan['kode_subkegiatan']; ?>" required>
                             </div>
-<!-- Nomenklatur Urusan Provinsi -->
+
                             <div class="form-group">
-                                <label>Nomenklatur Urusan Provinsi</label>
-                                <input type="text" name="nomenklatur_urusan_provinsi" class="form-control" value="<?= $subkegiatan['nomenklatur_urusan_provinsi']; ?>" required>
+                                <label>Uraian Subkegiatan</label>
+                                <input type="text" name="nama_subkegiatan" class="form-control" value="<?= $subkegiatan['nama_subkegiatan']; ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Bidang</label>
+                                <input type="text" name="bidang" class="form-control" value="<?= $subkegiatan['bidang']; ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Kode Bidang</label>
+                                <input type="text" name="kode_bidang" class="form-control" value="<?= $subkegiatan['kode_bidang']; ?>" required>
                             </div>
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->

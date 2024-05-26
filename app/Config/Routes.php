@@ -226,6 +226,7 @@ $routes->group('detailpenatausahaan', ['filter' => 'auth'], function ($routes) {
    $routes->get('delete2/(:num)', 'DetailPenatausahaanController::destroy2/$1');
    $routes->add('terima/(:num)', 'DetailPenatausahaanController::terima/$1');
    $routes->add('tolak/(:num)', 'DetailPenatausahaanController::tolak/$1');
+   $routes->get('cetak/(:num)', 'DetailPenatausahaanController::cetak/$1');
 });
 
 $routes->group('keterangan', ['filter' => 'auth'], function ($routes) {
@@ -236,7 +237,6 @@ $routes->group('keterangan', ['filter' => 'auth'], function ($routes) {
    $routes->get('edit/(:num)', 'KeteranganController::edit/$1');
    $routes->get('delete/(:num)', 'KeteranganController::destroy/$1');
 });
-
 
 
 $routes->group('detaildpa_subkegiatan', ['filter' => 'auth'], function ($routes) {
@@ -262,4 +262,24 @@ $routes->group('verifikasi', ['filter' => 'auth'], function ($routes) {
    $routes->get('download/(:num)', 'VerifikasiController::download/$1');
    $routes->add('terima/(:num)', 'VerifikasiController::terima/$1');
    $routes->add('tolak/(:num)', 'VerifikasiController::tolak/$1');
+});
+
+$routes->group('bp_kas_tunai', ['filter' => 'auth'], function ($routes) {
+   $routes->get('/', 'BPKasTunaiController::show');
+   $routes->get('create', 'BPKasTunaiController::create');
+   $routes->post('store', 'BPKasTunaiController::store');
+   $routes->post('update/(:num)', 'BPKasTunaiController::update/$1');
+   $routes->get('edit/(:num)', 'BPKasTunaiController::edit/$1');
+   $routes->get('delete/(:num)', 'BPKasTunaiController::destroy/$1');
+   $routes->get('cetak/(:num)', 'BPKasTunaiController::cetak/$1');
+
+});
+
+$routes->group('pajak', ['filter' => 'auth'], function ($routes) {
+   $routes->get('/', 'PajakController::index');
+   $routes->get('create', 'PajakController::create');
+   $routes->post('store', 'PajakController::store');
+   $routes->post('update/(:num)', 'PajakController::update/$1');
+   $routes->get('edit/(:num)', 'PajakController::edit/$1');
+   $routes->get('delete/(:num)', 'PajakController::destroy/$1');
 });

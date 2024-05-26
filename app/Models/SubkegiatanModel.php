@@ -10,7 +10,7 @@ class SubkegiatanModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     
-    protected $allowedFields    = ['id_urusan','id_bidang_urusan', 'id_program','id_kegiatan','kode_subkegiatan','nomenklatur_urusan_provinsi', 'kinerja', 'indikator', 'satuan'];
+    protected $allowedFields    = ['id_kegiatan','kode_subkegiatan','nama_subkegiatan', 'bidang', 'kode_bidang'];
 
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
@@ -19,11 +19,11 @@ class SubkegiatanModel extends Model
 
     public function getSubkegiatan()
     {
-        return $this->select('subkegiatan.id, CONCAT(urusan.kode_urusan, \'.\', bidang_urusan.kode_bidang_urusan ,\'.\', program.kode_program,\'.\', kegiatan.kode_kegiatan,\'.\', subkegiatan.kode_subkegiatan) AS kode_subkegiatan1, nomenklatur_urusan_provinsi AS nama_subkegiatan, subkegiatan.kinerja, subkegiatan.indikator, subkegiatan.satuan')
+        return $this->select('subkegiatan.id, CONCAT(urusan.kode_urusan, \'.\', bidang_urusan.kode_bidang_urusan ,\'.\', program.kode_program,\'.\', kegiatan.kode_kegiatan,\'.\', subkegiatan.kode_subkegiatan) AS kode_subkegiatan1, nama_subkegiatan AS nama_subkegiatan, subkegiatan.bidang, subkegiatan.kode_bidang')
         ->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
-        ->join('program', 'program.id = subkegiatan.id_program')
-        ->join('bidang_urusan', 'bidang_urusan.id = subkegiatan.id_bidang_urusan')
-        ->join('urusan', 'urusan.id = subkegiatan.id_urusan')
+        ->join('program', 'program.id = kegiatan.id_program')
+        ->join('bidang_urusan', 'bidang_urusan.id = program.id_bidang_urusan')
+        ->join('urusan', 'urusan.id = bidang_urusan.id_urusan')
         ->findAll();
     }
   

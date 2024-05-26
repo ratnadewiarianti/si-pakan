@@ -16,50 +16,7 @@
         </div>
         <!-- end breadcrumb -->
         <div class="row">
-            <!-- <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="table-responsive">
-                                    <table class="display expandable-table" style="width:100%" id=" table-2">
-                                        <thead>
-                                            <th>Nomor DPA</th>
-                                            <th>Subkegiatan</th>
-                                            <th>Rekening</th>
-                                            <th>Jumlah</th>
-                                            <th>Jumlah Perubahan</th>
-                                            <th>Action</th>
-
-                                            'id_dpa','id_subkegiatan','id_rekening','jumlah','jumlah_perubahan'
-                                        </thead>
-                                        <tbody>
-                                            <?php if (!empty($detaildpa)) : ?>
-                                                <?php foreach ($detaildpa as $row) : ?>
-                                                    <tr>
-                                                        <td><?= $row['id_dpa']; ?></td>
-                                                        <td><?= $row['id_subkegiatan']; ?></td>
-                                                        <td><?= $row['id_rekening']; ?></td>
-                                                        <td><?= 'Rp ' . number_format($row['jumlah'], 0, ',', '.'); ?></td>
-                                                        <td><?= !empty($row['jumlah_perubahan']) ? 'Rp ' . number_format($row['jumlah_perubahan'], 0, ',', '.') : '-'; ?></td>
-                                                        
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            <?php else : ?>
-                                                <tr>
-                                                    <td colspan="6" class="text-center">Tidak ada data dpa.</td>
-                                                </tr>
-                                            <?php endif; ?>
-
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+           
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -98,18 +55,19 @@
                                             <tr>
                                             <td><?= $no++; ?></td>
                                                 <td><?= $row['nomor_dpa']; ?></td>
-                                                <td><?= $row['kode_urusan']; ?>.<?= $row['kode_bidang_urusan']; ?>.<?= $row['kode_program']; ?>.<?= $row['kode_kegiatan']; ?>.<?= $row['kode_subkegiatan']; ?> <?= $row['nomenklatur_urusan_provinsi']; ?>
+                                                <td><?= $row['kode_urusan']; ?>.<?= $row['kode_bidang_urusan']; ?>.<?= $row['kode_program']; ?>.<?= $row['kode_kegiatan']; ?>.<?= $row['kode_subkegiatan']; ?> <?= $row['nama_subkegiatan']; ?>
                                                 </td>
                                                 <td><?= $row['kode_akun']; ?>.<?= $row['kode_kelompok']; ?>.<?= $row['kode_jenis']; ?>.<?= $row['kode_objek']; ?>.<?= $row['kode_rincian_objek']; ?>.<?= $row['kode_sub_rincian_objek']; ?> <?= $row['uraian_sub_rincian_objek']; ?>
                                                 </td>
-                                                <td><?= 'Rp ' . number_format($row['jumlah'], 0, ',', '.'); ?></td>
+                                                <td><?= 'Rp ' . number_format($row['jumlahdpa'], 0, ',', '.'); ?></td>
 
                                                 <td>
                                                     <?php
-                                                    if (!empty($row['jumlah_perubahan'])) {
-                                                        echo 'Rp ' . number_format($row['jumlah_perubahan'], 0, ',', '.');
+                                                    if (!empty($row['jumlahdpaperubahan'])) {
+                                                        echo 'Rp ' . number_format($row['jumlahdpaperubahan'], 0, ',', '.');
                                                     } else {
-                                                        echo '<a href="/detaildpa/edit_jumlah_perubahan/' . $row['id'] . '" class="btn btn-sm btn-warning">Tambah Perubahan</a>';
+                                                        // echo '<a href="/detaildpa/edit_jumlah_perubahan/' . $row['id'] . '" class="btn btn-sm btn-warning">Tambah Perubahan</a>';
+                                                        echo '-';
                                                     }
                                                     ?>
                                                 </td>

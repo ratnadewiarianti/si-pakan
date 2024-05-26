@@ -34,29 +34,6 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-
-                            <div class="form-group">
-                                <label>Jumlah</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="number" name="jumlah" class="form-control" value="<?= $detaildpa['jumlah']; ?>" required>
-                                </div>
-                            </div>
-
-                            <?php if (!empty($detaildpa['jumlah_perubahan'])): ?> <!-- Menampilkan form-group jika jumlah_perubahan tidak kosong -->
-                            <div class="form-group">
-                                <label>Jumlah Perubahan</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="number" name="jumlah_perubahan" class="form-control" value="<?= $detaildpa['jumlah_perubahan']; ?>" required>
-                                </div>
-                            </div>
-                            <?php endif; ?>
-
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <a href="/detaildpa/show/<?= $detaildpa['id_dpa']; ?>" class="btn btn-danger">Batal</a>
                         </form>

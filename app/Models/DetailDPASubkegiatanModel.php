@@ -23,10 +23,10 @@ class DetailDPASubkegiatanModel extends Model
             ->select('detail_dpa_subkegiatan.id,  detail_dpa_subkegiatan.id_detail_dpa, detail_dpa_subkegiatan.uraian, detail_dpa_subkegiatan.koefisien, detail_dpa_subkegiatan.satuan, detail_dpa_subkegiatan.harga, detail_dpa_subkegiatan.ppn, detail_dpa_subkegiatan.jumlah, detail_dpa_subkegiatan.keterangan, detail_dpa_subkegiatan.koefisien_perubahan, detail_dpa_subkegiatan.satuan_perubahan, detail_dpa_subkegiatan.harga_perubahan, detail_dpa_subkegiatan.ppn_perubahan, detail_dpa_subkegiatan.jumlah_perubahan, detail_dpa_subkegiatan.keterangan_perubahan, detail_dpa.id_subkegiatan, detail_dpa.id_rekening, subkegiatan.kode_subkegiatan, urusan.kode_urusan, bidang_urusan.kode_bidang_urusan, kegiatan.kode_kegiatan, program.kode_program,')
             ->join('detail_dpa', 'detail_dpa.id = detail_dpa_subkegiatan.id_detail_dpa')
             ->join('subkegiatan', 'subkegiatan.id = detail_dpa.id_subkegiatan')
-            ->join('urusan', 'urusan.id = subkegiatan.id_urusan')
-            ->join('bidang_urusan', 'bidang_urusan.id = subkegiatan.id_bidang_urusan')
-            ->join('program', 'program.id = subkegiatan.id_program')
             ->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
+            ->join('program', 'program.id = kegiatan.id_program')
+            ->join('bidang_urusan', 'bidang_urusan.id = program.id_bidang_urusan')
+            ->join('urusan', 'urusan.id = bidang_urusan.id_urusan')
             ->where('detail_dpa_subkegiatan.id_detail_dpa', $id) // Filter sesuai dengan ID yang diberikan
             ->get(); 
     

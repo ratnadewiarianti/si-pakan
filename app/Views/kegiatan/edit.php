@@ -8,7 +8,7 @@
                 <div class="col-12 col-xl-8 ">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Master</a></li>
-                        <li class="breadcrumb-item"><a href="/subrincian">Sub Rincian Objek</a></li>
+                        <li class="breadcrumb-item"><a href="/kegiatan">Kegiatan</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </div>
@@ -19,30 +19,14 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Edit Data Sub Rincian Objek</h4>
-                        <form action="/subrincian/update/<?= $kegiatan['id']; ?>" method="post">
-                            <div class="form-group">
-                                <label>Urusan</label>
-                                <select class="form-control" name="id_urusan" id="id_urusan" required>
-                                    <option selected disabled>-</option>
-                                    <?php foreach ($urusan as $key) : ?>
-                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $kegiatan['id_urusan']) echo 'selected="selected"' ?>><?= $key['kode_urusan']; ?> - <?= $key['nama_urusan']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Bidang Urusan</label>
-                                <select class="form-control" name="id_bidang_urusan" id="id_bidang_urusan" required>
-                                    <?php foreach ($bidang_urusan as $key) : ?>
-                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $kegiatan['id_bidang_urusan']) echo 'selected="selected"' ?>><?= $key['kode_bidang_urusan']; ?> - <?= $key['nama_bidang_urusan']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
+                        <h4 class="card-title">Edit Data Kegiatan</h4>
+                        <form action="/kegiatan/update/<?= $kegiatan['id']; ?>" method="post">
                             <div class="form-group">
                                 <label>Program</label>
-                                <select class="form-control" name="id_program" id="id_program" required>
+                                <select class="form-control js-example-basic-single w-100"  name="id_program" id="id_program" required>
+                                    <option selected disabled>-</option>
                                     <?php foreach ($program as $key) : ?>
-                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $kegiatan['id_program']) echo 'selected="selected"' ?>><?= $key['kode_program1']; ?> - <?= $key['nama_program']; ?></option>
+                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $kegiatan['id_program']) echo 'selected="selected"' ?>><?= $key['nama_program']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

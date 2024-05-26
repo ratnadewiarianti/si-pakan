@@ -10,7 +10,6 @@ class ProgramTable extends Migration
     {
         $this->forge->addField([
             'id' => ['type' => 'INT', 'constraint' => 5, 'unsigned' => true, 'auto_increment' => true],
-            'id_urusan' => ['type' => 'INT', 'constraint' => 5, 'unsigned' => true],
             'id_bidang_urusan' => ['type' => 'INT', 'constraint' => 5, 'unsigned' => true],
             'kode_program' => ['type' => 'VARCHAR', 'constraint' => 50],
             'nama_program' => ['type' => 'VARCHAR', 'constraint' => 100],

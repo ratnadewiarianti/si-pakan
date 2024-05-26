@@ -44,10 +44,10 @@ class RakBelanjaModel extends Model
         return $this->select('rak_belanja.*, sub_rincian_objek.id as id_rekening, CONCAT(akun.kode_akun, \'.\', kelompok.kode_kelompok, \'.\', jenis.kode_jenis, \'.\', objek.kode_objek, \'.\', rincian_objek.kode_rincian_objek, \'.\', sub_rincian_objek.kode_sub_rincian_objek) AS kode_rekening, uraian_sub_rincian_objek AS uraian_akun')
             ->join('sub_rincian_objek', 'sub_rincian_objek.id = rak_belanja.id_rekening')
             ->join('rincian_objek', 'rincian_objek.id = sub_rincian_objek.id_rincian_objek')
-            ->join('objek', 'objek.id = sub_rincian_objek.id_objek')
-            ->join('jenis', 'jenis.id = sub_rincian_objek.id_jenis')
-            ->join('kelompok', 'kelompok.id = sub_rincian_objek.id_kelompok')
-            ->join('akun', 'akun.id = sub_rincian_objek.id_akun')
+            ->join('objek', 'objek.id = rincian_objek.id_objek')
+            ->join('jenis', 'jenis.id = objek.id_jenis')
+            ->join('kelompok', 'kelompok.id = jenis.id_kelompok')
+            ->join('akun', 'akun.id = kelompok.id_akun')
             ->findAll();
     }
 
@@ -57,10 +57,10 @@ class RakBelanjaModel extends Model
         return $this->select('rak_belanja.*, sub_rincian_objek.id as id_rekening, CONCAT(akun.kode_akun, \'.\', kelompok.kode_kelompok, \'.\', jenis.kode_jenis, \'.\', objek.kode_objek, \'.\', rincian_objek.kode_rincian_objek, \'.\', sub_rincian_objek.kode_sub_rincian_objek) AS kode_rekening, uraian_sub_rincian_objek AS uraian_akun')
             ->join('sub_rincian_objek', 'sub_rincian_objek.id = rak_belanja.id_rekening')
             ->join('rincian_objek', 'rincian_objek.id = sub_rincian_objek.id_rincian_objek')
-            ->join('objek', 'objek.id = sub_rincian_objek.id_objek')
-            ->join('jenis', 'jenis.id = sub_rincian_objek.id_jenis')
-            ->join('kelompok', 'kelompok.id = sub_rincian_objek.id_kelompok')
-            ->join('akun', 'akun.id = sub_rincian_objek.id_akun')
+            ->join('objek', 'objek.id = rincian_objek.id_objek')
+            ->join('jenis', 'jenis.id = objek.id_jenis')
+            ->join('kelompok', 'kelompok.id = jenis.id_kelompok')
+            ->join('akun', 'akun.id = kelompok.id_akun')
             ->where('rak_belanja.id', $id)
             ->get()
             ->getResultArray();

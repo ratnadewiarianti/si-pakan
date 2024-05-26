@@ -40,7 +40,7 @@ class KegiatanController extends BaseController
     public function create()
     {
         $data = [
-            'urusan' => $this->UrusanModel->findAll(),
+            'program' => $this->ProgramModel->findAll(),
         ];
         return view('kegiatan/create', $data);
     }
@@ -48,8 +48,8 @@ class KegiatanController extends BaseController
     public function store()
     {
         $data = [
-            'id_urusan' => $this->request->getPost('id_urusan'),
-            'id_bidang_urusan' => $this->request->getPost('id_bidang_urusan'),
+            // 'id_urusan' => $this->request->getPost('id_urusan'),
+            // 'id_bidang_urusan' => $this->request->getPost('id_bidang_urusan'),
             'id_program' => $this->request->getPost('id_program'),
             'kode_kegiatan' => $this->request->getPost('kode_kegiatan'),
             'nama_kegiatan' => $this->request->getPost('nama_kegiatan'),
@@ -65,9 +65,9 @@ class KegiatanController extends BaseController
     {
         $data = [
             'kegiatan' => $this->KegiatanModel->find($id),
-            'program' => $this->ProgramModel->find($id),
-            'bidang_urusan' => $this->BidangUrusanModel->findAll(),
-            'urusan' => $this->UrusanModel->findAll(),
+            'program' => $this->ProgramModel->find(),
+            // 'bidang_urusan' => $this->BidangUrusanModel->findAll(),
+            // 'urusan' => $this->UrusanModel->findAll(),
         ];
         return view('kegiatan/edit', $data);
     }
@@ -75,8 +75,8 @@ class KegiatanController extends BaseController
     public function update($id)
     {
         $data = [
-            'id_urusan' => $this->request->getPost('id_urusan'),
-            'id_bidang_urusan' => $this->request->getPost('id_bidang_urusan'),
+            // 'id_urusan' => $this->request->getPost('id_urusan'),
+            // 'id_bidang_urusan' => $this->request->getPost('id_bidang_urusan'),
             'id_program' => $this->request->getPost('id_program'),
             'kode_kegiatan' => $this->request->getPost('kode_kegiatan'),
             'nama_kegiatan' => $this->request->getPost('nama_kegiatan'),
@@ -96,15 +96,15 @@ class KegiatanController extends BaseController
 
 
     // AJAX METHOD FOR DEPENDENT DROPDOWN / CHAINED SELECT OPTION
-    public function getBidangUrusan($id)
-    {
-        $data = $this->BidangUrusanModel->where('id_urusan', $id)->findAll();
-        return json_encode($data);
-    }
+    // public function getBidangUrusan($id)
+    // {
+    //     $data = $this->BidangUrusanModel->where('id_urusan', $id)->findAll();
+    //     return json_encode($data);
+    // }
 
-    public function getProgram($id)
-    {
-        $data = $this->ProgramModel->where('id_bidang_urusan', $id)->findAll();
-        return json_encode($data);
-    }
+    // public function getProgram($id)
+    // {
+    //     $data = $this->ProgramModel->where('id_bidang_urusan', $id)->findAll();
+    //     return json_encode($data);
+    // }
 }
