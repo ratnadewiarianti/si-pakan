@@ -26,7 +26,7 @@
                                 <select class="form-control js-example-basic-single w-100" name="id_jenis" required>
                                     <option selected disabled>-</option>
                                     <?php foreach ($jenis as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['kode_jenis']; ?> - <?= $key['uraian_jenis']; ?></option>
+                                        <option value="<?= $key['id']; ?>"><?= $key['uraian_jenis']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

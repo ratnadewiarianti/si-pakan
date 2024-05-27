@@ -25,7 +25,7 @@
                                 <label>Kode Rincian Objek</label>
                                 <select class="form-control js-example-basic-single w-100" name="id_rincian_objek" id="id_rincian_objek" required>
                                     <?php foreach ($rincianobjek as $key) : ?>
-                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $subrincian['id_rincian_objek']) echo 'selected="selected"' ?>><?= $key['kode_rincian_objek']; ?> - <?= $key['uraian_rincian_objek']; ?></option>
+                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $subrincian['id_rincian_objek']) echo 'selected="selected"' ?>><?= $key['uraian_rincian_objek']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

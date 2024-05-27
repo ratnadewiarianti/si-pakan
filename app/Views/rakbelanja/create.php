@@ -21,16 +21,16 @@
                     <div class="card-body">
                         <h4 class="card-title">Tambah Data Rak Belanja</h4>
                         <form class="forms-sample" action="/rakbelanja/store" method="post">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label>Nama Sub Kegiatan</label>
                                 <input type="text" name="nm_subkegiatan" class="form-control" required>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label>Data Rekening</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_rekening" required>
+                                <select class="form-control js-example-basic-single w-100" name="id_detail_dpa" required>
                                     <option selected disabled>-</option>
                                     <?php foreach ($rekening as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['kode_rekening']; ?> - <?= $key['uraian_akun']; ?></option>
+                                        <option value="<?= $key['id']; ?>"><?= $key['uraian_sub_rincian_objek']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
