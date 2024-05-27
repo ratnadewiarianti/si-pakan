@@ -22,15 +22,11 @@
                         <h4 class="card-title">Edit Data Rak Belanja</h4>
                         <form action="/rakbelanja/update/<?= $rakbelanja['id']; ?>" method="post">
                             <div class="form-group">
-                                <label>Nama Sub Kegiatan</label>
-                                <input type="text" name="nm_subkegiatan" class="form-control" value="<?= $rakbelanja['nm_subkegiatan']; ?>" required>
-                            </div>
-                            <div class="form-group">
                                 <label>Data Rekening</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_rekening" required>
+                                <select class="form-control js-example-basic-single w-100" name="id_detail_dpa" required>
                                     <option selected disabled>-</option>
                                     <?php foreach ($rekening as $key) : ?>
-                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $rakbelanja['id_rekening']) echo 'selected="selected"'; ?>><?= $key['kode_rekening']; ?> - <?= $key['uraian_akun']; ?></option>
+                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $rakbelanja['id_detail_dpa']) echo 'selected="selected"'; ?>><?= $key['uraian_sub_rincian_objek']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

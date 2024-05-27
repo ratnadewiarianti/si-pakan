@@ -34,7 +34,7 @@
                                             <?php if (!empty($rakbelanja)) : ?>
                                                 <?php foreach ($rakbelanja as $row) : ?>
                                                     <tr>
-                                                        <td><?= $row['nm_subkegiatan']; ?></td>
+                                                        <td><?= $row['nama_subkegiatan']; ?></td>
                                                         <td><?= $row['kode_rekening']; ?></td>
                                                         <td><?= $row['uraian_akun']; ?></td>
                                                         <td><?= 'Rp ' . number_format($row['nilai_rincian'], 0, ',', '.'); ?></td>

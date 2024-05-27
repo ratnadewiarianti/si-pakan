@@ -5,15 +5,18 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\SubRincianObjekModel;
+use App\Models\DetailDPAModel;
 use App\Models\RakBelanjaModel;
 class RakBelanjaController extends BaseController
 {
     protected $SubRincianObjekModel;
     protected $RakBelanjaModel;
+    protected $DetailDPAModel;
     public function __construct()
     {
         $this->SubRincianObjekModel = new SubRincianObjekModel();
         $this->RakBelanjaModel = new RakBelanjaModel();
+        $this->DetailDPAModel = new DetailDPAModel();
     }
 
     public function index()
@@ -29,15 +32,16 @@ class RakBelanjaController extends BaseController
 
     public function create()
     {
-        $data['rekening'] = $this->SubRincianObjekModel->getRekening();
+        $data['rekening'] = $this->DetailDPAModel->getRekening();
+        // $data['rekening'] = $this->SubRincianObjekModel->getRekening();
         return view('rakbelanja/create', $data);
     }
 
     public function store()
     {
         $data = [
-            'nm_subkegiatan' => $this->request->getPost('nm_subkegiatan'),
-            'id_rekening' => $this->request->getPost('id_rekening'),
+            // 'nm_subkegiatan' => $this->request->getPost('nm_subkegiatan'),
+            'id_detail_dpa' => $this->request->getPost('id_detail_dpa'),
             'nilai_rincian' => $this->request->getPost('nilai_rincian'),
         ];
 
@@ -51,7 +55,7 @@ class RakBelanjaController extends BaseController
     {
         $data = [
             'rakbelanja' => $this->RakBelanjaModel->find($id),
-            'rekening' => $this->SubRincianObjekModel->getRekening()
+            'rekening' => $this->DetailDPAModel->getRekening()
         ];
         return view('rakbelanja/edit', $data);
     }
@@ -59,8 +63,8 @@ class RakBelanjaController extends BaseController
     public function update($id)
     {
         $data = [
-            'nm_subkegiatan' => $this->request->getPost('nm_subkegiatan'),
-            'id_rekening' => $this->request->getPost('id_rekening'),
+            // 'nm_subkegiatan' => $this->request->getPost('nm_subkegiatan'),
+            'id_detail_dpa' => $this->request->getPost('id_detail_dpa'),
             'nilai_rincian' => $this->request->getPost('nilai_rincian'),
         ];
 

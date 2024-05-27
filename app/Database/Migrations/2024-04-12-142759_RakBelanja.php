@@ -15,10 +15,10 @@ class RakBelanja extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'nm_subkegiatan' => [
-                'type' => 'VARCHAR',
-                'constraint' => 100,
-            ],
+            // 'nm_subkegiatan' => [
+            //     'type' => 'VARCHAR',
+            //     'constraint' => 100,
+            // ],
             'id_detail_dpa' => [
                 'type' => 'INT', 
                 'constraint' => 5, 
