@@ -26,7 +26,7 @@
                                 <select class="form-control js-example-basic-single w-100" name="id_akun" required>
                                     <option selected disabled>-</option>
                                     <?php foreach ($akun as $key) : ?>
-                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $kelompok['id_akun']) echo 'selected="selected"'; ?>><?= $key['kode_akun']; ?> - <?= $key['uraian_akun']; ?></option>
+                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $kelompok['id_akun']) echo 'selected="selected"'; ?>><?= $key['uraian_akun']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

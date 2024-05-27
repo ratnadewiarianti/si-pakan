@@ -26,7 +26,7 @@
                                 <select class="form-control js-example-basic-single w-100" name="id_rincian_objek" id="id_rincian_objek" required>
                                     <option selected disabled>-</option>
                                     <?php foreach ($rincian_objek as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['kode_rincian_objek']; ?> - <?= $key['uraian_rincian_objek']; ?></option>
+                                        <option value="<?= $key['id']; ?>"><?= $key['uraian_rincian_objek']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

@@ -26,7 +26,7 @@
                                 <select class="js-example-basic-single w-100 form-control" name="id_objek" required>
                                     <option selected disabled>-</option>
                                     <?php foreach ($objek as $key) : ?>
-                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $rincianobjek['id_objek']) echo 'selected="selected"'; ?>><?= $key['kode_objek']; ?> - <?= $key['uraian_objek']; ?></option>
+                                        <option value="<?= $key['id']; ?>" <?php if ($key['id'] == $rincianobjek['id_objek']) echo 'selected="selected"'; ?>><?= $key['uraian_objek']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
