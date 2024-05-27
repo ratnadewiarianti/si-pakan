@@ -19,7 +19,7 @@ class RakBelanja extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 100,
             ],
-            'id_rekening' => [
+            'id_detail_dpa' => [
                 'type' => 'INT', 
                 'constraint' => 5, 
                 'unsigned' => true
