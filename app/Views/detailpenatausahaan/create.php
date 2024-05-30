@@ -28,7 +28,7 @@
                                 <select class="form-control" name="id_detail_dpa" required>
                                     <option selected disabled>-</option>
                                     <?php foreach ($detaildpa as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['kode_urusan']; ?>.<?= $key['kode_bidang_urusan']; ?>.<?= $key['kode_program']; ?>.<?= $key['kode_kegiatan']; ?>.<?= $key['kode_subkegiatan']; ?> - <?= $key['nomenklatur_urusan_provinsi']; ?></option>
+                                        <option value="<?= $key['id']; ?>"><?= $key['kode_urusan']; ?>.<?= $key['kode_bidang_urusan']; ?>.<?= $key['kode_program']; ?>.<?= $key['kode_kegiatan']; ?>.<?= $key['kode_subkegiatan']; ?> - <?= $key['nama_subkegiatan']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

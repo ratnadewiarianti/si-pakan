@@ -81,13 +81,13 @@ public function getRekening()
 
     public function getDPA()
     {
-        return  $this->select('detail_dpa.*, dpa.nomor_dpa, subkegiatan.kode_subkegiatan, subkegiatan.nomenklatur_urusan_provinsi, urusan.kode_urusan, bidang_urusan.kode_bidang_urusan, kegiatan.kode_kegiatan, program.kode_program')
+        return  $this->select('detail_dpa.*, dpa.nomor_dpa, subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, urusan.kode_urusan, bidang_urusan.kode_bidang_urusan, kegiatan.kode_kegiatan, program.kode_program')
         ->join('dpa', 'dpa.id = detail_dpa.id_dpa')
         ->join('subkegiatan', 'subkegiatan.id = detail_dpa.id_subkegiatan')
-        ->join('urusan', 'urusan.id = bidang_urusan.id_urusan')
-        ->join('bidang_urusan', 'bidang_urusan.id = program.id_bidang_urusan')
-        ->join('program', 'program.id = kegiatan.id_program')
         ->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
+        ->join('program', 'program.id = kegiatan.id_program')
+        ->join('bidang_urusan', 'bidang_urusan.id = program.id_bidang_urusan')
+        ->join('urusan', 'urusan.id = bidang_urusan.id_urusan')
         ->findAll();
     }
 

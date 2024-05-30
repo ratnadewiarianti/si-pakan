@@ -50,6 +50,7 @@
                                             <th>PPH 21</th>
                                             <th>Terbilang</th>
                                             <th>Status Verifikasi</th>
+                                            <th>Verifikasi</th>
                                             <th>Action</th>
 
                                             <!-- 'id_dpa','id_subkegiatan','id_rekening','jumlah','jumlah_perubahan' -->
@@ -108,7 +109,11 @@
                                                             ?>
                                                             <button class="btn <?= $buttonClass; ?>" disabled><?= $row['status_verifikasi']; ?></button>
                                                         </td>
-                                                     
+                                                        <td>
+                                                            <a href="/detailpenatausahaan/terima/<?= $row['id']; ?>" class="btn btn-success btn-sm btn-terima" data-id="<?= $row['id']; ?>" onclick="return confirm('Apakah Anda yakin ingin menerima data ini?')">Disetujui</a>
+                                                            <a href="/detailpenatausahaan/tolak/<?= $row['id']; ?>" class="btn btn-danger btn-sm btn-tolak" data-id="<?= $row['id']; ?>" onclick="return confirm('Apakah Anda yakin ingin menolak data ini?')">Ditolak</a>
+
+                                                        </td>
                                                         <td>
                                                             <?php if ($row['status_verifikasi'] == 'DITERIMA') : ?>
                                                                 <a href="/detailpenatausahaan/cetak/<?= $row['id']; ?>" class="btn btn-sm btn-dark" target="_blank">Cetak</a>
