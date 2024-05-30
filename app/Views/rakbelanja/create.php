@@ -35,17 +35,20 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Nilai Rincian</label>
+                                <label>Nilai Rincian <small id="total_jumlah"> </small></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp.</span>
                                     </div>
                                     <input type="number" name="nilai_rincian" class="form-control" required>
                                 </div>
+                                <small id="error_message" class="text-danger"></small> <!-- Tempat untuk menampilkan pesan error -->
                             </div>
+
+                            <input type="hidden" name="waktu" value="<?= service('uri')->getSegment(3); ?>">
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
-                            <a href="<?= base_url('/rakbelanja'); ?>" class="btn btn-danger">Batal</a>
+                            <a href="/rakbelanja/index/<?= service('uri')->getSegment(3); ?>" class="btn btn-danger">Batal</a>
                         </form>
                     </div>
                 </div>
@@ -66,4 +69,47 @@
 
 <?= $this->section('javascript') ?>
 <!--  script src -->
+<script>
+    $(document).ready(function() {
+        // Event listener untuk perubahan pada select dengan ID id_detail_dpa
+        $('select[name="id_detail_dpa"]').change(function() {
+            var idDetailDPA = $(this).val(); // Ambil nilai ID yang dipilih
+
+            // Kirim permintaan AJAX
+            $.ajax({
+                url: '/rakbelanja/getTotalJumlah/' + idDetailDPA, // Ganti dengan URL endpoint yang sesuai
+                type: 'GET',
+                success: function(response) {
+                    // Tampilkan total jumlah di dalam tag <small>
+                    $('small#total_jumlah').text("(maksimal jumlah yang bisa diinput: " + response.total_jumlah + ")");
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+
+        $('input[name="nilai_rincian"]').blur(function() {
+            var idDetailDPA = $('select[name="id_detail_dpa"]').val();
+            var nilaiRincian = $(this).val();
+            // Kirim permintaan AJAX untuk validasi nilai_rincian
+            $.ajax({
+                url: '/rakbelanja/cekNilai/' + idDetailDPA + '/' + nilaiRincian,
+                type: 'GET',
+                success: function(response) {
+                    if (response.error) {
+                        // Tampilkan pesan error jika ada kesalahan validasi
+                        $('small#error_message').text(response.error).addClass('text-danger');
+                    } else {
+                        // Kosongkan pesan error jika nilai rincian valid
+                        $('small#error_message').text('').removeClass('text-danger');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
 <?= $this->endSection() ?>
