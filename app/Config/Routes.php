@@ -55,12 +55,17 @@ $routes->group('datarekening', ['filter' => 'auth'], function ($routes) {
 });
 
 $routes->group('rakbelanja', ['filter' => 'auth'], function ($routes) {
-   $routes->get('/', 'RakBelanjaController::index');
-   $routes->get('create', 'RakBelanjaController::create');
+   $routes->get('/', 'RakBelanjaController::cekwaktu');
+   $routes->get('index/(:segment)', 'RakBelanjaController::index/$1'); 
+   $routes->get('create/(:segment)', 'RakBelanjaController::create/$1');
    $routes->post('store', 'RakBelanjaController::store');
    $routes->post('update/(:num)', 'RakBelanjaController::update/$1');
    $routes->get('edit/(:num)', 'RakBelanjaController::edit/$1');
    $routes->get('delete/(:num)', 'RakBelanjaController::destroy/$1');
+   $routes->get('getTotalJumlah/(:any)', 'RakBelanjaController::getTotalJumlah/$1');
+   $routes->get('cekNilai/(:num)/(:num)', 'RakBelanjaController::cekNilai/$1/$2');
+
+
 });
 
 $routes->group('detailrak', ['filter' => 'auth'], function ($routes) {

@@ -24,11 +24,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row mb-4">
-                            <div class="col-10">
+                            <div class="col-9">
                                 <p class="card-title">Data Master Data Rak Belanja</p>
                             </div>
-                            <div class="col-2 text-end">
-                                <a class="btn btn-success btn-sm" href="/rakbelanja/create">Tambah Data</a>
+                            <div class="col-3 text-end">
+                                <a class="btn btn-success btn-sm" href="/rakbelanja/create/<?= service('uri')->getSegment(3); ?>">Tambah Data</a>
+                                <a class="btn btn-dark btn-sm" href="/rakbelanja">Kembali</a>
                             </div>
                         </div>
                         <div class="row">
