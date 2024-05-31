@@ -40,6 +40,12 @@ class DetailPenatausahaanController extends BaseController
             'detailpenatausahaan' => $this->DetailPenatausahaanModel->getDetail($id),
             'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id),
         ];
+        if (!empty($data['detailpenatausahaan'])) {
+            foreach ($data['detailpenatausahaan'] as &$item) {
+                $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id']);
+                $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id']);
+            }
+        }
 
         // $penatausahaans = $this->penatausahaanModel->getPenatausahaan2();
         return view('detailpenatausahaan/show', $data);
@@ -263,7 +269,7 @@ public function tolak($id)
             'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan', $id)->findAll(),
             'penatausahaan' => $this->PenataUsahaanModel->getPenatausahaanById($id_p),
             'kegiatan' => $this->DetailDPAModel->getKegiatan($idd),
-            'program' => $this->DetailDPAModel->getProgram($idd)
+            'program' => $this->DetailDPAModel->getProgram($idd),
         ];
 
         foreach ($data['keterangan'] as &$ket) {

@@ -113,6 +113,28 @@ public function getTotalJumlahPerubahan($id)
     return $result ? $result->total_jumlah_perubahan : 0; // Mengakses alias dari hasil sum, cek null
 }
 
+public function getKegiatan($idd)
+{
+    return $this->select('detail_dpa.*, CONCAT(urusan.kode_urusan, \'.\', bidang_urusan.kode_bidang_urusan, \'.\', program.kode_program, \'.\', kegiatan.kode_kegiatan) AS kode_kegiatan,  kegiatan.nama_kegiatan')
+    ->join('subkegiatan', 'subkegiatan.id = detail_dpa.id_subkegiatan')
+    ->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
+    ->join('program', 'program.id = kegiatan.id_program')
+    ->join('bidang_urusan', 'bidang_urusan.id = program.id_bidang_urusan')
+    ->join('urusan', 'urusan.id = bidang_urusan.id_urusan')
+    ->where('detail_dpa.id',$idd)
+    ->first();
+}
 
+public function getProgram($idd)
+{
+    return $this->select('detail_dpa.*, CONCAT(urusan.kode_urusan, \'.\', bidang_urusan.kode_bidang_urusan, \'.\', program.kode_program) AS kode_program,  program.nama_program')
+    ->join('subkegiatan', 'subkegiatan.id = detail_dpa.id_subkegiatan')
+    ->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
+    ->join('program', 'program.id = kegiatan.id_program')
+    ->join('bidang_urusan', 'bidang_urusan.id = program.id_bidang_urusan')
+    ->join('urusan', 'urusan.id = bidang_urusan.id_urusan')
+    ->where('detail_dpa.id', $idd)
+    ->first();
+}
 
 }

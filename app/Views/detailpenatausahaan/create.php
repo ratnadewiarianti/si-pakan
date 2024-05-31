@@ -81,7 +81,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Terbilang</label>
-                                <input type="text" name="terbilang" required class="form-control">
+                                <input type="number" name="terbilang" required class="form-control">
                             </div>
                             <input type="text" name="status_verifikasi"  value="MENUNGGU" class="form-control"  hidden required>
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>

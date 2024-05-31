@@ -70,7 +70,7 @@
                     <tr>
                         <td style="vertical-align: top;white-space: nowrap;">SUB. KEGIATAN</td>
                         <td style="text-align: right;vertical-align: top;"> : </td>
-                        <td style="vertical-align: top;"> <?= $detailpenatausahaan['kode_urusan']; ?>.<?= $detailpenatausahaan['kode_bidang_urusan']; ?>.<?= $detailpenatausahaan['kode_program']; ?>.<?= $detailpenatausahaan['kode_kegiatan']; ?>.<?= $detailpenatausahaan['kode_subkegiatan']; ?> - <?= $detailpenatausahaan['nomenklatur_urusan_provinsi']; ?></td>
+                        <td style="vertical-align: top;"> <?= $detailpenatausahaan['kode_urusan']; ?>.<?= $detailpenatausahaan['kode_bidang_urusan']; ?>.<?= $detailpenatausahaan['kode_program']; ?>.<?= $detailpenatausahaan['kode_kegiatan']; ?>.<?= $detailpenatausahaan['kode_subkegiatan']; ?> - <?= $detailpenatausahaan['nama_subkegiatan']; ?></td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top;white-space: nowrap;">KODE REKENING</td>

@@ -28,6 +28,10 @@ class RakBelanja extends Migration
                 'type' => 'int',
                 'constraint' => 10,
             ],
+            'waktu' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
+            ],
         ]);
 
         $this->forge->addPrimaryKey('id');
