@@ -47,8 +47,6 @@
                                             <th>Sudah Terima Dari</th> -->
                                             <th>Uang Sebanyak</th>
                                             <th>Untuk Pembayaran</th>
-                                            <th>Pajak Daerah</th>
-                                            <th>PPH 21</th>
                                             <th>Terbilang</th>
                                             <th>Status Verifikasi</th>
                                             <th>Action</th>
@@ -76,15 +74,9 @@
                                                 </td>
                                                 <td style="text-align: justify;">
                                                     <?php
-                                                            $wrapped_text = wordwrap($row['untuk_pembayaran'], 70, "<br>\n", true);
-                                                            echo $wrapped_text;
-                                                            ?>
-                                                </td>
-                                                <td>
-                                                    <?= $row['pajak_daerah']; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $row['pph21']; ?>
+                                                    $wrapped_text = wordwrap($row['untuk_pembayaran'], 70, "<br>\n", true);
+                                                    echo $wrapped_text;
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <?= 'Rp ' . number_format($row['terbilang'], 0, ',', '.'); ?>

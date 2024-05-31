@@ -81,7 +81,7 @@
                 </table>
             </div>
             <div class="col-md-4">
-                <table class="table-borderless" style="text-align: left;">
+                <!-- <table class="table-borderless" style="text-align: left;">
                     <tr>
                         <td style="white-space: nowrap;vertical-align: top;">NO. BK. UMUM</td>
                         <td style="text-align: right;"> : </td>
@@ -98,7 +98,7 @@
                         <td style="vertical-align: top; white-space: nowrap;"> <?= $detailpenatausahaan['asli_123']; ?></td>
                     </tr>
 
-                </table>
+                </table> -->
             </div>
         </div>
 
@@ -141,17 +141,16 @@
                         <td style="text-align: right;"> : </td>
                         <td> </td>
                     </tr>
-                    <tr>
-                        <td style="vertical-align: top;white-space: nowrap;"><b>Pajak Deaerah</b></td>
-                        <td style="text-align: right;vertical-align: top;"> : </td>
-                        <td> <?= 'Rp ' . number_format($detailpenatausahaan['pajak_daerah'], 0, ',', '.'); ?></td>
-                    </tr>
-                    <tr>
-                        <td style="vertical-align: top;white-space: nowrap;"><b>PPH 21</b></td>
-                        <td style="text-align: right;vertical-align: top;"> : </td>
-                        <td> <?= 'Rp ' . number_format($detailpenatausahaan['pph21'], 0, ',', '.'); ?></td>
-                    </tr>
+                    <?php foreach ($pajak as $key) : ?>
+                        <tr>
+                            <td style="vertical-align: top;white-space: nowrap;"><b><?= $key['nama_pajak']; ?></b></td>
+                            <td style="text-align: right;vertical-align: top;"> : </td>
+                            <td> <?= $key['persen']; ?> %</td>
+                        </tr>
+                    <?php endforeach; ?>
                 </table>
+
+
             </div>
             <div class="col-md-8">
                 <!-- kosong -->

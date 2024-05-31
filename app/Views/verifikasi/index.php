@@ -63,7 +63,7 @@
                                                 <?php foreach ($verifikasi as $row) : ?>
                                                     <tr>
                                                         <td><?= $no++; ?></td>
-                                                        <td><?= $row['kode_urusan']; ?>.<?= $row['kode_bidang_urusan']; ?>.<?= $row['kode_program']; ?>.<?= $row['kode_kegiatan']; ?>.<?= $row['kode_subkegiatan']; ?> <?= $row['nomenklatur_urusan_provinsi']; ?></td>
+                                                        <td><?= $row['kode_urusan']; ?>.<?= $row['kode_bidang_urusan']; ?>.<?= $row['kode_program']; ?>.<?= $row['kode_kegiatan']; ?>.<?= $row['kode_subkegiatan']; ?> <?= $row['nama_subkegiatan']; ?></td>
 
                                                         <td><?= $row['kode_rekening']; ?> <?= $row['uraian_sub_rincian_objek']; ?></td>
                                                         <td><?= $row['nomor_bku']; ?></td>

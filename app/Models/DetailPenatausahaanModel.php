@@ -19,8 +19,6 @@ class DetailPenatausahaanModel extends Model
         'sudah_terima_dari',
         'uang_sebanyak',
         'untuk_pembayaran',
-        'pajak_daerah',
-        'pph21',
         'terbilang',
         'status_kwitansi',
         'status_verifikasi'

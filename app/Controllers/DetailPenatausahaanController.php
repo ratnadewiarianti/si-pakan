@@ -11,6 +11,8 @@ use App\Models\SubRincianObjekModel;
 use App\Models\KaryawanModel;
 use App\Models\PenatausahaanModel;
 use App\Models\KeteranganModel;
+use App\Models\PajakModel;
+use App\Models\PajakDPModel;
 class DetailPenatausahaanController extends BaseController
 {
     protected $PenataUsahaanModel;
@@ -20,6 +22,8 @@ class DetailPenatausahaanController extends BaseController
     protected $Detail2PenatausahaanModel;
     protected $KaryawanModel;
     protected $KeteranganModel;
+    protected $PajakModel;
+    protected $PajakDPModel;
 
     public function __construct()
     {
@@ -30,6 +34,8 @@ class DetailPenatausahaanController extends BaseController
         $this->KaryawanModel = new KaryawanModel();
         $this->PenataUsahaanModel = new PenataUsahaanModel();
         $this->KeteranganModel = new KeteranganModel();
+        $this->PajakModel = new PajakModel();
+        $this->PajakDPModel = new PajakDPModel();
     }
 
 
@@ -56,11 +62,12 @@ class DetailPenatausahaanController extends BaseController
     {
         $detaildpa = $this->DetailDPAModel->getDPA();
         $rekening = $this->SubRincianObjekModel->getRekening();
-
+        $pajak = $this->PajakModel->findAll();
         $data = [
             // 'dpa' => $this->DPAModel->findDatabyId($id),
             'detaildpa' => $detaildpa,
             'rekening' => $rekening,
+            'pajak' => $pajak
         ];
 
         return view('detailpenatausahaan/create', $data);
@@ -91,21 +98,32 @@ class DetailPenatausahaanController extends BaseController
             'sudah_terima_dari' => $this->request->getPost('sudah_terima_dari'),
             'uang_sebanyak' => $this->request->getPost('uang_sebanyak'),
             'untuk_pembayaran' => $this->request->getPost('untuk_pembayaran'),
-            'pajak_daerah' => $this->request->getPost('pajak_daerah'),
-            'pph21' => $this->request->getPost('pph21'),
             'terbilang' => $this->request->getPost('terbilang'),
             'status_verifikasi' => $this->request->getPost('status_verifikasi'),
-            // 'status_verifikasi' => 0,
             'status_kwitansi' => 0
         ];
 
         $this->DetailPenatausahaanModel->insert($data);
 
-        // Ambil kembali id rak belanja dari data yang disimpan
-        $id_penatausahaan = $data['id_penatausahaan'];
-        // Redirect kembali ke fungsi show dengan menyertakan id rak belanja
-        return redirect()->to("/detailpenatausahaan/show/$id_penatausahaan");
+        $id_detail_penatausahaan = $this->DetailPenatausahaanModel->insertID();
+
+        if ($this->request->getPost('berisi_pajak') == 'Ya') {
+            $id_pajak = $this->request->getPost('id_pajak');
+            if ($id_pajak) {
+                $pajakData = [];
+                foreach ($id_pajak as $pajak) {
+                    $pajakData[] = [
+                        'id_dp' => $id_detail_penatausahaan,
+                        'id_pajak' => $pajak
+                    ];
+                }
+                $this->PajakDPModel->insertBatch($pajakData);
+            }
+        }
+
+        return redirect()->to("/detailpenatausahaan/show/{$data['id_penatausahaan']}");
     }
+
 
     public function store2()
     {
@@ -263,13 +281,14 @@ public function tolak($id)
         $detailpenatausahaan = $this->DetailPenatausahaanModel->getDetailById($id);
         $id_p = $detailpenatausahaan['id_penatausahaan'];
         $idd = $detailpenatausahaan[ 'id_detail_dpa'];
-
+        $pajak = $this->PajakDPModel->getpajak($id);
         $data = [
             'detailpenatausahaan' =>  $detailpenatausahaan,
             'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan', $id)->findAll(),
             'penatausahaan' => $this->PenataUsahaanModel->getPenatausahaanById($id_p),
             'kegiatan' => $this->DetailDPAModel->getKegiatan($idd),
             'program' => $this->DetailDPAModel->getProgram($idd),
+            'pajak' => $pajak
         ];
 
         foreach ($data['keterangan'] as &$ket) {
