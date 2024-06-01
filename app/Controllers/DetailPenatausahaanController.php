@@ -279,6 +279,12 @@ public function tolak($id)
     public function cetak($id)
     {
         $detailpenatausahaan = $this->DetailPenatausahaanModel->getDetailById($id);
+        if (!empty($data['detailpenatausahaan'])) {
+            foreach ($data['detailpenatausahaan'] as &$item) {
+                $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id']);
+                $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id']);
+            }
+        }
         $id_p = $detailpenatausahaan['id_penatausahaan'];
         $idd = $detailpenatausahaan[ 'id_detail_dpa'];
         $pajak = $this->PajakDPModel->getpajak($id);

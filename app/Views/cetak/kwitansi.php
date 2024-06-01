@@ -121,6 +121,8 @@
                         <td style="text-align: right;vertical-align: top;"> : </td>
                         <td class="border-jajar-genjang">
                             <p style="text-align: center; margin: 10px;font-weight: bold; font-size: 14px;"><?= $detailpenatausahaan['uang_sebanyak']; ?></p>
+                        
+                            
                         </td>
                     </tr>
                     <tr>
