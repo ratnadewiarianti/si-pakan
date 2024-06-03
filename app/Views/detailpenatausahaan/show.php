@@ -79,8 +79,7 @@
                                                     ?>
                                                 </td>
                                                 <td>
-                                                    <?= 'Rp ' . number_format($row['terbilang'], 0, ',', '.'); ?>
-                                                    (<?= strtoupper(terbilang($row['terbilang'])); ?>)
+                                                    <?= 'Rp ' . number_format($row['jumlahdpa'], 0, ',', '.'); ?>
                                                 </td>
 
                                                 <td>

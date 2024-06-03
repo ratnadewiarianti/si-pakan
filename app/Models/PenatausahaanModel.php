@@ -10,7 +10,7 @@ class PenatausahaanModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
 
-    protected $allowedFields    = ['link_google', 'karyawan_1', 'karyawan_2', 'karyawan_3', 'tanggal'];
+    protected $allowedFields    = ['link_google', 'karyawan_1', 'karyawan_2', 'karyawan_3', 'tanggal', 'tahun'];
 
 
 
@@ -24,7 +24,7 @@ class PenatausahaanModel extends Model
 
     public function getPenatausahaan()
     {
-        return $this->select('penatausahaan.id , penatausahaan.link_google, karyawan_1.nama AS nama_karyawan_1, karyawan_2.nama AS nama_karyawan_2 ,karyawan_3.nama AS nama_karyawan_3, penatausahaan.tanggal')
+        return $this->select('penatausahaan.id, penatausahaan.tahun, penatausahaan.link_google, karyawan_1.nama AS nama_karyawan_1, karyawan_2.nama AS nama_karyawan_2 ,karyawan_3.nama AS nama_karyawan_3, penatausahaan.tanggal')
             ->join('karyawan AS karyawan_1', 'karyawan_1.id = penatausahaan.karyawan_1')
             ->join('karyawan AS karyawan_2', 'karyawan_2.id = penatausahaan.karyawan_2')
             ->join('karyawan AS karyawan_3', 'karyawan_3.id = penatausahaan.karyawan_3')
@@ -34,7 +34,7 @@ class PenatausahaanModel extends Model
     public function getPenatausahaanById($id)
     {
         return $this->select('
-        penatausahaan.id , penatausahaan.tanggal,
+        penatausahaan.id, penatausahaan.tahun, penatausahaan.tanggal,
         karyawan_1.nama AS nama_karyawan_1, karyawan_1.nip AS nip_karyawan_1, karyawan_1.file AS ttd_karyawan_1,
         karyawan_2.nama AS nama_karyawan_2, karyawan_2.nip AS nip_karyawan_2, karyawan_2.file AS ttd_karyawan_2,
         karyawan_3.nama AS nama_karyawan_3,karyawan_3.nip AS nip_karyawan_3, karyawan_3.file AS ttd_karyawan_3, karyawan_3.jabatan AS jabatan_karyawan_3

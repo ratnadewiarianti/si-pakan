@@ -9,7 +9,7 @@ class RincianObjekModel extends Model
     protected $table            = 'rincian_objek';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields    =  ['id_objek','kode_rincian_objek','uraian_rincian_objek'];
+    protected $allowedFields    =  ['id_objek','kode_rincian_objek','uraian_rincian_objek', 'tahun'];
 
     public function getData()
     {

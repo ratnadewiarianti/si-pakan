@@ -38,6 +38,9 @@ class SubkegiatanTable extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
+            'tahun' => [
+                'type' => 'YEAR',
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('subkegiatan');

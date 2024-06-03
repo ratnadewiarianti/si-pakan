@@ -12,6 +12,9 @@ class PajakDPTable extends Migration
             'id' => ['type' => 'INT', 'constraint' => 5, 'unsigned' => true, 'auto_increment' => true],
             'id_dp' => ['type' => 'INT', 'constraint' => 5],
             'id_pajak' => ['type' => 'INT', 'constraint' => 5],
+            'tahun' => [
+                'type' => 'YEAR',
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('pajak_dp');

@@ -10,7 +10,7 @@ class UrusanModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     
-    protected $allowedFields    = ['kode_urusan','nama_urusan'];
+    protected $allowedFields    = ['kode_urusan','nama_urusan', 'tahun'];
 
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';

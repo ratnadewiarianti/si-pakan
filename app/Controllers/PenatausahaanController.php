@@ -8,17 +8,17 @@ use App\Models\PenatausahaanModel;
 use App\Models\KaryawanModel;
 class PenatausahaanController extends BaseController
 {
-    protected $PenataUsahaanModel;
+    protected $PenatausahaanModel;
     protected $KaryawanModel;
     public function __construct()
     {
-        $this->PenataUsahaanModel = new PenataUsahaanModel();
+        $this->PenatausahaanModel = new PenatausahaanModel();
         $this->KaryawanModel = new KaryawanModel();
     }
 
     public function index()
     {
-        $data['penatausahaan'] = $this->PenataUsahaanModel->getPenatausahaan();
+        $data['penatausahaan'] = $this->PenatausahaanModel->getPenatausahaan();
         return view('penatausahaan/index', $data);
     }
 
@@ -38,7 +38,7 @@ class PenatausahaanController extends BaseController
             'tanggal' => $this->request->getPost('tanggal'),
         ];
 
-        $this->PenataUsahaanModel->insert($data);
+        $this->PenatausahaanModel->insert($data);
 
         return redirect()->to('/penatausahaan');
     }
@@ -47,7 +47,7 @@ class PenatausahaanController extends BaseController
     public function edit($id)
     {
         $data = [
-            'penatausahaan' => $this->PenataUsahaanModel->find($id),
+            'penatausahaan' => $this->PenatausahaanModel->find($id),
            'karyawan' => $this->KaryawanModel->findAll()
         ];
         return view('penatausahaan/edit', $data);
@@ -63,14 +63,14 @@ class PenatausahaanController extends BaseController
             'tanggal' => $this->request->getPost('tanggal'),
         ];
 
-        $this->PenataUsahaanModel->update($id, $data);
+        $this->PenatausahaanModel->update($id, $data);
 
         return redirect()->to('penatausahaan');
     }
 
     public function destroy($id)
     {
-        $this->PenataUsahaanModel->delete($id);
+        $this->PenatausahaanModel->delete($id);
 
         return redirect()->to('/penatausahaan');
     }

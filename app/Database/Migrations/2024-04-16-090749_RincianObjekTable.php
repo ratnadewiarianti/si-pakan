@@ -28,6 +28,9 @@ class RincianObjekTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 100,
             ],
+            'tahun' => [
+                'type' => 'YEAR',
+            ],
         ]);
 
         $this->forge->addPrimaryKey('id');

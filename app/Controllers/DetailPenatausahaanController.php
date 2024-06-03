@@ -61,12 +61,12 @@ class DetailPenatausahaanController extends BaseController
     public function create($id)
     {
         $detaildpa = $this->DetailDPAModel->getDPA();
-        $rekening = $this->SubRincianObjekModel->getRekening();
+        // $rekening = $this->SubRincianObjekModel->getRekening();
         $pajak = $this->PajakModel->findAll();
         $data = [
             // 'dpa' => $this->DPAModel->findDatabyId($id),
             'detaildpa' => $detaildpa,
-            'rekening' => $rekening,
+            // 'rekening' => $rekening,
             'pajak' => $pajak
         ];
 
@@ -91,16 +91,17 @@ class DetailPenatausahaanController extends BaseController
         $data = [
             'id_penatausahaan' => $this->request->getPost('id_penatausahaan'),
             'id_detail_dpa' => $this->request->getPost('id_detail_dpa'),
-            'id_rekening' => $this->request->getPost('id_rekening'),
-            'no_bk_umum' => $this->request->getPost('no_bk_umum'),
-            'no_bk_pembantu' => $this->request->getPost('no_bk_pembantu'),
-            'asli_123' => $this->request->getPost('asli_123'),
+            // 'id_rekening' => $this->request->getPost('id_rekening'),
+            // 'no_bk_umum' => $this->request->getPost('no_bk_umum'),
+            // 'no_bk_pembantu' => $this->request->getPost('no_bk_pembantu'),
+            // 'asli_123' => $this->request->getPost('asli_123'),
             'sudah_terima_dari' => $this->request->getPost('sudah_terima_dari'),
-            'uang_sebanyak' => $this->request->getPost('uang_sebanyak'),
+            // 'uang_sebanyak' => $this->request->getPost('uang_sebanyak'),
             'untuk_pembayaran' => $this->request->getPost('untuk_pembayaran'),
-            'terbilang' => $this->request->getPost('terbilang'),
+            // 'terbilang' => $this->request->getPost('terbilang'),
             'status_verifikasi' => $this->request->getPost('status_verifikasi'),
-            'status_kwitansi' => 0
+            'verifikasi_bendahara' => $this->request->getPost('verifikasi_bendahara'),
+            'verifikasi_kasubbag' => $this->request->getPost('verifikasi_kasubbag'),
         ];
 
         $this->DetailPenatausahaanModel->insert($data);
@@ -141,8 +142,6 @@ class DetailPenatausahaanController extends BaseController
         return redirect()->to("/detailpenatausahaan/show/$id_penatausahaan");
     }
 
-
-
     public function edit($id)
     {
         $detaildpa = $this->DetailDPAModel->getDPA();
@@ -178,17 +177,16 @@ class DetailPenatausahaanController extends BaseController
             'id_penatausahaan' => $this->request->getPost('id_penatausahaan'),
             'id_detail_dpa' => $this->request->getPost('id_detail_dpa'),
             'id_rekening' => $this->request->getPost('id_rekening'),
-            'no_bk_umum' => $this->request->getPost('no_bk_umum'),
-            'no_bk_pembantu' => $this->request->getPost('no_bk_pembantu'),
-            'asli_123' => $this->request->getPost('asli_123'),
+            // 'no_bk_umum' => $this->request->getPost('no_bk_umum'),
+            // 'no_bk_pembantu' => $this->request->getPost('no_bk_pembantu'),
+            // 'asli_123' => $this->request->getPost('asli_123'),
             'sudah_terima_dari' => $this->request->getPost('sudah_terima_dari'),
             'uang_sebanyak' => $this->request->getPost('uang_sebanyak'),
             'untuk_pembayaran' => $this->request->getPost('untuk_pembayaran'),
-            'pajak_daerah' => $this->request->getPost('pajak_daerah'),
-            'pph21' => $this->request->getPost('pph21'),
-            'terbilang' => $this->request->getPost('terbilang'),
-            'status_verifikasi' => $this->request->getPost('status_verifikasi'),
-            'status_kwitansi' => 0
+            // 'pajak_daerah' => $this->request->getPost('pajak_daerah'),
+            // 'pph21' => $this->request->getPost('pph21'),
+            // 'terbilang' => $this->request->getPost('terbilang'),
+            // 'status_verifikasi' => $this->request->getPost('status_verifikasi'),
         ];
 
         $this->DetailPenatausahaanModel->update($id,$data);
@@ -304,9 +302,4 @@ public function tolak($id)
         }
         return view('cetak/kwitansi',$data);
     }
-
-
-
-
-
 }

@@ -32,6 +32,9 @@ class KeteranganDPATable extends Migration
                 'type' => 'INT',
                 'constraint' => 11
             ],
+            'tahun' => [
+                'type' => 'YEAR',
+            ],
            
         ]);
         $this->forge->addKey('id', true);

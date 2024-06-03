@@ -15,6 +15,7 @@ class KeteranganModel extends Model
         'keperluan',
         'harga',
         'jumlah',
+        'tahun'
 
     ];
 

@@ -21,16 +21,8 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <label>Rekening</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_rekening" required>
-                                    <option selected disabled>-</option>
-                                    <?php foreach ($rekening as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['uraian_akun']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
+                           
+                            <!-- <div class="form-group">
                                 <label>Nomor BK Umum</label>
                                 <input type="text" name="no_bk_umum" required class="form-control">
                             </div>
@@ -41,21 +33,21 @@
                             <div class="form-group">
                                 <label>Asli</label>
                                 <input type="text" name="asli_123" required class="form-control">
-                            </div>
-                            <div class="form-group">
+                            </div> -->
+                            <!-- <div class="form-group">
                                 <label>Sudah Terima Dari</label>
                                 <input type="text" name="sudah_terima_dari" required class="form-control">
-                            </div>
-                            <div class="form-group">
+                            </div> -->
+                            <!-- <div class="form-group">
                                 <label>Uang Sebanyak</label>
                                 <input type="text" name="uang_sebanyak" class="form-control" required>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label>Untuk Pembayaran</label>
                                 <textarea name="untuk_pembayaran" required class="form-control" style="min-height:100px"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Apakah berisi pajak?</label>
+                                <label>Apakah Memiliki pajak?</label>
                                 <div class="form-check">
                                     <label class="form-check-label">
                                         <input type="radio" class="form-check-input" name="berisi_pajak" value="Ya" required onclick="togglePajakOptions(true)"> Ya
@@ -79,7 +71,7 @@
                                     </div>
                                 <?php endforeach; ?>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label>Terbilang</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -87,8 +79,11 @@
                                     </div>
                                     <input type="number" name="terbilang" required class="form-control">
                                 </div>
-                            </div>
+                            </div> -->
+                            <input type="text" name="sudah_terima_dari" value="BENDAHARA PENGELUARAN DINAS PERPUSTAKAAN DAN KEARSIPAN" class="form-control" hidden required>
                             <input type="text" name="status_verifikasi" value="MENUNGGU" class="form-control" hidden required>
+                            <input type="text" name="verifikasi_bendahara" value="MENUNGGU" class="form-control" hidden required>
+                            <input type="text" name="verifikasi_kasubbag" value="MENUNGGU" class="form-control" hidden required>
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <a href="/detailpenatausahaan/show/<?= service('uri')->getSegment(3); ?>" class="btn btn-danger">Batal</a>
                         </form>

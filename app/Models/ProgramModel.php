@@ -10,7 +10,7 @@ class ProgramModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     
-    protected $allowedFields    = ['id_bidang_urusan','kode_program','nama_program'];
+    protected $allowedFields    = ['id_bidang_urusan','kode_program','nama_program', 'tahun'];
 
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
@@ -19,7 +19,7 @@ class ProgramModel extends Model
 
     public function getProgram()
     {
-        return $this->select('program.id, CONCAT(urusan.kode_urusan, \'.\', bidang_urusan.kode_bidang_urusan ,\'.\', program.kode_program) AS kode_program1, program.nama_program')
+        return $this->select('program.id, CONCAT(urusan.kode_urusan, \'.\', bidang_urusan.kode_bidang_urusan ,\'.\', program.kode_program) AS kode_program1, program.nama_program, program.tahun')
         ->join('bidang_urusan', 'bidang_urusan.id = program.id_bidang_urusan')
         ->join('urusan', 'urusan.id = bidang_urusan.id_urusan')
         ->findAll();
