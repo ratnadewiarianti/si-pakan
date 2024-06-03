@@ -20,6 +20,9 @@ class UrusanTable extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
+            'tahun' => [
+                'type' => 'YEAR',
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('urusan');

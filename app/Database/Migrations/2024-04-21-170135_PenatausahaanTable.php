@@ -45,6 +45,9 @@ class PenatausahaanTable extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
+            'tahun' => [
+                'type' => 'YEAR',
+            ],
         ]);
 
         $this->forge->addPrimaryKey('id');

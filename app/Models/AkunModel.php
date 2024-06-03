@@ -10,7 +10,7 @@ class AkunModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     
-    protected $allowedFields    = ['kode_akun','uraian_akun'];
+    protected $allowedFields    = ['kode_akun','uraian_akun', 'tahun'];
 
   
 }

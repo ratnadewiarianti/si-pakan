@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class KeteranganDPATable extends Migration
+class Detail2Penatausahaan extends Migration
 {
     public function up()
     {
@@ -15,34 +15,31 @@ class KeteranganDPATable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true
             ],
-            'id_detail_penatausahaan' => [
+            'id_penatausahaan' => [
                 'type' => 'INT',
                 'constraint' => 5,
                 'unsigned' => true,
             ],
-            'keperluan' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50
+            'id_karyawan' => [
+                'type' => 'INT', 
+                'constraint' => 5, 
+                'unsigned' => true, 
             ],
-            'harga' => [
-                'type' => 'INT',
-                'constraint' => 50
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
             ],
-            'jumlah' => [
-                'type' => 'INT',
-                'constraint' => 11
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
             ],
-            'tahun' => [
-                'type' => 'YEAR',
-            ],
-           
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('keterangan_penatausahaan');
+        $this->forge->createTable('detail2_penatausahaan');
     }
 
     public function down()
     {
-        $this->forge->createTable('keterangan_penatausahaan');
+        $this->forge->dropTable('detail2_penatausahaan');
     }
 }

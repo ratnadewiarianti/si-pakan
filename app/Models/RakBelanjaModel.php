@@ -10,7 +10,7 @@ class RakBelanjaModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
 
-    protected $allowedFields    = ['nm_subkegiatan', 'id_detail_dpa', 'nilai_rincian','waktu'];
+    protected $allowedFields    = ['nm_subkegiatan', 'id_detail_dpa', 'nilai_rincian','waktu', 'tahun'];
 
     // Dates
     protected $useTimestamps = false;

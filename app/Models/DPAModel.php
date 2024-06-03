@@ -10,7 +10,7 @@ class DPAModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     
-    protected $allowedFields    = ['nomor_dpa'];
+    protected $allowedFields    = ['nomor_dpa','tahun'];
 
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';

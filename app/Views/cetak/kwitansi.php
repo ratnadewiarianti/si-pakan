@@ -81,7 +81,7 @@
                 </table>
             </div>
             <div class="col-md-4">
-                <!-- <table class="table-borderless" style="text-align: left;">
+                <table class="table-borderless" style="text-align: left;">
                     <tr>
                         <td style="white-space: nowrap;vertical-align: top;">NO. BK. UMUM</td>
                         <td style="text-align: right;"> : </td>
@@ -98,7 +98,7 @@
                         <td style="vertical-align: top; white-space: nowrap;"> <?= $detailpenatausahaan['asli_123']; ?></td>
                     </tr>
 
-                </table> -->
+                </table>
             </div>
         </div>
 
@@ -120,7 +120,7 @@
                         <td style="vertical-align: top;white-space: nowrap;"><b>UANG SEBANYAK</b></td>
                         <td style="text-align: right;vertical-align: top;"> : </td>
                         <td class="border-jajar-genjang">
-                            <p style="text-align: center; margin: 10px;font-weight: bold; font-size: 14px;"><?= $detailpenatausahaan['uang_sebanyak']; ?></p>
+                            <p style="text-align: center; margin: 10px;font-weight: bold; font-size: 14px;"><?= $detailpenatausahaan['jumlahdpa']; ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -161,7 +161,7 @@
                 <div class="garis-container">
                     <div class="garis-atas"></div>
                     <div class="content"><b>Terbilang Rp. </b> <span class="jajar-genjang"><b>
-                                <td> <?= 'Rp ' . number_format($detailpenatausahaan['terbilang'], 0, ',', '.'); ?></td>
+                                <td> <?= 'Rp ' . number_format($detailpenatausahaan['jumlahdpa'], 0, ',', '.'); ?></td>
                             </b></span>
                     </div>
                     <div class="garis-bawah"></div>

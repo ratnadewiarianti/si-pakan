@@ -25,11 +25,6 @@ class DetailPenataushaanTable extends Migration
                 'constraint' => 5, 
                 'unsigned' => true, 
             ],
-            'id_rekening' => [
-                'type' => 'INT',
-                'constraint' => 5,
-                'unsigned' => true,
-            ],
             'no_bk_umum' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50
@@ -46,33 +41,21 @@ class DetailPenataushaanTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 200
             ],
-            'uang_sebanyak' => [
-                'type' => 'TEXT',
-            ],
             'untuk_pembayaran' => [
                 'type' => 'TEXT',
-            ],
-            'pajak_daerah' => [
-                'type' => 'VARCHAR',
-                'constraint' => 20
-            ],
-            'pph21' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50
-            ],
-            'terbilang' => [
-                'type' => 'VARCHAR',
-                'constraint' => 100
-            ],
-            'status_kwitansi' => [
-                'type' => 'VARCHAR',
-                'constraint' => 2
             ],
             'status_verifikasi' => [
                 'type' => 'VARCHAR',
                 'constraint' => 10
             ],
-            
+            'verifikasi_bendahara' => [
+                'type' => 'VARCHAR',
+                'constraint' => 10
+            ],
+            'verifikasi_kasubbag' => [
+                'type' => 'VARCHAR',
+                'constraint' => 10
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,

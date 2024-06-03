@@ -15,6 +15,7 @@ class DataRekeningModel extends Model
         'rincian_object', 
         'sub_rincian_objek',
         'uraian_akun',
+        'tahun',
     ];
 
     // Dates

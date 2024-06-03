@@ -32,6 +32,9 @@ class RakBelanja extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 50,
             ],
+            'tahun' => [
+                'type' => 'YEAR',
+            ],
         ]);
 
         $this->forge->addPrimaryKey('id');
