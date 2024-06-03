@@ -120,7 +120,7 @@
                         <td style="vertical-align: top;white-space: nowrap;"><b>UANG SEBANYAK</b></td>
                         <td style="text-align: right;vertical-align: top;"> : </td>
                         <td class="border-jajar-genjang">
-                            <p style="text-align: center; margin: 10px;font-weight: bold; font-size: 14px;"><?= $detailpenatausahaan['jumlahdpa']; ?></p>
+                            <p style="text-align: center; margin: 10px;font-weight: bold; font-size: 12px;"> <?= strtoupper(terbilang($jumlahdpa)); ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -145,7 +145,7 @@
                         <tr>
                             <td style="vertical-align: top;white-space: nowrap;"><b><?= $key['nama_pajak']; ?></b></td>
                             <td style="text-align: right;vertical-align: top;"> : </td>
-                            <td> <?= $key['persen']; ?> %</td>
+                            <td> <?= 'Rp ' . number_format($key['nilai_pajak'], 0, ',', '.'); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
@@ -160,9 +160,13 @@
             <div class="col-md-4">
                 <div class="garis-container">
                     <div class="garis-atas"></div>
-                    <div class="content"><b>Terbilang Rp. </b> <span class="jajar-genjang"><b>
-                                <td> <?= 'Rp ' . number_format($detailpenatausahaan['jumlahdpa'], 0, ',', '.'); ?></td>
-                            </b></span>
+                    <div class="content">
+                        <b>Terbilang Rp. </b>
+                        <span class="jajar-genjang">
+                            <span class="skew-fix">
+                                <b><?=  number_format($jumlahdpa, 0, ',', '.'); ?></b>
+                            </span>
+                        </span>
                     </div>
                     <div class="garis-bawah"></div>
                 </div>
@@ -281,6 +285,43 @@
             window.print();
         });
     </script>
+
+    <?php
+    function terbilang($number)
+    {
+        $number = abs($number);
+        $units = ["", "Ribu", "Juta", "Miliar", "Triliun"];
+        $words = ["", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas"];
+
+        if ($number < 12) {
+            return $words[$number];
+        } elseif ($number < 20) {
+            return $words[$number - 10] . " Belas";
+        } elseif ($number < 100) {
+            return $words[intval($number / 10)] . " Puluh" . (($number % 10 > 0) ? " " . $words[$number % 10] : "");
+        } elseif ($number < 200) {
+            return "Seratus" . (($number - 100 > 0) ? " " . terbilang($number - 100) : "");
+        } elseif ($number < 1000) {
+            return $words[intval($number / 100)] . " Ratus" . (($number % 100 > 0) ? " " . terbilang($number % 100) : "");
+        } elseif ($number < 2000) {
+            return "Seribu" . (($number - 1000 > 0) ? " " . terbilang($number - 1000) : "");
+        } else {
+            $output = "";
+            $i = 0;
+            while ($number > 0) {
+                $remainder = $number % 1000;
+                if ($remainder > 0) {
+                    $output = terbilang($remainder) . " " . $units[$i] . (($output) ? " " . $output : "");
+                }
+                $number = intval($number / 1000);
+                $i++;
+            }
+            return trim($output);
+        }
+    }
+    ?>
+
+
 </body>
 
 </html>

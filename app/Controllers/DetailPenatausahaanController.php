@@ -13,6 +13,7 @@ use App\Models\PenatausahaanModel;
 use App\Models\KeteranganModel;
 use App\Models\PajakModel;
 use App\Models\PajakDPModel;
+
 class DetailPenatausahaanController extends BaseController
 {
     protected $PenataUsahaanModel;
@@ -27,7 +28,7 @@ class DetailPenatausahaanController extends BaseController
 
     public function __construct()
     {
-        $this->DetailPenatausahaanModel= new DetailPenatausahaanModel();
+        $this->DetailPenatausahaanModel = new DetailPenatausahaanModel();
         $this->Detail2PenatausahaanModel = new Detail2PenatausahaanModel();
         $this->DetailDPAModel = new DetailDPAModel();
         $this->SubRincianObjekModel = new SubRincianObjekModel();
@@ -48,8 +49,8 @@ class DetailPenatausahaanController extends BaseController
         ];
         if (!empty($data['detailpenatausahaan'])) {
             foreach ($data['detailpenatausahaan'] as &$item) {
-                $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id']);
-                $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id']);
+                $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id_detail_dpa']);
+                $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id_detail_dpa']);
             }
         }
 
@@ -189,7 +190,7 @@ class DetailPenatausahaanController extends BaseController
             // 'status_verifikasi' => $this->request->getPost('status_verifikasi'),
         ];
 
-        $this->DetailPenatausahaanModel->update($id,$data);
+        $this->DetailPenatausahaanModel->update($id, $data);
 
         // Ambil kembali id rak belanja dari data yang disimpan
         $id_penatausahaan = $data['id_penatausahaan'];
@@ -249,57 +250,63 @@ class DetailPenatausahaanController extends BaseController
     }
 
     public function terima($id)
-{
-    $model = new DetailPenatausahaanModel();
-    $updated = $model->updateStatusVerifikasi($id, 'DITERIMA');
-    if ($updated) {
-        // Pembaruan berhasil
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil diterima']);
-    } else {
-        // Pembaruan gagal
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+    {
+        $model = new DetailPenatausahaanModel();
+        $updated = $model->updateStatusVerifikasi($id, 'DITERIMA');
+        if ($updated) {
+            // Pembaruan berhasil
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil diterima']);
+        } else {
+            // Pembaruan gagal
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+        }
     }
-}
 
-public function tolak($id)
-{
-    $model = new DetailPenatausahaanModel();
-    $updated = $model->updateStatusVerifikasi($id, 'DITOLAK');
-    if ($updated) {
-        // Pembaruan berhasil
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil ditolak']);
-    } else {
-        // Pembaruan gagal
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+    public function tolak($id)
+    {
+        $model = new DetailPenatausahaanModel();
+        $updated = $model->updateStatusVerifikasi($id, 'DITOLAK');
+        if ($updated) {
+            // Pembaruan berhasil
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil ditolak']);
+        } else {
+            // Pembaruan gagal
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+        }
     }
-}
 
     public function cetak($id)
     {
         $detailpenatausahaan = $this->DetailPenatausahaanModel->getDetailById($id);
-        if (!empty($data['detailpenatausahaan'])) {
-            foreach ($data['detailpenatausahaan'] as &$item) {
-                $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id']);
-                $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id']);
-            }
-        }
         $id_p = $detailpenatausahaan['id_penatausahaan'];
-        $idd = $detailpenatausahaan[ 'id_detail_dpa'];
+        $idd = $detailpenatausahaan['id_detail_dpa'];
         $pajak = $this->PajakDPModel->getpajak($id);
+        $jumlahdpa = $this->DetailDPAModel->getTotalJumlah($idd);
+        $jumlahdpaperubahan = $this->DetailDPAModel->getTotalJumlahPerubahan($idd);
+
         $data = [
-            'detailpenatausahaan' =>  $detailpenatausahaan,
+            'detailpenatausahaan' => $detailpenatausahaan,
             'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan', $id)->findAll(),
             'penatausahaan' => $this->PenataUsahaanModel->getPenatausahaanById($id_p),
             'kegiatan' => $this->DetailDPAModel->getKegiatan($idd),
             'program' => $this->DetailDPAModel->getProgram($idd),
-            'pajak' => $pajak
+            'pajak' => $pajak,
+            'jumlahdpa' => $jumlahdpa,
+            'jumlahdpaperubahan' => $jumlahdpaperubahan,
         ];
 
         foreach ($data['keterangan'] as &$ket) {
             $total = $ket['jumlah'] * $ket['harga'];
-
             $ket['total'] = $total;
         }
-        return view('cetak/kwitansi',$data);
+        // Calculate nilai_pajak for each pajak item
+        foreach ($data['pajak'] as &$pajak_item) {
+            $pajak_item['nilai_pajak'] = $jumlahdpa * ($pajak_item['persen'] / 100);
+        }
+
+        unset($ket); // Unset reference to the last element
+        unset($pajak_item); // Unset reference to the last element
+
+        return view('cetak/kwitansi', $data);
     }
 }

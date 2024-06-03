@@ -74,7 +74,7 @@ td.border-jajar-genjang::before {
     content: "";
     position: absolute;
     top: 0;
-    left: 15px;
+    left: 5px;
     right: 20px;
     width: 100%;
     height: 100%;
@@ -103,34 +103,28 @@ td.border-jajar-genjang::before {
 
 .content {
     flex: 1;
-    /* Allow content to occupy remaining space */
     text-align: center;
-    /* Center text */
     display: flex;
-    /* Enable flexbox layout for content alignment */
     align-items: center;
-    /* Align items vertically */
     justify-content: flex-start;
-    /* Align items to the start (left) */
 }
 
 .jajar-genjang {
     display: inline-block;
-    /* Allow inline placement */
     position: relative;
-    /* Enable positioning */
     padding: 5px 10px;
     box-sizing: border-box;
     background-color: #fff;
-
     border: 2px solid #000;
-
     transform: skewX(-30deg);
-
     margin-left: 2em;
     margin-top: 3px;
     margin-bottom: 3px;
+}
 
+.skew-fix {
+    display: inline-block;
+    transform: skewX(30deg);
 }
 
 .table-centered {
@@ -214,7 +208,7 @@ td.border-jajar-genjang::before {
         content: "";
         position: absolute;
         top: 0;
-        left: 15px;
+        left: 0px;
         right: 20px;
         width: 100%;
         height: 100%;
@@ -250,39 +244,31 @@ td.border-jajar-genjang::before {
         /* Sesuaikan jarak dengan konten setelahnya */
     }
 
+.content {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
 
-    .content {
-        flex: 1;
-        /* Allow content to occupy remaining space */
-        text-align: center;
-        /* Center text */
-        display: flex;
-        /* Enable flexbox layout for content alignment */
-        align-items: center;
-        /* Align items vertically */
-        justify-content: flex-start;
-        /* Align items to the start (left) */
-        white-space: nowrap
-    }
+.jajar-genjang {
+    display: inline-block;
+    position: relative;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 2px solid #000;
+    transform: skewX(-30deg);
+    margin-left: 2em;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
 
-    .jajar-genjang {
-        display: inline-block;
-        /* Allow inline placement */
-        position: relative;
-        /* Enable positioning */
-        padding: 5px 10px;
-        box-sizing: border-box;
-        background-color: #fff;
-
-        border: 2px solid #000;
-
-        transform: skewX(-30deg);
-
-        margin-left: 2em;
-        margin-top: 3px;
-        margin-bottom: 3px;
-
-    }
+.skew-fix {
+    display: inline-block;
+    transform: skewX(30deg);
+}
 
     .table-centered {
         display: flex;
