@@ -64,7 +64,7 @@ $routes->group('rakbelanja', ['filter' => 'auth'], function ($routes) {
    $routes->get('delete/(:num)', 'RakBelanjaController::destroy/$1');
    $routes->get('getTotalJumlah/(:any)', 'RakBelanjaController::getTotalJumlah/$1');
    $routes->get('cekNilai/(:num)/(:num)', 'RakBelanjaController::cekNilai/$1/$2');
-
+   $routes->get('cetak/(:segment)', 'RakBelanjaController::cetakExcel/$1');
 
 });
 
