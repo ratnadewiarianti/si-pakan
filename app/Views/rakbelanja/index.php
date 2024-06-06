@@ -28,6 +28,7 @@
                                 <p class="card-title">Data Master Data Rak Belanja</p>
                             </div>
                             <div class="col-3 text-end">
+                                <a class="btn btn-primary btn-sm" target="_blank" href="/rakbelanja/cetak/<?= service('uri')->getSegment(3); ?>">Print</a>
                                 <a class="btn btn-success btn-sm" href="/rakbelanja/create/<?= service('uri')->getSegment(3); ?>">Tambah Data</a>
                                 <a class="btn btn-dark btn-sm" href="/rakbelanja">Kembali</a>
                             </div>

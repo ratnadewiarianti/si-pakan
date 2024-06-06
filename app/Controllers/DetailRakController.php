@@ -7,6 +7,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\RakBelanjaModel;
 use App\Models\DetailRakBelanjaModel;
 
+
 class DetailRakController extends BaseController
 {
     protected $DetailRakBelanjaModel;
@@ -20,54 +21,78 @@ class DetailRakController extends BaseController
 
     public function show($id)
     {
-        $data = [
-            'rakbelanja' => $this->RakBelanjaModel->findDatabyId($id),
-            'detailrak' => $this->DetailRakBelanjaModel->where('id_rakbelanja', $id)->findAll(),
-        ];
-        foreach ($data['rakbelanja'] as &$rak) {
+        $rakbelanja = $this->RakBelanjaModel->findDatabyId($id);
+        $detailrak = $this->DetailRakBelanjaModel->where('id_rakbelanja', $id)->findAll();
+        $waktu = '';
+
+        foreach ($rakbelanja as &$rak) {
             $totalRak = $this->RakBelanjaModel->getTotalRak($rak['id']);
             $rak['total_rak'] = $totalRak;
+            $waktu = $rak['waktu'];
         }
+
+        $data = [
+            'rakbelanja' => $rakbelanja,
+            'detailrak' => $detailrak,
+            'waktu' => $waktu // Pass the waktu variable to the view
+        ];
+
         return view('detailrak/show', $data);
     }
 
 
     public function create($id)
     {
+        // Ambil detail rak belanja berdasarkan ID rak belanja
         $detailrak = $this->DetailRakBelanjaModel->where('id_rakbelanja', $id)->findAll();
         $bulan_terpilih = array_column($detailrak, 'bulan');
 
-        // Ambil semua bulan
-        $all_bulan = [
-            'Januari'   => 'Januari',
-            'Februari'  => 'Februari',
-            'Maret'     => 'Maret',
-            'April'     => 'April',
-            'Mei'       => 'Mei',
-            'Juni'      => 'Juni',
-            'Juli'      => 'Juli',
-            'Agustus'   => 'Agustus',
-            'September' => 'September',
-            'Oktober'   => 'Oktober',
-            'November'  => 'November',
-            'Desember'  => 'Desember'
+        // Ambil waktu dari rak belanja
+        $rakbelanja = $this->RakBelanjaModel->find($id);
+        $waktu = $rakbelanja['waktu'];
+
+        // Pemetaan waktu ke bulan
+        $waktu_to_bulan = [
+            'semester_1' => ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'],
+            'semester_2' => ['Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+            'triwulan_1' => ['Januari', 'Februari', 'Maret'],
+            'triwulan_2' => ['April', 'Mei', 'Juni'],
+            'triwulan_3' => ['Juli', 'Agustus', 'September'],
+            'triwulan_4' => ['Oktober', 'November', 'Desember'],
+            'januari' => ['Januari'],
+            'februari' => ['Februari'],
+            'maret' => ['Maret'],
+            'april' => ['April'],
+            'mei' => ['Mei'],
+            'juni' => ['Juni'],
+            'juli' => ['Juli'],
+            'agustus' => ['Agustus'],
+            'september' => ['September'],
+            'oktober' => ['Oktober'],
+            'november' => ['November'],
+            'desember' => ['Desember']
         ];
+
+        // Ambil bulan yang sesuai dengan waktu
+        $available_bulan = $waktu_to_bulan[$waktu];
 
         // Buat opsi untuk dropdown bulan
         $options = '';
-        foreach ($all_bulan as $key => $bulan) {
-            $disabled = in_array($key, $bulan_terpilih) ? 'disabled' : ''; // Periksa apakah bulan sudah dipilih
-            $options .= "<option value=\"$key\" $disabled>$bulan</option>";
+        foreach ($available_bulan as $bulan) {
+            // Periksa apakah bulan sudah dipilih
+            $disabled = in_array($bulan, $bulan_terpilih) ? 'disabled' : '';
+            $options .= "<option value=\"$bulan\" $disabled>$bulan</option>";
         }
 
         $data = [
-            'rakbelanja' => $this->RakBelanjaModel->findDatabyId($id),
+            'rakbelanja' => $rakbelanja,
             'detailrak' => $detailrak,
             'bulan_options' => $options
         ];
 
         return view('detailrak/create', $data);
     }
+
 
     public function store()
     {
@@ -95,6 +120,10 @@ class DetailRakController extends BaseController
         // Ambil ID rak belanja dari detail rak belanja
         $id_rakbelanja = $detailrak['id_rakbelanja'];
 
+        // Ambil waktu dari rak belanja
+        $rakbelanja = $this->RakBelanjaModel->find($id_rakbelanja);
+        $waktu = $rakbelanja['waktu'];
+
         // Ambil semua bulan yang sudah terpilih untuk ID rak belanja kecuali bulan pada data yang dipilih
         $detailrak_rakbelanja = $this->DetailRakBelanjaModel
             ->where('id_rakbelanja', $id_rakbelanja)
@@ -102,34 +131,43 @@ class DetailRakController extends BaseController
             ->findAll();
         $bulan_terpilih = array_column($detailrak_rakbelanja, 'bulan');
 
-        // Ambil semua bulan
-        $all_bulan = [
-            'Januari'   => 'Januari',
-            'Februari'  => 'Februari',
-            'Maret'     => 'Maret',
-            'April'     => 'April',
-            'Mei'       => 'Mei',
-            'Juni'      => 'Juni',
-            'Juli'      => 'Juli',
-            'Agustus'   => 'Agustus',
-            'September' => 'September',
-            'Oktober'   => 'Oktober',
-            'November'  => 'November',
-            'Desember'  => 'Desember'
+        // Pemetaan waktu ke bulan
+        $waktu_to_bulan = [
+            'semester_1' => ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'],
+            'semester_2' => ['Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+            'triwulan_1' => ['Januari', 'Februari', 'Maret'],
+            'triwulan_2' => ['April', 'Mei', 'Juni'],
+            'triwulan_3' => ['Juli', 'Agustus', 'September'],
+            'triwulan_4' => ['Oktober', 'November', 'Desember'],
+            'januari' => ['Januari'],
+            'februari' => ['Februari'],
+            'maret' => ['Maret'],
+            'april' => ['April'],
+            'mei' => ['Mei'],
+            'juni' => ['Juni'],
+            'juli' => ['Juli'],
+            'agustus' => ['Agustus'],
+            'september' => ['September'],
+            'oktober' => ['Oktober'],
+            'november' => ['November'],
+            'desember' => ['Desember']
         ];
+
+        // Ambil bulan yang sesuai dengan waktu
+        $available_bulan = $waktu_to_bulan[$waktu];
 
         // Buat opsi untuk dropdown bulan
         $options = '';
-        foreach ($all_bulan as $key => $bulan) {
+        foreach ($available_bulan as $bulan) {
             // Tandai bulan yang sesuai dengan id_detail_rak sebagai selected
-            $selected = ($key === $detailrak['bulan']) ? 'selected' : '';
+            $selected = ($bulan === $detailrak['bulan']) ? 'selected' : '';
             // Periksa apakah bulan sudah terpilih untuk ID rak belanja
-            $disabled = in_array($key, $bulan_terpilih) && ($key !== $detailrak['bulan']) ? 'disabled' : '';
-            $options .= "<option value=\"$key\" $disabled $selected>$bulan</option>";
+            $disabled = in_array($bulan, $bulan_terpilih) && ($bulan !== $detailrak['bulan']) ? 'disabled' : '';
+            $options .= "<option value=\"$bulan\" $disabled $selected>$bulan</option>";
         }
 
         $data = [
-            'rakbelanja' => $this->RakBelanjaModel->find($id_rakbelanja),
+            'rakbelanja' => $rakbelanja,
             'detailrak' => $detailrak,
             'bulan_options' => $options
         ];

@@ -65,7 +65,7 @@
                             </div>
                             <div>
                                 <a class="btn btn-success btn-sm" href="/detailrak/create/<?= service('uri')->getSegment(3); ?>">Tambah Data</a>
-                                <a class="btn btn-dark btn-sm" href="/rakbelanja">Kembali</a>
+                                <a class="btn btn-dark btn-sm" href="/rakbelanja/index/<?= $waktu; ?>">Kembali</a>
                             </div>
                         </div>
 
