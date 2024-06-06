@@ -155,6 +155,7 @@ class DetailPenatausahaanController extends BaseController
             'detailpenatausahaan' => $detailpenatausahaan
         ];
         return view('detailpenatausahaan/edit', $data);
+        
     }
 
 
