@@ -33,20 +33,7 @@
                                 <input type="text" name="untuk_pembayaran" required class="form-control"
                                     value="<?= $detailpenatausahaan['untuk_pembayaran']; ?>">
                             </div>
-                            <div class="form-group" id="pajak-options">
-                                <label>Pilih Pajak <small> (maksimal pilih 2 pajak)</small></label>
-                                <?php foreach ($pajak as $key) : ?>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="id_pajak[]"
-                                            value="<?= $key['id']; ?>"
-                                            <?= in_array($key['id'], $selectedPajak) ? 'checked' : ''; ?>
-                                            onclick="limitPajakSelection(this)">
-                                        <?= $key['nama_pajak']; ?> (<?= $key['persen']; ?>%)
-                                    </label>
-                                </div>
-                                <?php endforeach; ?>
-                            </div>
+                            
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
                             <a href="/detailpenatausahaan/show/<?= $detailpenatausahaan['id_penatausahaan']; ?>"

@@ -105,7 +105,7 @@
                                                 </td>
 
                                                 <td>
-                                                    <?php if ($row['status_verifikasi'] == 'DITERIMA') : ?>
+                                                    <?php if ($row['verifikasi_kasubbag'] == 'DITERIMA') : ?>
                                                     <a href="/detailpenatausahaan/cetak/<?= $row['id']; ?>"
                                                         class="btn btn-sm btn-dark" target="_blank">Cetak</a>
                                                     <?php endif; ?>

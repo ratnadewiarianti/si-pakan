@@ -146,13 +146,13 @@ class DetailPenatausahaanController extends BaseController
     public function edit($id)
     {
         $detaildpa = $this->DetailDPAModel->getDPA();
-        $rekening = $this->SubRincianObjekModel->getRekening();
         $detailpenatausahaan = $this->DetailPenatausahaanModel->find($id);
+        // $pajak = $this->PajakDPModel->getpajak($id);
         $data = [
             // 'dpa' => $this->DPAModel->findDatabyId($id),
             'detaildpa' => $detaildpa,
-            'rekening' => $rekening,
-            'detailpenatausahaan' => $detailpenatausahaan
+            'detailpenatausahaan' => $detailpenatausahaan,
+            // 'pajak' => $pajak
         ];
         return view('detailpenatausahaan/edit', $data);
         
@@ -178,12 +178,12 @@ class DetailPenatausahaanController extends BaseController
         $data = [
             'id_penatausahaan' => $this->request->getPost('id_penatausahaan'),
             'id_detail_dpa' => $this->request->getPost('id_detail_dpa'),
-            'id_rekening' => $this->request->getPost('id_rekening'),
+            // 'id_rekening' => $this->request->getPost('id_rekening'),
             // 'no_bk_umum' => $this->request->getPost('no_bk_umum'),
             // 'no_bk_pembantu' => $this->request->getPost('no_bk_pembantu'),
             // 'asli_123' => $this->request->getPost('asli_123'),
-            'sudah_terima_dari' => $this->request->getPost('sudah_terima_dari'),
-            'uang_sebanyak' => $this->request->getPost('uang_sebanyak'),
+            // 'sudah_terima_dari' => $this->request->getPost('sudah_terima_dari'),
+            // 'uang_sebanyak' => $this->request->getPost('uang_sebanyak'),
             'untuk_pembayaran' => $this->request->getPost('untuk_pembayaran'),
             // 'pajak_daerah' => $this->request->getPost('pajak_daerah'),
             // 'pph21' => $this->request->getPost('pph21'),
@@ -275,6 +275,53 @@ class DetailPenatausahaanController extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
         }
     }
+    
+    public function terima_bendahara($id)
+{
+    $model = new DetailPenatausahaanModel();
+    $updated = $model->updateStatusBendahara($id, 'DITERIMA');
+    if ($updated) {
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil diterima']);
+    } else {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+    }
+}
+
+public function tolak_bendahara($id)
+{
+    $model = new DetailPenatausahaanModel();
+    $updated = $model->updateStatusBendahara($id, 'DITOLAK');
+    if ($updated) {
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil ditolak']);
+    } else {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+    }
+}
+
+    
+
+public function terima_kasubbag($id)
+{
+    $model = new DetailPenatausahaanModel();
+    $updated = $model->updateStatusKasubbag($id, 'DITERIMA');
+    if ($updated) {
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil diterima']);
+    } else {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+    }
+}
+
+public function tolak_kasubbag($id)
+{
+    $model = new DetailPenatausahaanModel();
+    $updated = $model->updateStatusKasubbag($id, 'DITOLAK');
+    if ($updated) {
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil ditolak']);
+    } else {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+    }
+}
+
 
     public function cetak($id)
     {

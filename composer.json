@@ -11,6 +11,8 @@
     },
     "require": {
         "php": "^7.4 || ^8.0",
+        "ext-fileinfo": "*",
+        "ext-gd": "*",
         "codeigniter4/framework": "^4.4",
         "dompdf/dompdf": "^2.0",
         "iio/libmergepdf": "^4.0",
