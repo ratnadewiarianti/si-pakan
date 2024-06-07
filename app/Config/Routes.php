@@ -232,6 +232,10 @@ $routes->group('detailpenatausahaan', ['filter' => 'auth'], function ($routes) {
    $routes->add('terima/(:num)', 'DetailPenatausahaanController::terima/$1');
    $routes->add('tolak/(:num)', 'DetailPenatausahaanController::tolak/$1');
    $routes->get('cetak/(:num)', 'DetailPenatausahaanController::cetak/$1');
+   $routes->add('terima_bendahara/(:num)', 'DetailPenatausahaanController::terima_bendahara/$1');
+   $routes->add('tolak_bendahara/(:num)', 'DetailPenatausahaanController::tolak_bendahara/$1');
+   $routes->add('terima_kasubbag/(:num)', 'DetailPenatausahaanController::terima_kasubbag/$1');
+   $routes->add('tolak_kasubbag/(:num)', 'DetailPenatausahaanController::tolak_kasubbag/$1');
 });
 
 $routes->group('keterangan', ['filter' => 'auth'], function ($routes) {
@@ -257,16 +261,14 @@ $routes->group('detaildpa_subkegiatan', ['filter' => 'auth'], function ($routes)
 
 $routes->group('verifikasi', ['filter' => 'auth'], function ($routes) {
    $routes->get('/', 'VerifikasiController::index');
+   $routes->get('bendahara', 'VerifikasiController::index_bendahara');
+   $routes->get('kasubbag', 'VerifikasiController::index_kasubbag');
    $routes->get('create', 'VerifikasiController::create');
    $routes->post('store', 'VerifikasiController::store');
    $routes->post('update/(:num)', 'VerifikasiController::update/$1');
    $routes->get('edit/(:num)', 'VerifikasiController::edit/$1');
    $routes->get('destroy/(:num)', 'VerifikasiController::destroy/$1');
-   $routes->get('preview_spj/(:segment)', 'VerifikasiController::preview_spj/$1');
-   $routes->get('preview_kwintansi/(:segment)', 'VerifikasiController::preview_kwintansi/$1');
    $routes->get('download/(:num)', 'VerifikasiController::download/$1');
-   $routes->add('terima/(:num)', 'VerifikasiController::terima/$1');
-   $routes->add('tolak/(:num)', 'VerifikasiController::tolak/$1');
 });
 
 $routes->group('bp_kas_tunai', ['filter' => 'auth'], function ($routes) {

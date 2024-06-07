@@ -18,7 +18,6 @@ class PajakDPModel extends Model
         ->where('pajak_dp.id_dp',$id)
         ->findAll();
     }
-
     public function getPajakByIdDp($id_dp)
     {
         return $this->where('id_dp', $id_dp)->findAll();

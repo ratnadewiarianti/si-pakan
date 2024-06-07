@@ -8,7 +8,7 @@
                 <div class="col-12 col-xl-8 ">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Master</a></li>
-                        <li class="breadcrumb-item"><a href="/verifikasi">Verifikasi</a></li>
+                        <li class="breadcrumb-item"><a href="/verifikasi">Verifikasi Bendahara</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Detail</li>
                     </ol>
                 </div>
@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <div style="display: flex; justify-content: space-between; align-items: center;" class="mb-4">
                             <div>
-                                <p class="card-title">Verifikasi Data</p>
+                                <p class="card-title">Verifikasi Data Bendahara</p>
                             </div>
                             <div>
                             </div>
@@ -54,7 +54,6 @@
                                                     <?= $no++; ?>
                                                 </td>
                                                 <td><a href="<?= $row['link_google']; ?>" target="_blank">lihat dokumen</a></td>
-
                                                 <td>
                                                     <?= $row['kode_urusan']; ?>.<?= $row['kode_bidang_urusan']; ?>.<?= $row['kode_program']; ?>.<?= $row['kode_kegiatan']; ?>.<?= $row['kode_subkegiatan']; ?>
                                                     - <?= $row['nama_subkegiatan']; ?>
@@ -89,46 +88,45 @@
                                             </td> -->
 
 
-                                            <td>
-                                                <?php
-                                                            $buttonClass = '';
-                                                            switch ($row['status_verifikasi']) {
-                                                                case 'MENUNGGU':
-                                                                    $buttonClass = 'btn-warning';
-                                                                    break;
-                                                                case 'DITERIMA':
-                                                                    $buttonClass = 'btn-success';
-                                                                    break;
-                                                                case 'DITOLAK':
-                                                                    $buttonClass = 'btn-danger';
-                                                                    break;
-                                                                default:
-                                                                    // Default class atau logika jika tidak sesuai kondisi di atas.
-                                                                    break;
-                                                            }
-                                                ?>
-                                                <button class="btn <?= $buttonClass; ?>"
-                                                    disabled><?= $row['status_verifikasi']; ?></button>
-                                            </td>
-                                            <td>
-                                                <a href="/detailpenatausahaan/terima/<?= $row['id']; ?>"
-                                                    class="btn btn-success btn-sm btn-terima"
-                                                    data-id="<?= $row['id']; ?>"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menerima data ini?')">Disetujui</a>
-                                                <a href="/detailpenatausahaan/tolak/<?= $row['id']; ?>"
-                                                    class="btn btn-danger btn-sm btn-tolak" data-id="<?= $row['id']; ?>"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menolak data ini?')">Ditolak</a>
-
-                                            </td>
-                                            <td>
-                                                <?php if ($row['status_verifikasi'] == 'DITERIMA') : ?>
-                                                <a href="/detailpenatausahaan/cetak/<?= $row['id']; ?>"
-                                                    class="btn btn-sm btn-dark" target="_blank">Cetak</a>
-                                                <?php else : ?>
-                                                -
-                                                <?php endif; ?>
-
-                                            </td>
+                                                <td>
+                                                    <?php
+                                                        $buttonClass = '';
+                                                        switch ($row['verifikasi_bendahara']) {
+                                                            case 'MENUNGGU':
+                                                                $buttonClass = 'btn-warning';
+                                                                break;
+                                                            case 'DITERIMA':
+                                                                $buttonClass = 'btn-success';
+                                                                break;
+                                                            case 'DITOLAK':
+                                                                $buttonClass = 'btn-danger';
+                                                                break;
+                                                            default:
+                                                                // Default class atau logika jika tidak sesuai kondisi di atas.
+                                                                break;
+                                                        }
+                                                        ?>
+                                                    <button class="btn <?= $buttonClass; ?>"
+                                                        disabled><?= $row['verifikasi_bendahara']; ?></button>
+                                                </td>
+                                                <td>
+                                                    <a href="/detailpenatausahaan/terima_bendahara/<?= $row['id']; ?>"
+                                                        class="btn btn-success btn-sm btn-terima"
+                                                        data-id="<?= $row['id']; ?>"
+                                                        onclick="return confirm('Apakah Anda yakin ingin menerima data ini?')">Disetujui</a>
+                                                    <a href="/detailpenatausahaan/tolak_bendahara/<?= $row['id']; ?>"
+                                                        class="btn btn-danger btn-sm btn-tolak"
+                                                        data-id="<?= $row['id']; ?>"
+                                                        onclick="return confirm('Apakah Anda yakin ingin menolak data ini?')">Ditolak</a>
+                                                </td>
+                                                <td>
+                                                    <?php if ($row['verifikasi_bendahara'] == 'DITERIMA') : ?>
+                                                    <a href="/detailpenatausahaan/cetak/<?= $row['id']; ?>"
+                                                        class="btn btn-sm btn-dark" target="_blank">Cetak</a>
+                                                    <?php else : ?>
+                                                    -
+                                                    <?php endif; ?>
+                                                </td>
                                             </tr>
                                             <?php endforeach; ?>
                                             <?php else : ?>
@@ -160,7 +158,6 @@
                     function handleResponse(data) {
                         if (data.status === 'success') {
                             console.log(data.message);
-                            // Ubah tampilan sesuai dengan respons
                             location.reload(); // Reload halaman setelah pembaruan berhasil
                         } else {
                             console.error('Gagal memperbarui status:', data.message);
@@ -170,11 +167,9 @@
                     buttonsTerima.forEach(function (button) {
                         button.addEventListener('click', function (event) {
                             event.preventDefault();
-
                             var id = this.getAttribute('data-id');
-
-                            fetch('/detailpenatausahaan/terima/' + id + '?timestamp=' +
-                                    new Date().getTime(), {
+                            fetch('/detailpenatausahaan/terima_bendahara/' + id +
+                                    '?timestamp=' + new Date().getTime(), {
                                         method: 'GET',
                                     })
                                 .then(response => response.json())
@@ -190,10 +185,8 @@
                     buttonsTolak.forEach(function (button) {
                         button.addEventListener('click', function (event) {
                             event.preventDefault();
-
                             var id = this.getAttribute('data-id');
-
-                            fetch('/detailpenatausahaan/tolak/' + id + '?timestamp=' +
+                            fetch('/detailpenatausahaan/tolak_bendahara/' + id + '?timestamp=' +
                                     new Date().getTime(), {
                                         method: 'GET',
                                     })

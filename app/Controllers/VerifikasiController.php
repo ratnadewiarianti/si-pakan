@@ -62,6 +62,43 @@ class VerifikasiController extends BaseController
 
     return view('verifikasi/index', $data);
 }
+    public function index_bendahara()
+{
+    $penatausahaan = $this->DetailPenatausahaanModel->getVerifikasiBendahara();
+
+    if (!empty($penatausahaan)) {
+        foreach ($penatausahaan as &$item) {
+            $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id']);
+            $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id']);
+            $item['pajak'] = $this->PajakDPModel->getPajakByIdDp($item['id']);
+        }
+    }
+
+    $data = [
+        'penatausahaan' => $penatausahaan
+    ];
+
+    return view('verifikasi/index_bendahara', $data);
+}
+
+    public function index_kasubbag()
+{
+    $penatausahaan = $this->DetailPenatausahaanModel->getVerifikasiKasubbag();
+
+    if (!empty($penatausahaan)) {
+        foreach ($penatausahaan as &$item) {
+            $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id']);
+            $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id']);
+            $item['pajak'] = $this->PajakDPModel->getPajakByIdDp($item['id']);
+        }
+    }
+
+    $data = [
+        'penatausahaan' => $penatausahaan
+    ];
+
+    return view('verifikasi/index_kasubbag', $data);
+}
 
 
    
@@ -92,9 +129,9 @@ class VerifikasiController extends BaseController
 // }
 
    
-public function terima($id)
+public function terima_bendahara($id)
 {
-    $model = new PenatausahaanModel();
+    $model = new DetailPenatausahaanModel();
     $updated = $model->updateStatusBendahara($id, 'DITERIMA');
     if ($updated) {
         // Pembaruan berhasil
@@ -105,10 +142,36 @@ public function terima($id)
     }
 }
 
-public function tolak($id)
+public function tolak_bendahara($id)
 {
-    $model = new PenatausahaanModel();
+    $model = new DetailPenatausahaanModel();
     $updated = $model->updateStatusBendahara($id, 'DITOLAK');
+    if ($updated) {
+        // Pembaruan berhasil
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil ditolak']);
+    } else {
+        // Pembaruan gagal
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+    }
+}
+
+public function terima_kasubbag($id)
+{
+    $model = new DetailPenatausahaanModel();
+    $updated = $model->updateStatusKasubbag($id, 'DITERIMA');
+    if ($updated) {
+        // Pembaruan berhasil
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil diterima']);
+    } else {
+        // Pembaruan gagal
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+    }
+}
+
+public function tolak_kasubbag($id)
+{
+    $model = new DetailPenatausahaanModel();
+    $updated = $model->updateStatusKasubbag($id, 'DITOLAK');
     if ($updated) {
         // Pembaruan berhasil
         return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil ditolak']);
