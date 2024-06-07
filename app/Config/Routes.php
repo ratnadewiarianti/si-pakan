@@ -203,6 +203,7 @@ $routes->group('dpa', ['filter' => 'auth'], function ($routes) {
    $routes->post('update/(:num)', 'DPAController::update/$1');
    $routes->get('edit/(:num)', 'DPAController::edit/$1');
    $routes->get('delete/(:num)', 'DPAController::destroy/$1');
+   $routes->get('cetak/(:num)', 'DPAController::cetakExcel/$1');
 });
 
 $routes->group('detaildpa', ['filter' => 'auth'], function ($routes) {

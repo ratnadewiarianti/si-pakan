@@ -18,8 +18,8 @@ class DetailDPAModel extends Model
     protected $updatedField  = 'updated_at';
 
     public function getDetailDPA($id)
-{
-    $query = $this->db->table('detail_dpa')
+    {
+        $query = $this->db->table('detail_dpa')
         ->select('
             detail_dpa.id, detail_dpa.id_dpa, detail_dpa.jumlah, detail_dpa.jumlah_perubahan, 
             detail_dpa.id_subkegiatan, detail_dpa.id_rekening, 
@@ -28,8 +28,8 @@ class DetailDPAModel extends Model
             kegiatan.kode_kegiatan, program.kode_program, 
             sub_rincian_objek.uraian_sub_rincian_objek, sub_rincian_objek.kode_sub_rincian_objek, 
             akun.kode_akun, kelompok.kode_kelompok, jenis.kode_jenis, objek.kode_objek, rincian_objek.kode_rincian_objek, 
-            dpa.nomor_dpa'
-        )
+            dpa.nomor_dpa, akun.uraian_akun, kelompok.uraian_kelompok, jenis.uraian_jenis, objek.uraian_objek, rincian_objek.uraian_rincian_objek
+        ')
         ->join('dpa', 'dpa.id = detail_dpa.id_dpa')
         ->join('subkegiatan', 'subkegiatan.id = detail_dpa.id_subkegiatan')
         ->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
@@ -43,10 +43,11 @@ class DetailDPAModel extends Model
         ->join('kelompok', 'kelompok.id = jenis.id_kelompok')
         ->join('akun', 'akun.id = kelompok.id_akun')
         ->where('detail_dpa.id_dpa', $id)
-        ->get();
+            ->get();
 
-    return $query->getResultArray();
-}
+        return $query->getResultArray();
+    }
+
 
 public function getRekening()
 {

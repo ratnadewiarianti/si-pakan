@@ -51,6 +51,7 @@
                                                         <td><?= $no++; ?></td>
                                                         <td><?= $row['nomor_dpa']; ?></td>
                                                         <td>
+                                                            <a href="/dpa/cetak/<?= $row['id']; ?>" class="btn btn-sm btn-dark">Cetak</a>
                                                             <a href="/detaildpa/show/<?= $row['id']; ?>" class="btn btn-sm btn-success">Detail</a>
                                                             <a href="/dpa/edit/<?= $row['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
                                                             <a href="/dpa/delete/<?= $row['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
