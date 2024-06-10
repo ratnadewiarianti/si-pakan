@@ -9,11 +9,11 @@ class PajakDPModel extends Model
     protected $table            = 'pajak_dp';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['id_dp','id_pajak', 'tahun'];
+    protected $allowedFields    = ['id_dp','id_pajak','jumlah_p', 'tahun'];
 
 
     public function getPajak($id){
-        return $this->select('pajak.nama_pajak, pajak.persen, pajak.tahun')
+        return $this->select('pajak.nama_pajak, pajak.persen, pajak.tahun, pajak_dp.jumlah_p')
         ->join('pajak','pajak.id = pajak_dp.id_pajak')
         ->where('pajak_dp.id_dp',$id)
         ->findAll();

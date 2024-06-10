@@ -145,7 +145,7 @@
                         <tr>
                             <td style="vertical-align: top;white-space: nowrap;"><b><?= $key['nama_pajak']; ?></b></td>
                             <td style="text-align: right;vertical-align: top;"> : </td>
-                            <td> <?= 'Rp ' . number_format($key['nilai_pajak'], 0, ',', '.'); ?></td>
+                            <td> <?= 'Rp ' . number_format($key['jumlah_p'], 0, ',', '.'); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>

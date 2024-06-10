@@ -24,8 +24,7 @@
                                 <p class="card-title">Detail Data penatausahaan</p>
                             </div>
                             <div>
-                                <a class="btn btn-success btn-sm"
-                                    href="/detailpenatausahaan/create/<?= service('uri')->getSegment(3); ?>">Tambah
+                                <a class="btn btn-success btn-sm" href="/detailpenatausahaan/create/<?= service('uri')->getSegment(3); ?>">Tambah
                                     Data</a>
                                 <a class="btn btn-dark btn-sm" href="/penatausahaan">Kembali</a>
                             </div>
@@ -48,6 +47,7 @@
                                             <th>Uang Sebanyak</th>
                                             <th>Untuk Pembayaran</th>
                                             <th>Terbilang</th>
+                                            <th>Pajak</th>
                                             <th>Status Verifikasi</th>
                                             <th>Action</th>
 
@@ -55,35 +55,45 @@
                                         </thead>
                                         <tbody>
                                             <?php if (!empty($detailpenatausahaan)) : ?>
-                                            <?php $no = 1; ?>
-                                            <?php foreach ($detailpenatausahaan as $row) : ?>
-                                            <tr>
-                                                <td>
-                                                    <?= $no++; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $row['kode_urusan']; ?>.<?= $row['kode_bidang_urusan']; ?>.<?= $row['kode_program']; ?>.<?= $row['kode_kegiatan']; ?>.<?= $row['kode_subkegiatan']; ?>
-                                                    - <?= $row['nama_subkegiatan']; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $row['kode_rekening']; ?> -
-                                                    <?= $row['uraian_sub_rincian_objek']; ?>
-                                                </td>
-                                                <td>
-                                                <?= strtoupper(terbilang($row['jumlahdpa'])); ?>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <?php
-                                                    $wrapped_text = wordwrap($row['untuk_pembayaran'], 70, "<br>\n", true);
-                                                    echo $wrapped_text;
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?= 'Rp ' . number_format($row['jumlahdpa'], 0, ',', '.'); ?>
-                                                </td>
-
-                                                <td>
-                                                    <?php
+                                                <?php $no = 1; ?>
+                                                <?php foreach ($detailpenatausahaan as $row) : ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?= $no++; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row['kode_urusan']; ?>.<?= $row['kode_bidang_urusan']; ?>.<?= $row['kode_program']; ?>.<?= $row['kode_kegiatan']; ?>.<?= $row['kode_subkegiatan']; ?>
+                                                            - <?= $row['nama_subkegiatan']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row['kode_rekening']; ?> -
+                                                            <?= $row['uraian_sub_rincian_objek']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= strtoupper(terbilang($row['jumlahdpa'])); ?>
+                                                        </td>
+                                                        <td style="text-align: justify;">
+                                                            <?php
+                                                            $wrapped_text = wordwrap($row['untuk_pembayaran'], 70, "<br>\n", true);
+                                                            echo $wrapped_text;
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= 'Rp ' . number_format($row['jumlahdpa'], 0, ',', '.'); ?>
+                                                        </td>
+                                                        <td>
+                                                            <ol>
+                                                                <?php if (!empty($row['pajak'])) : ?>
+                                                                    <?php foreach ($row['pajak'] as $pajak_item) : ?>
+                                                                        <li> <?= $pajak_item['nama_pajak']; ?> <?= 'Rp ' . number_format($pajak_item['jumlah_p'], 0, ',', '.'); ?> </li>
+                                                                    <?php endforeach; ?>
+                                                                <?php else : ?>
+                                                                    <li>Tidak ada data pajak</li>
+                                                                <?php endif; ?>
+                                                            </ol>
+                                                        </td>
+                                                        <td>
+                                                            <?php
                                                             $buttonClass = '';
                                                             switch ($row['status_verifikasi']) {
                                                                 case 'MENUNGGU':
@@ -100,29 +110,25 @@
                                                                     break;
                                                             }
                                                             ?>
-                                                    <button class="btn <?= $buttonClass; ?>"
-                                                        disabled><?= $row['status_verifikasi']; ?></button>
-                                                </td>
+                                                            <button class="btn <?= $buttonClass; ?>" disabled><?= $row['status_verifikasi']; ?></button>
+                                                        </td>
 
-                                                <td>
-                                                    <?php if ($row['verifikasi_kasubbag'] == 'DITERIMA') : ?>
-                                                    <a href="/detailpenatausahaan/cetak/<?= $row['id']; ?>"
-                                                        class="btn btn-sm btn-dark" target="_blank">Cetak</a>
-                                                    <?php endif; ?>
-                                                    <a href="/keterangan/show/<?= $row['id']; ?>"
-                                                        class="btn btn-sm btn-success">Keterangan</a>
-                                                    <a href="/detailpenatausahaan/edit/<?= $row['id']; ?>"
-                                                        class="btn btn-sm btn-primary">Edit</a>
-                                                    <a href="/detailpenatausahaan/delete/<?= $row['id']; ?>"
-                                                        class="btn btn-sm btn-danger">Delete</a>
-                                                </td>
-                                            </tr>
-                                            <?php endforeach; ?>
+                                                        <td>
+                                                            <?php if ($row['verifikasi_kasubbag'] == 'DITERIMA') : ?>
+                                                                <a href="/detailpenatausahaan/cetak/<?= $row['id']; ?>" class="btn btn-sm btn-dark" target="_blank">Cetak</a>
+                                                            <?php endif; ?>
+                                                            <a href="/keterangan/show/<?= $row['id']; ?>" class="btn btn-sm btn-success">Keterangan</a>
+                                                            <!-- <a href="/detailpenatausahaan/edit/<?= $row['id']; ?>"
+                                                        class="btn btn-sm btn-primary">Edit</a> -->
+                                                            <a href="/detailpenatausahaan/delete/<?= $row['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             <?php else : ?>
-                                            <tr>
-                                                <td colspan="6" class="text-center">Tidak ada data detail penatausahaan.
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td colspan="6" class="text-center">Tidak ada data detail penatausahaan.
+                                                    </td>
+                                                </tr>
                                             <?php endif; ?>
 
                                         </tbody>
@@ -144,8 +150,7 @@
                                 <p class="card-title">Keterangan Anggota</p>
                             </div>
                             <div>
-                                <a class="btn btn-success btn-sm"
-                                    href="/detailpenatausahaan/create2/<?= service('uri')->getSegment(3); ?>">Tambah
+                                <a class="btn btn-success btn-sm" href="/detailpenatausahaan/create2/<?= service('uri')->getSegment(3); ?>">Tambah
                                     Data</a>
 
                             </div>
@@ -168,26 +173,24 @@
                                         </thead>
                                         <tbody>
                                             <?php if (!empty($detail2)) : ?>
-                                            <?php $no = 1; ?>
-                                            <?php foreach ($detail2 as $row) : ?>
-                                            <tr>
-                                                <td><?= $no++; ?></td>
-                                                <td><?= $row['nama']; ?></td>
-                                                <td><?= $row['nip']; ?></td>
-                                                <td><?= $row['jabatan']; ?></td>
-                                                <td>
-                                                    <a href="/detailpenatausahaan/edit2/<?= $row['id']; ?>"
-                                                        class="btn btn-sm btn-primary">Edit</a>
-                                                    <a href="/detailpenatausahaan/delete2/<?= $row['id']; ?>"
-                                                        class="btn btn-sm btn-danger">Delete</a>
-                                                </td>
-                                            </tr>
-                                            <?php endforeach; ?>
+                                                <?php $no = 1; ?>
+                                                <?php foreach ($detail2 as $row) : ?>
+                                                    <tr>
+                                                        <td><?= $no++; ?></td>
+                                                        <td><?= $row['nama']; ?></td>
+                                                        <td><?= $row['nip']; ?></td>
+                                                        <td><?= $row['jabatan']; ?></td>
+                                                        <td>
+                                                            <a href="/detailpenatausahaan/edit2/<?= $row['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                                            <a href="/detailpenatausahaan/delete2/<?= $row['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             <?php else : ?>
-                                            <tr>
-                                                <td colspan="6" class="text-center">Tidak ada data detail penatausahaan.
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td colspan="6" class="text-center">Tidak ada data detail penatausahaan.
+                                                    </td>
+                                                </tr>
                                             <?php endif; ?>
 
                                         </tbody>
@@ -204,7 +207,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             var buttonsTerima = document.querySelectorAll('.btn-terima');
             var buttonsTolak = document.querySelectorAll('.btn-tolak');
 
@@ -218,8 +221,8 @@
                 }
             }
 
-            buttonsTerima.forEach(function (button) {
-                button.addEventListener('click', function (event) {
+            buttonsTerima.forEach(function(button) {
+                button.addEventListener('click', function(event) {
                     event.preventDefault();
 
                     var id = this.getAttribute('data-id');
@@ -238,8 +241,8 @@
                 });
             });
 
-            buttonsTolak.forEach(function (button) {
-                button.addEventListener('click', function (event) {
+            buttonsTolak.forEach(function(button) {
+                button.addEventListener('click', function(event) {
                     event.preventDefault();
 
                     var id = this.getAttribute('data-id');
@@ -261,38 +264,39 @@
     </script>
 
     <?php
-function terbilang($number) {
-    $number = abs($number);
-    $units = ["", "Ribu", "Juta", "Miliar", "Triliun"];
-    $words = ["", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas"];
-    
-    if ($number < 12) {
-        return $words[$number];
-    } elseif ($number < 20) {
-        return $words[$number - 10] . " Belas";
-    } elseif ($number < 100) {
-        return $words[intval($number / 10)] . " Puluh" . (($number % 10 > 0) ? " " . $words[$number % 10] : "");
-    } elseif ($number < 200) {
-        return "Seratus" . (($number - 100 > 0) ? " " . terbilang($number - 100) : "");
-    } elseif ($number < 1000) {
-        return $words[intval($number / 100)] . " Ratus" . (($number % 100 > 0) ? " " . terbilang($number % 100) : "");
-    } elseif ($number < 2000) {
-        return "Seribu" . (($number - 1000 > 0) ? " " . terbilang($number - 1000) : "");
-    } else {
-        $output = "";
-        $i = 0;
-        while ($number > 0) {
-            $remainder = $number % 1000;
-            if ($remainder > 0) {
-                $output = terbilang($remainder) . " " . $units[$i] . (($output) ? " " . $output : "");
+    function terbilang($number)
+    {
+        $number = abs($number);
+        $units = ["", "Ribu", "Juta", "Miliar", "Triliun"];
+        $words = ["", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas"];
+
+        if ($number < 12) {
+            return $words[$number];
+        } elseif ($number < 20) {
+            return $words[$number - 10] . " Belas";
+        } elseif ($number < 100) {
+            return $words[intval($number / 10)] . " Puluh" . (($number % 10 > 0) ? " " . $words[$number % 10] : "");
+        } elseif ($number < 200) {
+            return "Seratus" . (($number - 100 > 0) ? " " . terbilang($number - 100) : "");
+        } elseif ($number < 1000) {
+            return $words[intval($number / 100)] . " Ratus" . (($number % 100 > 0) ? " " . terbilang($number % 100) : "");
+        } elseif ($number < 2000) {
+            return "Seribu" . (($number - 1000 > 0) ? " " . terbilang($number - 1000) : "");
+        } else {
+            $output = "";
+            $i = 0;
+            while ($number > 0) {
+                $remainder = $number % 1000;
+                if ($remainder > 0) {
+                    $output = terbilang($remainder) . " " . $units[$i] . (($output) ? " " . $output : "");
+                }
+                $number = intval($number / 1000);
+                $i++;
             }
-            $number = intval($number / 1000);
-            $i++;
+            return trim($output);
         }
-        return trim($output);
     }
-}
-?>
+    ?>
 
 
 
@@ -310,7 +314,7 @@ function terbilang($number) {
 
 <?= $this->section('javascript') ?>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#table-1').DataTable();
     });
 </script>

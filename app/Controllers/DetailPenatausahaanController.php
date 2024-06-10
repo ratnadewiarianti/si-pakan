@@ -43,20 +43,29 @@ class DetailPenatausahaanController extends BaseController
 
     public function show($id)
     {
-        $data = [
-            'detailpenatausahaan' => $this->DetailPenatausahaanModel->getDetail($id),
-            'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id),
-        ];
-        if (!empty($data['detailpenatausahaan'])) {
-            foreach ($data['detailpenatausahaan'] as &$item) {
+        $detailpenatausahaan = $this->DetailPenatausahaanModel->getDetail($id);
+
+        // Ensure there's at least one result before trying to access it
+        if (!empty($detailpenatausahaan) && is_array($detailpenatausahaan)) {
+
+            foreach ($detailpenatausahaan as &$item) {
                 $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id_detail_dpa']);
                 $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id_detail_dpa']);
+                $item['pajak'] = $this->PajakDPModel->getpajak($item['id']);
             }
-        }
 
-        // $penatausahaans = $this->penatausahaanModel->getPenatausahaan2();
-        return view('detailpenatausahaan/show', $data);
+            $data = [
+                'detailpenatausahaan' => $detailpenatausahaan,
+                'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id),
+            ];
+
+            return view('detailpenatausahaan/show', $data);
+        } else {
+            // Handle the case where no details are found
+            return redirect()->back()->with('error', 'No details found for the given ID');
+        }
     }
+
 
 
     public function create($id)
@@ -92,10 +101,6 @@ class DetailPenatausahaanController extends BaseController
         $data = [
             'id_penatausahaan' => $this->request->getPost('id_penatausahaan'),
             'id_detail_dpa' => $this->request->getPost('id_detail_dpa'),
-            // 'id_rekening' => $this->request->getPost('id_rekening'),
-            // 'no_bk_umum' => $this->request->getPost('no_bk_umum'),
-            // 'no_bk_pembantu' => $this->request->getPost('no_bk_pembantu'),
-            // 'asli_123' => $this->request->getPost('asli_123'),
             'sudah_terima_dari' => $this->request->getPost('sudah_terima_dari'),
             // 'uang_sebanyak' => $this->request->getPost('uang_sebanyak'),
             'untuk_pembayaran' => $this->request->getPost('untuk_pembayaran'),
@@ -111,12 +116,15 @@ class DetailPenatausahaanController extends BaseController
 
         if ($this->request->getPost('berisi_pajak') == 'Ya') {
             $id_pajak = $this->request->getPost('id_pajak');
-            if ($id_pajak) {
+            $jumlah_pajak = $this->request->getPost('jumlah_p');
+
+            if ($id_pajak && $jumlah_pajak) {
                 $pajakData = [];
-                foreach ($id_pajak as $pajak) {
+                foreach ($id_pajak as $index => $pajak) {
                     $pajakData[] = [
                         'id_dp' => $id_detail_penatausahaan,
-                        'id_pajak' => $pajak
+                        'id_pajak' => $pajak,
+                        'jumlah_p' => $jumlah_pajak[$index]
                     ];
                 }
                 $this->PajakDPModel->insertBatch($pajakData);
@@ -222,18 +230,20 @@ class DetailPenatausahaanController extends BaseController
 
     public function destroy($id)
     {
-        // Ambil detail rak belanja berdasarkan ID yang akan dihapus
+        // Find the detail penatausahaan record
         $detailpenatausahaan = $this->DetailPenatausahaanModel->find($id);
-
-        // Simpan id_rakbelanja sebelum melakukan delete
         $id_penatausahaan = $detailpenatausahaan['id_penatausahaan'];
 
-        // Lakukan penghapusan
+        // Find and delete associated tax records in PajakDPModel
+        $this->PajakDPModel->where('id_dp', $id)->delete();
+
+        // Delete the detail penatausahaan record
         $this->DetailPenatausahaanModel->delete($id);
 
-        // Redirect kembali ke halaman show dengan id_rakbelanja
+        // Redirect back to the relevant page
         return redirect()->to("/detailpenatausahaan/show/$id_penatausahaan");
     }
+
 
     public function destroy2($id)
     {
@@ -348,10 +358,7 @@ public function tolak_kasubbag($id)
             $ket['total'] = $total;
         }
         // Calculate nilai_pajak for each pajak item
-        foreach ($data['pajak'] as &$pajak_item) {
-            $pajak_item['nilai_pajak'] = $jumlahdpa * ($pajak_item['persen'] / 100);
-        }
-
+   
         unset($ket); // Unset reference to the last element
         unset($pajak_item); // Unset reference to the last element
 

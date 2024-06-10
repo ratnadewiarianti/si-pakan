@@ -21,27 +21,6 @@
                                 </select>
                             </div>
 
-                           
-                            <!-- <div class="form-group">
-                                <label>Nomor BK Umum</label>
-                                <input type="text" name="no_bk_umum" required class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Nomor BK Pembantu</label>
-                                <input type="text" name="no_bk_pembantu" required class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Asli</label>
-                                <input type="text" name="asli_123" required class="form-control">
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <label>Sudah Terima Dari</label>
-                                <input type="text" name="sudah_terima_dari" required class="form-control">
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <label>Uang Sebanyak</label>
-                                <input type="text" name="uang_sebanyak" class="form-control" required>
-                            </div> -->
                             <div class="form-group">
                                 <label>Untuk Pembayaran</label>
                                 <textarea name="untuk_pembayaran" required class="form-control" style="min-height:100px"></textarea>
@@ -60,26 +39,11 @@
                                 </div>
                             </div>
                             <div class="form-group" id="pajak-options" style="display: none;">
-                                <label>Pilih Pajak <small> (maksimal pilih 2 pajak)</small></label>
-                                <?php foreach ($pajak as $key) : ?>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" checked>
-                                            <input class="form-check-input" type="checkbox" name="id_pajak[]" value="<?= $key['id']; ?>" onclick="limitPajakSelection(this)">
-                                            <?= $key['nama_pajak']; ?> (<?= $key['persen']; ?>%)
-                                        </label>
-                                    </div>
-                                <?php endforeach; ?>
+                                <label>Pajak</label>
+                                <div id="pajak-container"></div>
+                                <button type="button" class="btn btn-primary mt-2" onclick="addPajakField()">Tambah Pajak</button>
                             </div>
-                            <!-- <div class="form-group">
-                                <label>Terbilang</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="number" name="terbilang" required class="form-control">
-                                </div>
-                            </div> -->
+
                             <input type="text" name="sudah_terima_dari" value="BENDAHARA PENGELUARAN DINAS PERPUSTAKAAN DAN KEARSIPAN" class="form-control" hidden required>
                             <input type="text" name="status_verifikasi" value="MENUNGGU" class="form-control" hidden required>
                             <input type="text" name="verifikasi_bendahara" value="MENUNGGU" class="form-control" hidden required>
@@ -104,21 +68,62 @@
 <script>
     function togglePajakOptions(show) {
         var pajakOptions = document.getElementById('pajak-options');
-        pajakOptions.style.display = show ? 'block' : 'none';
+        var pajakContainer = document.getElementById('pajak-container');
+
+        if (show) {
+            pajakOptions.style.display = 'block';
+            // Add an initial tax field if none exists
+            if (pajakContainer.children.length === 0) {
+                addPajakField();
+            }
+        } else {
+            pajakOptions.style.display = 'none';
+            // Remove all children (tax fields)
+            while (pajakContainer.firstChild) {
+                pajakContainer.removeChild(pajakContainer.firstChild);
+            }
+        }
     }
 
-    function limitPajakSelection(checkbox) {
-        var checkboxes = document.querySelectorAll('input[name="pajak[]"]');
-        var checkedCount = 0;
-        checkboxes.forEach(function(cb) {
-            if (cb.checked) {
-                checkedCount++;
-            }
-        });
-        if (checkedCount > 2) {
-            checkbox.checked = false;
-            alert("Anda hanya bisa memilih maksimal 2 pajak.");
-        }
+    function addPajakField() {
+        var container = document.getElementById('pajak-container');
+        var div = document.createElement('div');
+        div.className = 'pajak-entry form-group';
+        div.style.display = 'flex';
+        div.style.alignItems = 'center';
+        div.style.marginBottom = '10px';
+
+        var select = document.createElement('select');
+        select.name = 'id_pajak[]';
+        select.className = 'form-control js-example-basic-single w-100';
+        select.required = true;
+        select.style.marginRight = '10px';
+        select.innerHTML = `<option selected disabled>Pilih Pajak</option>
+                            <?php foreach ($pajak as $key) : ?>
+                                <option value="<?= $key['id']; ?>"><?= $key['nama_pajak']; ?> </option>
+                            <?php endforeach; ?>`;
+
+        var input = document.createElement('input');
+        input.type = 'number';
+        input.name = 'jumlah_p[]';
+        input.className = 'form-control';
+        input.placeholder = 'Jumlah Pajak';
+        input.required = true;
+        input.style.marginRight = '10px';
+
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn btn-danger';
+        button.innerText = 'Hapus';
+        button.onclick = function() {
+            container.removeChild(div);
+        };
+
+        div.appendChild(select);
+        div.appendChild(input);
+        div.appendChild(button);
+
+        container.appendChild(div);
     }
 </script>
 <?= $this->endSection() ?>
