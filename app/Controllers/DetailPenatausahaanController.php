@@ -45,9 +45,6 @@ class DetailPenatausahaanController extends BaseController
     {
         $detailpenatausahaan = $this->DetailPenatausahaanModel->getDetail($id);
 
-        // Ensure there's at least one result before trying to access it
-        if (!empty($detailpenatausahaan) && is_array($detailpenatausahaan)) {
-
             foreach ($detailpenatausahaan as &$item) {
                 $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id_detail_dpa']);
                 $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id_detail_dpa']);
@@ -60,10 +57,7 @@ class DetailPenatausahaanController extends BaseController
             ];
 
             return view('detailpenatausahaan/show', $data);
-        } else {
-            // Handle the case where no details are found
-            return redirect()->back()->with('error', 'No details found for the given ID');
-        }
+
     }
 
 
