@@ -141,13 +141,15 @@
                         <td style="text-align: right;"> : </td>
                         <td> </td>
                     </tr>
-                    <?php foreach ($pajak as $key) : ?>
-                        <tr>
-                            <td style="vertical-align: top;white-space: nowrap;"><b><?= $key['nama_pajak']; ?></b></td>
-                            <td style="text-align: right;vertical-align: top;"> : </td>
-                            <td> <?= 'Rp ' . number_format($key['jumlah_p'], 0, ',', '.'); ?></td>
-                        </tr>
-                    <?php endforeach; ?>
+                    <?php if (!empty($pajak)) : ?>
+                        <?php foreach ($pajak as $key) : ?>
+                            <tr>
+                                <td style="vertical-align: top;white-space: nowrap;"><b><?= $key['nama_pajak']; ?></b></td>
+                                <td style="text-align: right;vertical-align: top;"> : </td>
+                                <td> <?= 'Rp ' . number_format($key['jumlah_p'], 0, ',', '.'); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </table>
 
 
@@ -164,7 +166,7 @@
                         <b>Terbilang Rp. </b>
                         <span class="jajar-genjang">
                             <span class="skew-fix">
-                                <b><?=  number_format($jumlahdpa, 0, ',', '.'); ?></b>
+                                <b><?= number_format($jumlahdpa, 0, ',', '.'); ?></b>
                             </span>
                         </span>
                     </div>
