@@ -155,7 +155,13 @@
                <div class="collapse" id="ui-basic7">
                    <ul class="nav flex-column sub-menu">
                        <li class="nav-item <?= (strpos($uri, '/bp_kas_tunai/') !== false) ? 'active' : '' ?>"> <a
-                               class="nav-link" href="/bp_kas_tunai">Buku Pembantu Kas Tunai</a></li>
+                               class="nav-link" href="/bp_kas_tunai">BP Kas Tunai</a></li>
+                       <li class="nav-item <?= (strpos($uri, '/bp_kas_tunai/') !== false) ? 'active' : '' ?>"> <a
+                               class="nav-link" href="/bp_kas_tunai">BP Pajak</a></li>
+                       <li class="nav-item <?= (strpos($uri, '/bp_kas_tunai/') !== false) ? 'active' : '' ?>"> <a
+                               class="nav-link" href="/bp_kas_tunai">BP Simpanan Bank</a></li>
+                       <li class="nav-item <?= (strpos($uri, '/bp_kas_tunai/') !== false) ? 'active' : '' ?>"> <a
+                               class="nav-link" href="/bp_kas_tunai">Laporan Untuk SI SPJ</a></li>
                    </ul>
                </div>
            </li>

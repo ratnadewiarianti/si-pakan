@@ -44,7 +44,7 @@
                                             <th>Nomor BK Pembantu</th>
                                             <th>Asli I,II,III</th>
                                             <th>Sudah Terima Dari</th> -->
-                                            <th>Uang Sebanyak</th>
+                                            <!-- <th>Uang Sebanyak</th> -->
                                             <th>Untuk Pembayaran</th>
                                             <th>Terbilang</th>
                                             <th>Pajak</th>
@@ -69,9 +69,9 @@
                                                             <?= $row['kode_rekening']; ?> -
                                                             <?= $row['uraian_sub_rincian_objek']; ?>
                                                         </td>
-                                                        <td>
+                                                        <!-- <td>
                                                             <?= strtoupper(terbilang($row['jumlahdpa'])); ?>
-                                                        </td>
+                                                        </td> -->
                                                         <td style="text-align: justify;">
                                                             <?php
                                                             $wrapped_text = wordwrap($row['untuk_pembayaran'], 70, "<br>\n", true);

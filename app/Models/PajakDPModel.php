@@ -13,7 +13,7 @@ class PajakDPModel extends Model
 
 
     public function getPajak($id){
-        return $this->select('pajak.nama_pajak, pajak.persen, pajak.tahun, pajak_dp.jumlah_p')
+        return $this->select('pajak.nama_pajak, pajak.jenis_pajak, pajak.tahun, pajak_dp.jumlah_p')
         ->join('pajak','pajak.id = pajak_dp.id_pajak')
         ->where('pajak_dp.id_dp',$id)
         ->findAll();

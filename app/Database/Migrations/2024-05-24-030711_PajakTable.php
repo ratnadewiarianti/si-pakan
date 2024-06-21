@@ -11,7 +11,7 @@ class PajakTable extends Migration
         $this->forge->addField([
             'id' => ['type' => 'INT', 'constraint' => 5, 'unsigned' => true, 'auto_increment' => true],
             'nama_pajak' => ['type' => 'VARCHAR', 'constraint' => 100],
-            'persen' => ['type' => 'VARCHAR', 'constraint' => 10],
+            'jenis_pajak' => ['type' => 'VARCHAR', 'constraint' => 50],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,

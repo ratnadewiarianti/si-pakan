@@ -29,7 +29,7 @@ class PajakController extends BaseController
     {
         $data = [
             'nama_pajak' => $this->request->getPost('nama_pajak'),
-            'persen' => $this->request->getPost('persen'),
+            'jenis_pajak' => $this->request->getPost('jenis_pajak'),
         ];
 
         $this->PajakModel->insert($data);
@@ -50,7 +50,7 @@ class PajakController extends BaseController
     {
         $data = [
             'nama_pajak' => $this->request->getPost('nama_pajak'),
-            'persen' => $this->request->getPost('persen'),
+            'jenis_pajak' => $this->request->getPost('jenis_pajak'),
         ];
 
         $this->PajakModel->update($id, $data);

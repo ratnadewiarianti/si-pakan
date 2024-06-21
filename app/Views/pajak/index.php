@@ -39,7 +39,7 @@
                                             <tr>
                                                 <th class="">No</th>
                                                 <th>Nama Pajak</th>
-                                                <th>Persen (%)</th>
+                                                <th>Jenis Pajak</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -50,7 +50,7 @@
                                                     <tr>
                                                         <td><?= $no++; ?></td>
                                                         <td><?= $row['nama_pajak']; ?></td>
-                                                        <td><?= $row['persen']; ?></td>
+                                                        <td><?= $row['jenis_pajak']; ?></td>
                                                         <td>
                                                             <a href="/pajak/edit/<?= $row['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
                                                             <a href="/pajak/delete/<?= $row['id']; ?>" class="btn btn-sm btn-danger">Delete</a>

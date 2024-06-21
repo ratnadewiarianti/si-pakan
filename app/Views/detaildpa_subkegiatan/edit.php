@@ -170,7 +170,7 @@
     function updateJumlah() {
         var harga = parseFloat(hargaInput.value) || 0; // Mengonversi harga menjadi angka, jika kosong maka 0
         var ppn = parseFloat(ppnInput.value) || 0; // Mengonversi ppn menjadi angka, jika kosong maka 0
-        var jumlah = harga - ppn; // Menghitung jumlah
+        var jumlah = harga + ppn; // Menghitung jumlah
         jumlahInput.value = jumlah; // Menetapkan jumlah ke input jumlah, dengan membulatkan ke 2 angka desimal
     }
 </script>
