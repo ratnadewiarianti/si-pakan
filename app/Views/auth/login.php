@@ -26,13 +26,13 @@
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                            <div class="brand-logo">
-                                <!-- <img src="assets/images/logo.svg" alt="logo"> -->
-                                <h1><b><center>SI-PAKAN</center></b></h1>
+                        <div class="brand-logo" style="display: flex; justify-content: center; align-items: center;">
+    <img src="assets/images/logo_sipakan.png" alt="logo" style="vertical-align: middle; margin-right: 10px; width: 100px; height: auto;">
+    <b style="font-size: 40px;">SI-PAKAN</b>
+</div>
 
-                            </div>
-                            <h4>Hello! let's get started</h4>
-                            <h6 class="font-weight-light">Sign in to continue.</h6>
+                            <h4>Halo, Selamat Datang Di Sistem Informasi Pelaporan Keuangan.</h4>
+                            <h6 class="font-weight-light">Sign in untuk melanjutkan.</h6>
                             <form method="POST" action="<?= base_url('auth/login'); ?>" class="pt-3">
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" name="username" placeholder="Username">
@@ -46,8 +46,8 @@
                                 <div class="my-2 d-flex justify-content-between align-items-center">
                                     <div class="form-check">
                                         <label class="form-check-label text-muted">
-                                            <input type="checkbox" class="form-check-input">
-                                            Keep me signed in
+                                            <!-- <input type="checkbox" class="form-check-input">
+                                            Keep me signed in -->
                                         </label>
                                     </div>
 

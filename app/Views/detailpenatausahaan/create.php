@@ -87,6 +87,12 @@
 
     function addPajakField() {
         var container = document.getElementById('pajak-container');
+        // Check if there are already 2 fields
+        if (container.children.length >= 2) {
+            alert("Anda Hanya Bisa Menambahkan Maksimal 2 Pajak");
+            return;
+        }
+
         var div = document.createElement('div');
         div.className = 'pajak-entry form-group';
         div.style.display = 'flex';
@@ -126,4 +132,5 @@
         container.appendChild(div);
     }
 </script>
+
 <?= $this->endSection() ?>

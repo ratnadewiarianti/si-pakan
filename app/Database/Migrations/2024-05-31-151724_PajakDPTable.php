@@ -12,6 +12,7 @@ class PajakDPTable extends Migration
             'id' => ['type' => 'INT', 'constraint' => 5, 'unsigned' => true, 'auto_increment' => true],
             'id_dp' => ['type' => 'INT', 'constraint' => 5],
             'id_pajak' => ['type' => 'INT', 'constraint' => 5],
+            'jumlah_p' => ['type' => 'VARCHAR', 'constraint' => 100],
             'tahun' => [
                 'type' => 'YEAR',
             ],

@@ -23,12 +23,17 @@
                         <form action="/pajak/store/" method="post">
                             <div class="form-group">
                                 <label>Nama Pajak</label>
-                                <input type="text" name="nama_pajak" class="form-control"  required>
+                                <input type="text" name="nama_pajak" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label>Persen</label>
-                                <input type="number" name="persen" class="form-control"  required>
+                                <label>Jenis Pajak</label>
+                                <select name="jenis_pajak" class="form-control" required>
+                                    <option value="">Pilih Jenis Pajak</option>
+                                    <option value="Negara">Negara</option>
+                                    <option value="Daerah">Daerah</option>
+                                </select>
                             </div>
+
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
                             <a href="<?= base_url('/pajak'); ?>" class="btn btn-danger">Batal</a>

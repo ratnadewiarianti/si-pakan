@@ -23,12 +23,15 @@
                         <form action="/pajak/update/<?= $pajak['id']; ?>" method="post">
                             <div class="form-group">
                                 <label>Nama Pajak</label>
-                                <input type="text" name="nama_pajak" class="form-control" value="<?= $pajak['nama_pajak']; ?>" required>
+                                <input type="text" name="nama_pajak" class="form-control"
+                                    value="<?= $pajak['nama_pajak']; ?>" required>
                             </div>
                             <div class="form-group">
-                                <label>Persen</label>
-                                <input type="text" name="persen" class="form-control" value="<?= $pajak['persen']; ?>" required>
-                            </div>
+                                <label>Jenis Pajak</label>
+                                <select class="form-control" name="jenis_pajak" required>
+                                    <option <?php if($pajak['jenis_pajak']=='Daerah') {echo "selected";}?> value="Daerah">Daerah</option>
+                                    <option <?php if($pajak['jenis_pajak']=='Negara') {echo "selected";}?> value="Negara">Negara</option>
+                                  </select> </div>
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
                             <a href="<?= base_url('/pajak'); ?>" class="btn btn-danger">Batal</a>

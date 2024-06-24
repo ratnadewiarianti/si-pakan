@@ -10,7 +10,7 @@ class PajakModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     
-    protected $allowedFields    = ['nama_pajak','persen', 'tahun'];
+    protected $allowedFields    = ['nama_pajak','jenis_pajak', 'tahun'];
 
   
 }
