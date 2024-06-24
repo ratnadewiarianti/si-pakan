@@ -30592,4 +30592,10 @@ div.tagsinput span.tag a {
   }
 }
 
-/*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
+
+
+.sidebar .nav-item .dropdown-toggle::after {
+  margin-left: auto;
+  margin-right: 0;
+}
+
