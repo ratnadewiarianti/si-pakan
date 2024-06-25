@@ -14,8 +14,9 @@
              <li class="nav-item nav-profile dropdown" style="display: flex; align-items: center;">
                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown"
                      style="display: flex; align-items: center;">
-                     <img src="/assets/images/Power.PNG" alt="profile" style="width: 35px; height: auto;">
-                     <!-- <i class="ti-power-off text-primary"></i> -->
+                   <!--  <img src="/assets/images/Power.PNG" alt="profile" style="width: 35px; height: auto;"> -->
+                     <i class="ti-power-off text-primary" style="font-size: 1.7em; font-weight: bold;"></i>
+
                  </a>
                  <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                      <!-- <a class="dropdown-item">
