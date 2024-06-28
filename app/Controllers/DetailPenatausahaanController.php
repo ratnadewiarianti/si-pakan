@@ -358,4 +358,36 @@ public function tolak_kasubbag($id)
 
         return view('cetak/kwitansi', $data);
     }
+
+    public function preview($id)
+    {
+        $detailpenatausahaan = $this->DetailPenatausahaanModel->getDetailById($id);
+        $id_p = $detailpenatausahaan['id_penatausahaan'];
+        $idd = $detailpenatausahaan['id_detail_dpa'];
+        $pajak = $this->PajakDPModel->getpajak($id);
+        $jumlahdpa = $this->DetailDPAModel->getTotalJumlah($idd);
+        $jumlahdpaperubahan = $this->DetailDPAModel->getTotalJumlahPerubahan($idd);
+
+        $data = [
+            'detailpenatausahaan' => $detailpenatausahaan,
+            'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan', $id)->findAll(),
+            'penatausahaan' => $this->PenataUsahaanModel->getPenatausahaanById($id_p),
+            'kegiatan' => $this->DetailDPAModel->getKegiatan($idd),
+            'program' => $this->DetailDPAModel->getProgram($idd),
+            'pajak' => $pajak,
+            'jumlahdpa' => $jumlahdpa,
+            'jumlahdpaperubahan' => $jumlahdpaperubahan,
+        ];
+
+        foreach ($data['keterangan'] as &$ket) {
+            $total = $ket['jumlah'] * $ket['harga'];
+            $ket['total'] = $total;
+        }
+        // Calculate nilai_pajak for each pajak item
+   
+        unset($ket); // Unset reference to the last element
+        unset($pajak_item); // Unset reference to the last element
+
+        return view('cetak/preview_kwitansi', $data);
+    }
 }

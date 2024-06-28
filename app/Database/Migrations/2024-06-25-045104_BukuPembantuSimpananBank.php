@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class BukuPembantuKasTunaiTable extends Migration
+class BukuPembantuSimpananBank extends Migration
 {
     public function up()
     {
@@ -56,11 +56,11 @@ class BukuPembantuKasTunaiTable extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('bp_kas_tunai');
+        $this->forge->createTable('bp_simpanan_bank');
     }
 
     public function down()
     {
-        $this->forge->dropTable('bp_kas_tunai');
+        $this->forge->dropTable('bp_simpanan_bank');
     }
 }

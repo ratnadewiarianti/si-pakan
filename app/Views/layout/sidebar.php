@@ -113,8 +113,8 @@
                <div class="collapse" id="ui-basic7">
                    <ul class="nav flex-column sub-menu">
                        <li class="nav-item <?= (strpos($uri, '/bp_kas_tunai/') !== false) ? 'active' : '' ?>"> <a class="nav-link" style="white-space: normal;word-wrap: break-word;" href="/bp_kas_tunai">Buku Pembantu Kas Tunai</a></li>
-                       <li class="nav-item <?= (strpos($uri, '/bp_kas_tunai/') !== false) ? 'active' : '' ?>"> <a class="nav-link" style="white-space: normal;word-wrap: break-word;" href="/bp_kas_tunai">Buku Pembantu Pajak</a></li>
-                       <li class="nav-item <?= (strpos($uri, '/bp_kas_tunai/') !== false) ? 'active' : '' ?>"> <a class="nav-link" style="white-space: normal;word-wrap: break-word;" href="/bp_kas_tunai">Buku Pembantu Simpanan Bank</a></li>
+                       <li class="nav-item <?= (strpos($uri, '/bp_pajak/') !== false) ? 'active' : '' ?>"> <a class="nav-link" style="white-space: normal;word-wrap: break-word;" href="/bp_pajak">Buku Pembantu Pajak</a></li>
+                       <li class="nav-item <?= (strpos($uri, '/bp_simpanan_bank/') !== false) ? 'active' : '' ?>"> <a class="nav-link" style="white-space: normal;word-wrap: break-word;" href="/bp_simpanan_bank">Buku Pembantu Simpanan Bank</a></li>
                        <li class="nav-item <?= (strpos($uri, '/bp_kas_tunai/') !== false) ? 'active' : '' ?>"> <a class="nav-link" style="white-space: normal;word-wrap: break-word;" href="/bp_kas_tunai">Laporan Untuk SI SPJ</a></li>
                    </ul>
                </div>

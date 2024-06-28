@@ -114,8 +114,12 @@
                                                         </td>
 
                                                         <td>
+                                                       
                                                             <?php if ($row['verifikasi_kasubbag'] == 'DITERIMA') : ?>
                                                                 <a href="/detailpenatausahaan/cetak/<?= $row['id']; ?>" class="btn btn-sm btn-dark" target="_blank">Cetak</a>
+                                                                <?php else : ?> 
+                                                                 <a href="/detailpenatausahaan/preview/<?= $row['id']; ?>" class="btn btn-sm btn-secondary" target="_blank">Preview</a>
+
                                                             <?php endif; ?>
                                                             <a href="/keterangan/show/<?= $row['id']; ?>" class="btn btn-sm btn-success">Keterangan</a>
                                                             <!-- <a href="/detailpenatausahaan/edit/<?= $row['id']; ?>"

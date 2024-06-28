@@ -21,124 +21,40 @@
                     <div class="card-body">
                         <h4 class="card-title">Tambah Data Buku Pembantu Kas Tunai</h4>
                         <form action="/bp_kas_tunai/store/" method="post">
-                        <div class="form-group">
-                                <label>Subkegiatan</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_subkegiatan" required>
-                                    <option selected disabled>-</option>
-                                    <?php foreach ($subkegiatan as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['kode_subkegiatan1']; ?> - <?= $key['nama_subkegiatan']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                            <div class="form-group">
+                                <label>Periode</label>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <input type="date" name="tgl_mulai" required class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="date" name="tgl_selesai" required class="form-control">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group">
-                                <label>Rekening</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_sub_rincian_objek" required>
-                                    <option selected disabled>-</option>
-                                    <?php foreach ($rekening as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['kode_rekening']; ?> - <?= $key['uraian_akun']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
                                 <label>Tanggal</label>
                                 <input type="date" name="tanggal" required class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Nomor Bukti</label>
-                                <input type="text" name="no_bukti" required class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Uraian</label>
-                                <input type="text" name="uraian" required class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Penerimaan</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="number" name="penerimaan" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Pengeluaran</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="number" name="pengeluaran" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Saldo</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="number" name="saldo" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Jumlah Periode Ini</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="number" name="jumlah_periode_ini" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Jumlah Periode Lalu</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="number" name="jumlah_periode_lalu" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Jumlah Semua Periode Sampai Periode Ini</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="number" name="jumlah_semua_periode" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Sisa Kas</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="number" name="sisa_kas" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Kas Bendahara</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="number" name="kas_bendahara" class="form-control" required>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Kepala Dinas Perpustakaan dan Kearsipan</label>
                                 <select class="form-control js-example-basic-single w-100" name="kepala_dinas" required>
                                     <option selected disabled>-</option>
                                     <?php foreach ($karyawan as $key) : ?>
-                                        <option value="<?= $key['nip']; ?>"><?= $key['nip']; ?> - <?= $key['nama']; ?></option>
+                                    <option value="<?= $key['nip']; ?>"><?= $key['nip']; ?> - <?= $key['nama']; ?>
+                                    </option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Bendahara Pengeluaran</label>
-                                <select class="form-control js-example-basic-single w-100" name="bendahara_pengeluaran" required>
+                                <select class="form-control js-example-basic-single w-100" name="bendahara_pengeluaran"
+                                    required>
                                     <option selected disabled>-</option>
                                     <?php foreach ($karyawan as $key) : ?>
-                                        <option value="<?= $key['nip']; ?>"><?= $key['nip']; ?> - <?= $key['nama']; ?></option>
+                                    <option value="<?= $key['nip']; ?>"><?= $key['nip']; ?> - <?= $key['nama']; ?>
+                                    </option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

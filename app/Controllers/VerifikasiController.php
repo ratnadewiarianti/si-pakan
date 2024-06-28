@@ -50,8 +50,8 @@ class VerifikasiController extends BaseController
 
     if (!empty($penatausahaan)) {
         foreach ($penatausahaan as &$item) {
-            $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id']);
-            $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id']);
+            $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id_detail_dpa']);
+            $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id_detail_dpa']);
             $item['pajak'] = $this->PajakDPModel->getPajakByIdDp($item['id']);
         }
     }
