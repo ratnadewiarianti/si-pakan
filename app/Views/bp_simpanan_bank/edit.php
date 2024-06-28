@@ -8,7 +8,7 @@
                 <div class="col-12 col-xl-8 ">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Master</a></li>
-                        <li class="breadcrumb-item"><a href="/bp_kas_tunai"> Buku Pembantu Kas Tunai</a></li>
+                        <li class="breadcrumb-item"><a href="/bp_simpanan_bank"> Buku Pembantu Kas Tunai</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </div>
@@ -20,21 +20,21 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Edit Data Buku Pembantu Kas Tunai</h4>
-                        <form action="/bp_kas_tunai/update/<?= $bp_kas_tunai['id']; ?>" method="post">
+                        <form action="/bp_simpanan_bank/update/<?= $bp_simpanan_bank['id']; ?>" method="post">
                             <div class="form-group">
                                 <label>Periode</label>
                                 <div class="form-row">
                                     <div class="col-md-6">
-                                        <input type="date" name="tgl_mulai" value="<?= $bp_kas_tunai['tgl_mulai']; ?>" required class="form-control">
+                                        <input type="date" name="tgl_mulai" value="<?= $bp_simpanan_bank['tgl_mulai']; ?>" required class="form-control">
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="date" name="tgl_selesai" value="<?= $bp_kas_tunai['tgl_selesai']; ?>"required class="form-control">
+                                        <input type="date" name="tgl_selesai" value="<?= $bp_simpanan_bank['tgl_selesai']; ?>"required class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal</label>
-                                <input type="date" name="tanggal" value="<?= $bp_kas_tunai['tanggal']; ?>" required
+                                <input type="date" name="tanggal" value="<?= $bp_simpanan_bank['tanggal']; ?>" required
                                     class="form-control">
                             </div>
 
@@ -44,7 +44,7 @@
                                     <option selected disabled>-</option>
                                     <?php foreach ($karyawan as $key) : ?>
                                     <option value="<?= $key['nip']; ?>"
-                                        <?php if ($key['nip'] == $bp_kas_tunai['kepala_dinas']) echo 'selected="selected"'; ?>>
+                                        <?php if ($key['nip'] == $bp_simpanan_bank['kepala_dinas']) echo 'selected="selected"'; ?>>
                                         <?= $key['nip']; ?> - <?= $key['nama']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -56,7 +56,7 @@
                                     <option selected disabled>-</option>
                                     <?php foreach ($karyawan as $key) : ?>
                                     <option value="<?= $key['nip']; ?>"
-                                        <?php if ($key['nip'] == $bp_kas_tunai['bendahara_pengeluaran']) echo 'selected="selected"'; ?>>
+                                        <?php if ($key['nip'] == $bp_simpanan_bank['bendahara_pengeluaran']) echo 'selected="selected"'; ?>>
                                         <?= $key['nip']; ?> - <?= $key['nama']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -64,7 +64,7 @@
 
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
-                            <a href="<?= base_url('/bp_kas_tunai'); ?>" class="btn btn-danger">Batal</a>
+                            <a href="<?= base_url('/bp_simpanan_bank'); ?>" class="btn btn-danger">Batal</a>
                         </form>
                     </div>
                 </div>

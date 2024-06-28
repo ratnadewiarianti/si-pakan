@@ -8,7 +8,7 @@
                 <div class="col-12 col-xl-8 ">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Master</a></li>
-                        <li class="breadcrumb-item"><a href="/bp_kas_tunai">Bidang Urusan</a></li>
+                        <li class="breadcrumb-item"><a href="/bp_simpanan_bank">Bidang Urusan</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Data</li>
                     </ol>
                 </div>
@@ -28,7 +28,7 @@
                                 <p class="card-title">Master Data Bidang Urusan</p>
                             </div>
                             <div class="col-2 text-end">
-                                <a class="btn btn-success btn-sm" href="/bp_kas_tunai/create">Tambah Data</a>
+                                <a class="btn btn-success btn-sm" href="/bp_simpanan_bank/create">Tambah Data</a>
                             </div>
                         </div>
                         <div class="row">
@@ -41,27 +41,25 @@
                                             <th>Tanggal</th>
                                             <th>Periode</th>
                                             <th>Kepala Dinas</th>
-                                            <th>Jabatan Kepala Dinas</th>
                                             <th>Bendahara Pengeluaran</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if (!empty($bp_kas_tunai)) : ?>
+                                            <?php if (!empty($bp_simpanan_bank)) : ?>
                                                 <?php $no = 1; ?>
-                                                <?php foreach ($bp_kas_tunai as $row) : ?>
+                                                <?php foreach ($bp_simpanan_bank as $row) : ?>
                                                     <tr>
                                                         <td><?= $no++; ?></td>
                                                        
                                                         <td><?= $row['tanggal']; ?></td>
                                                         <td><?= $row['tgl_mulai']; ?> sd. <?= $row['tgl_selesai']; ?></td>
                                                         <td><?= $row['kepala_dinas_nama']; ?></td>
-                                                        <td><?= $row['jabatan_kepala_dinas']; ?></td>
                                                         <td><?= $row['bendahara_nama']; ?></td>
                                                         <td>
-                                                        <a href="/bp_kas_tunai/cetak/<?= $row['id']; ?>" class="btn btn-sm btn-dark" target="_blank">Cetak</a>
-                                                            <a href="/bp_kas_tunai/edit/<?= $row['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                                            <a href="/bp_kas_tunai/delete/<?= $row['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
+                                                        <a href="/bp_simpanan_bank/cetak/<?= $row['id']; ?>" class="btn btn-sm btn-dark" target="_blank">Cetak</a>
+                                                            <a href="/bp_simpanan_bank/edit/<?= $row['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
+                                                            <a href="/bp_simpanan_bank/delete/<?= $row['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -106,3 +104,5 @@
 </script>
 
 <?= $this->endSection() ?>
+
+<!-- Baru bikin CRUD Biasa untul laporan belum bikin -->

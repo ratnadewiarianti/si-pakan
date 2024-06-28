@@ -121,11 +121,12 @@
 
                                             </td>
                                             <td>
+                                            <!-- <a href="/detailpenatausahaan/preview/<?= $row['id']; ?>" class="btn btn-sm btn-dark" target="_blank">Preview</a> -->
+
                                                 <?php if ($row['status_verifikasi'] == 'DITERIMA') : ?>
-                                                <a href="/detailpenatausahaan/cetak/<?= $row['id']; ?>"
-                                                    class="btn btn-sm btn-dark" target="_blank">Cetak</a>
+                                                <a href="/detailpenatausahaan/cetak/<?= $row['id']; ?>" class="btn btn-sm btn-dark" target="_blank">Cetak</a>
                                                 <?php else : ?>
-                                                -
+                                                    <a href="/detailpenatausahaan/preview/<?= $row['id']; ?>" class="btn btn-sm btn-secondary" target="_blank">Preview</a>
                                                 <?php endif; ?>
 
                                             </td>

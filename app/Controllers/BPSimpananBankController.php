@@ -4,24 +4,24 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\BPKasTunaiModel;
+use App\Models\BPSimpananBankModel;
 use App\Models\KaryawanModel;
-class BPKasTunaiController extends BaseController
+class BPSimpananBankController extends BaseController
 {
-    protected $BPKasTunaiModel;
+    protected $BPSimpananBankModel;
     protected $KaryawanModel;
     public function __construct()
     {
-        $this->BPKasTunaiModel = new BPKasTunaiModel();
+        $this->BPSimpananBankModel = new BPSimpananBankModel();
         $this->KaryawanModel = new KaryawanModel();
     }
 
     public function show()
     {
-        $bp_kas_tunai = $this->BPKasTunaiModel->getKaryawan();
+        $bp_simpanan_bank = $this->BPSimpananBankModel->findAll();
 
 
-        return view('bp_kas_tunai/show', ['bp_kas_tunai' => $bp_kas_tunai]);
+        return view('bp_simpanan_bank/show', ['bp_simpanan_bank' => $bp_simpanan_bank]);
     }
 
     public function create()
@@ -30,7 +30,7 @@ class BPKasTunaiController extends BaseController
             'karyawan' => $this->KaryawanModel->findAll(),
         ];
         // return view('program/create', $data);
-        return view('bp_kas_tunai/create', $data);
+        return view('bp_simpanan_bank/create', $data);
     }
 
     public function store()
@@ -47,9 +47,9 @@ class BPKasTunaiController extends BaseController
             // Cek data sebelum disimpan
             print_r($data);
     
-            $this->BPKasTunaiModel->insert($data);
+            $this->BPSimpananBankModel->insert($data);
     
-            return redirect()->to('/bp_kas_tunai');
+            return redirect()->to('/bp_simpanan_bank');
         } catch (\Exception $e) {
             // Tangkap dan cetak pesan kesalahan
             die($e->getMessage());
@@ -60,9 +60,9 @@ class BPKasTunaiController extends BaseController
     public function edit($id)
     {
         $data = [
-            'bp_kas_tunai' => $this->BPKasTunaiModel->find($id),
+            'bp_simpanan_bank' => $this->BPSimpananBankModel->find($id),
             'karyawan' => $this->KaryawanModel->findAll(),        ];
-        return view('bp_kas_tunai/edit', $data);
+        return view('bp_simpanan_bank/edit', $data);
     }
 
     public function update($id)
@@ -75,26 +75,26 @@ class BPKasTunaiController extends BaseController
             'bendahara_pengeluaran' => $this->request->getPost('bendahara_pengeluaran'),
         ];
 
-        $this->BPKasTunaiModel->update($id, $data);
+        $this->BPSimpananBankModel->update($id, $data);
 
-        return redirect()->to('bp_kas_tunai');
+        return redirect()->to('bp_simpanan_bank');
     }
 
     public function destroy($id)
     {
-        $this->BPKasTunaiModel->delete($id);
+        $this->BPSimpananBankModel->delete($id);
 
-        return redirect()->to('/bp_kas_tunai');
+        return redirect()->to('/bp_simpanan_bank');
     }
 
     public function cetak($id)
     {
-        $bp_kas_tunai = $this->BPKasTunaiModel->getBPKasTunaiById($id);
+        $bp_simpanan_bank = $this->BPSimpananBankModel->getBPPajakById($id);
         // $id_p = $detailpenatausahaan['id_penatausahaan'];
         // $idd = $detailpenatausahaan[ 'id_detail_dpa'];
 
         $data = [
-            'bp_kas_tunai' =>  $bp_kas_tunai,
+            'bp_simpanan_bank' =>  $bp_simpanan_bank,
             // 'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan', $id)->findAll(),
             // 'penatausahaan' => $this->PenataUsahaanModel->getPenatausahaanById($id_p),
             // 'kegiatan' => $this->DetailDPAModel->getKegiatan($idd),
@@ -106,6 +106,6 @@ class BPKasTunaiController extends BaseController
 
         //     $ket['total'] = $total;
         // }
-        return view('bp_kas_tunai/cetak',$data);
+        return view('bp_simpanan_bank/cetak',$data);
     }
 }

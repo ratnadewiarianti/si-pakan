@@ -233,6 +233,7 @@ $routes->group('detailpenatausahaan', ['filter' => 'auth'], function ($routes) {
    $routes->add('terima/(:num)', 'DetailPenatausahaanController::terima/$1');
    $routes->add('tolak/(:num)', 'DetailPenatausahaanController::tolak/$1');
    $routes->get('cetak/(:num)', 'DetailPenatausahaanController::cetak/$1');
+   $routes->get('preview/(:num)', 'DetailPenatausahaanController::preview/$1');
    $routes->add('terima_bendahara/(:num)', 'DetailPenatausahaanController::terima_bendahara/$1');
    $routes->add('tolak_bendahara/(:num)', 'DetailPenatausahaanController::tolak_bendahara/$1');
    $routes->add('terima_kasubbag/(:num)', 'DetailPenatausahaanController::terima_kasubbag/$1');
@@ -290,4 +291,25 @@ $routes->group('pajak', ['filter' => 'auth'], function ($routes) {
    $routes->post('update/(:num)', 'PajakController::update/$1');
    $routes->get('edit/(:num)', 'PajakController::edit/$1');
    $routes->get('delete/(:num)', 'PajakController::destroy/$1');
+});
+
+$routes->group('bp_pajak', ['filter' => 'auth'], function ($routes) {
+   $routes->get('/', 'BPPajakController::show');
+   $routes->get('create', 'BPPajakController::create');
+   $routes->post('store', 'BPPajakController::store');
+   $routes->post('update/(:num)', 'BPPajakController::update/$1');
+   $routes->get('edit/(:num)', 'BPPajakController::edit/$1');
+   $routes->get('delete/(:num)', 'BPPajakController::destroy/$1');
+   $routes->get('cetak/(:num)', 'BPPajakController::cetak/$1');
+
+});
+$routes->group('bp_simpanan_bank', ['filter' => 'auth'], function ($routes) {
+   $routes->get('/', 'BPSimpananBankController::show');
+   $routes->get('create', 'BPSimpananBankController::create');
+   $routes->post('store', 'BPSimpananBankController::store');
+   $routes->post('update/(:num)', 'BPSimpananBankController::update/$1');
+   $routes->get('edit/(:num)', 'BPSimpananBankController::edit/$1');
+   $routes->get('delete/(:num)', 'BPSimpananBankController::destroy/$1');
+   $routes->get('cetak/(:num)', 'BPSimpananBankController::cetak/$1');
+
 });
