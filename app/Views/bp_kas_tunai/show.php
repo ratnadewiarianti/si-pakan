@@ -41,7 +41,6 @@
                                             <th>Tanggal</th>
                                             <th>Periode</th>
                                             <th>Kepala Dinas</th>
-                                            <th>Jabatan Kepala Dinas</th>
                                             <th>Bendahara Pengeluaran</th>
                                                 <th>Action</th>
                                             </tr>
@@ -56,7 +55,6 @@
                                                         <td><?= $row['tanggal']; ?></td>
                                                         <td><?= $row['tgl_mulai']; ?> sd. <?= $row['tgl_selesai']; ?></td>
                                                         <td><?= $row['kepala_dinas_nama']; ?></td>
-                                                        <td><?= $row['jabatan_kepala_dinas']; ?></td>
                                                         <td><?= $row['bendahara_nama']; ?></td>
                                                         <td>
                                                         <a href="/bp_kas_tunai/cetak/<?= $row['id']; ?>" class="btn btn-sm btn-dark" target="_blank">Cetak</a>
