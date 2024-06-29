@@ -27,6 +27,17 @@ class BPKasTunaiModel extends Model
                     ->findAll();
     }
 
+    public function getCetak($id)
+    {
+        return $this->select('bp_kas_tunai.tanggal, bp_kas_tunai.tgl_selesai, bp_kas_tunai.tgl_mulai, bp_kas_tunai.kepala_dinas, bp_kas_tunai.bendahara_pengeluaran,
+                              karyawan1.nama AS kepala_dinas_nama, karyawan1.jabatan AS jabatan_kepala_dinas, karyawan1.file AS ttd_kepala_dinas,
+                              karyawan2.nama AS bendahara_nama, karyawan2.jabatan AS jabatan_bendahara, karyawan2.file AS ttd_bendahara')
+                    ->join('karyawan AS karyawan1', 'karyawan1.nip =bp_kas_tunai.kepala_dinas')
+                    ->join('karyawan AS karyawan2', 'karyawan2.nip = bp_kas_tunai.bendahara_pengeluaran')
+                    ->where('bp_kas_tunai.id', $id)
+                    ->findAll();
+    }
+
     // baru bikin tabel untuk laporan sisanya belum, verifikasi belum bikin pinbuk, sama status verifikasinya belum mengarah ke arah yang benar. button blm di benarkan juga. bagian verifikasi lah. belum di php spark migrate juga.
 
     

@@ -41,6 +41,7 @@ class BPKasTunaiController extends BaseController
                 'tgl_mulai' => $this->request->getPost('tgl_mulai'),
                 'tgl_selesai' => $this->request->getPost('tgl_selesai'),
                 'kepala_dinas' => $this->request->getPost('kepala_dinas'),
+                'jabatan_kepala_dinas' => $this->request->getPost('jabatan_kepala_dinas'),
                 'bendahara_pengeluaran' => $this->request->getPost('bendahara_pengeluaran'),
             ];
     
@@ -89,16 +90,13 @@ class BPKasTunaiController extends BaseController
 
     public function cetak($id)
     {
-        $bp_kas_tunai = $this->BPKasTunaiModel->getBPKasTunaiById($id);
+        $bp_kas_tunai = $this->BPKasTunaiModel->getCetak($id);
         // $id_p = $detailpenatausahaan['id_penatausahaan'];
         // $idd = $detailpenatausahaan[ 'id_detail_dpa'];
 
         $data = [
             'bp_kas_tunai' =>  $bp_kas_tunai,
-            // 'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan', $id)->findAll(),
-            // 'penatausahaan' => $this->PenataUsahaanModel->getPenatausahaanById($id_p),
-            // 'kegiatan' => $this->DetailDPAModel->getKegiatan($idd),
-            // 'program' => $this->DetailDPAModel->getProgram($idd)
+
         ];
 
         // foreach ($data['keterangan'] as &$ket) {

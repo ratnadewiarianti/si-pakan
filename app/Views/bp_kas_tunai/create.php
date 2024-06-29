@@ -37,6 +37,7 @@
                                 <label>Tanggal</label>
                                 <input type="date" name="tanggal" required class="form-control">
                             </div>
+                            
                             <div class="form-group">
                                 <label>Kepala Dinas Perpustakaan dan Kearsipan</label>
                                 <select class="form-control js-example-basic-single w-100" name="kepala_dinas" required>

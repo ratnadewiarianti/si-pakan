@@ -5,7 +5,7 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 12px;
 }
 
@@ -47,7 +47,7 @@ body {
     width: 20mm;
     /* Lebar gambar setara dengan dua teks */
     height: auto;
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
     /* Efek hitam putih */
     margin-right: 20px;
     /* Menyesuaikan jarak antara gambar dan teks */
@@ -56,9 +56,30 @@ body {
 .title {
     font-size: 20px;
     font-weight: bold;
+    text-align: center;
+
+}
+.title1 {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+
 }
 
+.sub-title1 {
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+
+    /* Ukuran teks sama dengan title */
+}
 .sub-title {
+    font-size: 14px;
+    text-align: center;
+    font-style: italic; /* Menambahkan style miring */
+    /* Ukuran teks sama dengan title */
+}
+.sub-title2 {
     font-size: 14px;
     text-align: center;
     /* Ukuran teks sama dengan title */
