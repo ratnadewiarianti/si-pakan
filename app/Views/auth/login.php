@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="assets/css/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -26,10 +27,10 @@
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                        <div class="brand-logo" style="display: flex; justify-content: center; align-items: center;">
-    <img src="assets/images/logo_sipakan.png" alt="logo" style="vertical-align: middle; margin-right: 10px; width: 100px; height: auto;">
-    <b style="font-size: 40px;">SI-PAKAN</b>
-</div>
+                            <div class="brand-logo" style="display: flex; justify-content: center; align-items: center;">
+                                <img src="assets/images/logo_sipakan.png" alt="logo" style="vertical-align: middle; margin-right: 10px; width: 100px; height: auto;">
+                                <b style="font-size: 40px;">SI-PAKAN</b>
+                            </div>
 
                             <h4>Halo, Selamat Datang Di Sistem Informasi Pelaporan Keuangan.</h4>
                             <h6 class="font-weight-light">Sign in untuk melanjutkan.</h6>
@@ -39,6 +40,13 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="password" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tahun Anggaran</label>
+                                    <input type="text" id="tahun" class="form-control form-control-lg" name="tahun" required placeholder="Pilih Tahun">
+                                    <div class="invalid-feedback">
+                                        Pilih tahun terlebih dahulu
+                                    </div>
                                 </div>
                                 <div class="mt-3">
                                     <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
@@ -73,6 +81,18 @@
     <script src="assets/js/template.js"></script>
     <script src="assets/js/settings.js"></script>
     <script src="assets/js/todolist.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        // Inisialisasi Bootstrap Datepicker
+        $(document).ready(function() {
+            $('#tahun').datepicker({
+                format: "yyyy",
+                startView: "years",
+                minViewMode: "years",
+                autoclose: true
+            });
+        });
+    </script>
     <!-- endinject -->
 </body>
 

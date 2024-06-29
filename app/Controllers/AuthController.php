@@ -39,7 +39,7 @@ class AuthController extends BaseController
 
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
-        // $tahun = $this->request->getPost('tahun');
+        $tahun = $this->request->getPost('tahun');
         $user = $this->userModel->getUserByUsername($username);
 
         if ($user && password_verify($password, $user['password'])) {
@@ -47,7 +47,7 @@ class AuthController extends BaseController
                 'user_id' => $user['id'],
                 'username' => $user['username'],
                 'role_id' => $user['role'],
-                // 'tahun' => $tahun
+                'tahun' => $tahun,
                 'logged_in' => TRUE
             ];
 

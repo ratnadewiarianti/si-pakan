@@ -18,7 +18,7 @@ class BPPajakController extends BaseController
 
     public function show()
     {
-        $bp_pajak = $this->BPPajakModel->findAll();
+        $bp_pajak = $this->BPPajakModel->getKaryawan();
 
 
         return view('bp_pajak/show', ['bp_pajak' => $bp_pajak]);
