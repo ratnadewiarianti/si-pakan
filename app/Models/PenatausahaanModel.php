@@ -28,6 +28,7 @@ class PenatausahaanModel extends Model
             ->join('karyawan AS karyawan_1', 'karyawan_1.id = penatausahaan.karyawan_1')
             ->join('karyawan AS karyawan_2', 'karyawan_2.id = penatausahaan.karyawan_2')
             ->join('karyawan AS karyawan_3', 'karyawan_3.id = penatausahaan.karyawan_3')
+            ->where('tahun',session()->get('tahun'))
             ->findAll();
     }
 

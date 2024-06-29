@@ -36,6 +36,7 @@ class PenatausahaanController extends BaseController
             'karyawan_2' => $this->request->getPost('karyawan_2'),
             'karyawan_3' => $this->request->getPost('karyawan_3'),
             'tanggal' => $this->request->getPost('tanggal'),
+            'tahun' => session()->get('tahun')
         ];
 
         $this->PenatausahaanModel->insert($data);
@@ -61,6 +62,7 @@ class PenatausahaanController extends BaseController
             'karyawan_2' => $this->request->getPost('karyawan_2'),
             'karyawan_3' => $this->request->getPost('karyawan_3'),
             'tanggal' => $this->request->getPost('tanggal'),
+            'tahun' => session()->get('tahun')
         ];
 
         $this->PenatausahaanModel->update($id, $data);
