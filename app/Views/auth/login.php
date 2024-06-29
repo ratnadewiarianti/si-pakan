@@ -42,7 +42,6 @@
                                     <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="password" placeholder="Password">
                                 </div>
                                 <div class="form-group">
-                                    <label>Tahun Anggaran</label>
                                     <input type="text" id="tahun" class="form-control form-control-lg" name="tahun" required placeholder="Pilih Tahun">
                                     <div class="invalid-feedback">
                                         Pilih tahun terlebih dahulu
