@@ -16,10 +16,6 @@
         </div>
         <!-- end breadcrumb -->
         <div class="row">
-            <!-- <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row"> -->
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -38,7 +34,6 @@
                                         <thead>
                                             <tr>
                                                 <th class="">No</th>
-                                                <!-- <th>Kode dpa</th> -->
                                                 <th>Nomor dpa</th>
                                                 <th>Action</th>
                                             </tr>

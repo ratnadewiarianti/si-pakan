@@ -105,48 +105,6 @@ class BPPajakController extends BaseController
         return redirect()->to('/bp_pajak');
     }
 
-    // public function cetak($id)
-    // {
-    //     $bp_pajak = $this->BPPajakModel->getCetak($id);
-    //     $penatausahaan = $this->PenatausahaanModel->where('YEAR(tanggal)', session()->get('tahun'))->findAll();
-
-    //     foreach ($penatausahaan as $p) {
-    //         $detailpenatausahaan = $this->DetailPenatausahaanModel
-    //         ->where('id_penatausahaan', $p['id'])
-    //         ->where('status_verifikasi', 'DITERIMA')
-    //         ->findAll();
-
-    //         foreach ($detailpenatausahaan as $detail) {
-    //             $subRincianObjekModel = new SubRincianObjekModel();
-    //             $uraian = $subRincianObjekModel
-    //                 ->select('uraian_sub_rincian_objek')
-    //                 ->join('detail_dpa', 'subrincian_objek.id = detail_dpa.id_rekening')
-    //                 ->where('detail_dpa.id_detail_dpa', $detail['id_detail_dpa'])
-    //                 ->where('detail_dpa.id', $detail['id'])
-    //                 ->first();
-
-    //             // Ambil informasi pajak_dp jika ada
-    //             $pajak_dp = $this->PajakDPModel
-    //                 ->select('pajak_dp.id, pajak_dp.jumlah_p, pajak.nama_pajak')
-    //                 ->join('pajak', 'pajak_dp.id_pajak = pajak.id')
-    //                 ->where('pajak_dp.id_dp', $detail['id'])
-    //                 ->where('pajak.jenis_pajak', 'Negara')
-    //                 ->findAll();
-
-    //             foreach ($pajak_dp as $pajak) {
-    //                $nama_pajak = $pajak['nama_pajak'];
-    //                $jumlah_pajak = $pajak['jumlah_p'];
-    //             }
-    //         }
-    //     }
-
-
-    //     $data = [
-    //         'bp_pajak' =>  $bp_pajak,
-    //     ];
-
-    //     return view('bp_pajak/cetak', $data);
-    // }
 
     public function cetak($id)
     {

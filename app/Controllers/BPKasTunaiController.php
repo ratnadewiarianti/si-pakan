@@ -91,19 +91,9 @@ class BPKasTunaiController extends BaseController
     public function cetak($id)
     {
         $bp_kas_tunai = $this->BPKasTunaiModel->getCetak($id);
-        // $id_p = $detailpenatausahaan['id_penatausahaan'];
-        // $idd = $detailpenatausahaan[ 'id_detail_dpa'];
-
         $data = [
             'bp_kas_tunai' =>  $bp_kas_tunai,
-
         ];
-
-        // foreach ($data['keterangan'] as &$ket) {
-        //     $total = $ket['jumlah'] * $ket['harga'];
-
-        //     $ket['total'] = $total;
-        // }
         return view('bp_kas_tunai/cetak',$data);
     }
 }

@@ -100,6 +100,21 @@ public function getDetail($id)
             ->findAll();
     }
 
+
+    public function getRekening($id)
+    {
+        return $this->select('CONCAT(akun.kode_akun, \'.\', kelompok.kode_kelompok, \'.\', jenis.kode_jenis, \'.\', objek.kode_objek, \'.\', rincian_objek.kode_rincian_objek, \'.\', sub_rincian_objek.kode_sub_rincian_objek) AS kode_rekening')
+            ->join('detail_dpa', 'detail_dpa.id = detail_penatausahaan.id_detail_dpa')
+        ->join('sub_rincian_objek', 'sub_rincian_objek.id = detail_dpa.id_rekening')
+        ->join('rincian_objek', 'rincian_objek.id = sub_rincian_objek.id_rincian_objek')
+        ->join('objek', 'objek.id = rincian_objek.id_objek')
+        ->join('jenis', 'jenis.id = objek.id_jenis')
+        ->join('kelompok', 'kelompok.id = jenis.id_kelompok')
+        ->join('akun', 'akun.id = kelompok.id_akun')
+        ->where('detail_penatausahaan.id',$id)
+        ->first();
+    }
+
     public function updateStatusVerifikasi($id, $status)
 {
     $data = [

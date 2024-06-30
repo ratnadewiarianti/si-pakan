@@ -110,7 +110,7 @@
                             <td></td>
                             <td></td>
                             <td>Saldo</td>
-                            <td></td>
+                            <td>-</td>
                             <td>0,00</td>
                             <td>0,00</td>
                         </tr>
@@ -120,8 +120,8 @@
                             <td></td>
                             <td>Saldo Awal</td>
                             <td>0,00</td>
-                            <td></td>
-                            <td></td>
+                            <td>-</td>
+                            <td>-</td>
                         </tr>
                         <?php $no = 2; ?>
                         <?php foreach ($data as $row) : ?>
@@ -132,7 +132,7 @@
                                     <td><?= $row['no_bukti'] ?></td>
                                     <td><?= $row['uraian'] ?></td>
                                     <td><?= number_format($row['pemotongan'], 2, ',', '.') ?></td>
-                                    <td><?= $row['penyetoran'] ?></td>
+                                    <td>-</td>
                                     <td><?= number_format($row['pemotongan'], 2, ',', '.') ?></td>
                                 </tr>
                             <?php else : ?>
@@ -141,9 +141,9 @@
                                     <td></td>
                                     <td><?= $row['no_bukti'] ?></td>
                                     <td><?= $row['uraian'] ?></td>
-                                    <td><?= $row['pemotongan'] ?></td>
+                                    <td>-</td>
                                     <td><?= number_format($row['penyetoran'], 2, ',', '.') ?></td>
-                                    <td></td>
+                                    <td>-</td>
                                 </tr>
                             <?php endif; ?>
                         <?php endforeach; ?>
