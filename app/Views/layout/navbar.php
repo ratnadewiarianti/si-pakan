@@ -2,9 +2,11 @@
  <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
          <a class="navbar-brand brand-logo mr-5" href="#" data-toggle="tooltip" title="Tahun : <?= session()->get('tahun'); ?>">
-             <img src="/assets/images/logo_sipakan.jpeg" class="mr-2" alt="logo" />
-             <span style="font-weight: bold; font-size: 24px;">SI-PAKAN</span>
-             <span style=" font-size: 14px;"><?= session()->get('tahun'); ?></span>
+         <img src="/assets/images/logo_sipakan.jpeg" alt="logo" style="margin-left: 10px; margin-right: 1px;" />
+<span style="font-weight: bold; font-size: 24px;">SI-PAKAN</span>
+<span style="font-size: 14px;"><?= session()->get('tahun'); ?></span>
+
+
          </a>
      </div>
      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
