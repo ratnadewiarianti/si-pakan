@@ -184,7 +184,8 @@
                     <thead>
                         <tr>
                             <th rowspan="2" style="text-align:center; vertical-align:middle;">NO.</th>
-                            <th rowspan="2" style="text-align:center; vertical-align:middle;">Nama & Nomor Rekening Penerima</th>
+                            <th rowspan="2" style="text-align:center; vertical-align:middle;">Nama & Nomor Rekening
+                                Penerima</th>
                             <th colspan="4" style="text-align: center; ">Nominal</th>
                             <th rowspan="2" style="text-align:center; vertical-align:middle;">Keterangan</th>
                         </tr>
@@ -205,6 +206,14 @@
                             <td></td>
                             <td></td>
                         </tr>
+                        <tr>
+                            <td colspan="2" class="text-center"><d>Jumlah</d></td>
+                            <td><?= number_format($jumlahdpa, 0, ',', '.'); ?>,00</td>
+                            <td><?= number_format($jumlahdpa, 0, ',', '.'); ?>,00</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -215,7 +224,8 @@
                 <table class="table-borderless" style="text-align: left;">
 
                     <tr>
-                        <td style="vertical-align: top;white-space: nowrap; ">Demikian atas bantuan dan kerjasama yang baik kami sampaikan terima kasih</td>
+                        <td style="vertical-align: top;white-space: nowrap; ">Demikian atas bantuan dan kerjasama yang
+                            baik kami sampaikan terima kasih</td>
                     </tr>
                 </table>
             </div>
@@ -235,12 +245,11 @@
 
         <div class="row mt-3">
             <div class="col-md-6 text-center">
-                
             </div>
             <div class="col-md-6 text-center">
                 <?php if (!empty($penatausahaan[0]['ttd_karyawan_2'])) : ?>
-                <img src="<?= base_url('uploads/ttd/' . $penatausahaan[0]['ttd_karyawan_2']) ?>" alt="Gambar" width="100"
-                    height="100">
+                <img src="<?= base_url('uploads/ttd/' . $penatausahaan[0]['ttd_karyawan_2']) ?>" alt="Gambar"
+                    width="100" height="100">
                 <?php else : ?>
                 -
                 <?php endif; ?>

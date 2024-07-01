@@ -316,7 +316,7 @@ $routes->group('bp_simpanan_bank', ['filter' => 'auth'], function ($routes) {
 
 });
 $routes->group('laporan', ['filter' => 'auth'], function ($routes) {
-   $routes->get('/', 'LaporanController::show');
+   $routes->get('/', 'LaporanController::index');
    $routes->get('create', 'LaporanController::create');
    $routes->post('store', 'LaporanController::store');
    $routes->post('update/(:num)', 'LaporanController::update/$1');
