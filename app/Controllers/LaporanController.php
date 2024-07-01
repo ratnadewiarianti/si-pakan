@@ -98,6 +98,11 @@ class LaporanController extends BaseController
     {
         // $LaporanModel = new LaporanModel(); 
         $laporan = $this->LaporanModel->getCetak($id);
+        if (!empty($laporan)) {
+            foreach ($laporan as &$item) {
+                $item['jumlahdpa'] = $this->LaporanModel->getTotalJumlah($item['id_detail_dpa']);
+            }
+        }
     
         $data = [
             'laporan' =>  $laporan,
