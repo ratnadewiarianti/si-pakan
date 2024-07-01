@@ -38,7 +38,7 @@ class PenatausahaanModel extends Model
         penatausahaan.id, penatausahaan.tahun, penatausahaan.tanggal,
         karyawan_1.nama AS nama_karyawan_1, karyawan_1.nip AS nip_karyawan_1, karyawan_1.file AS ttd_karyawan_1,
         karyawan_2.nama AS nama_karyawan_2, karyawan_2.nip AS nip_karyawan_2, karyawan_2.file AS ttd_karyawan_2,
-        karyawan_3.nama AS nama_karyawan_3,karyawan_3.nip AS nip_karyawan_3, karyawan_3.file AS ttd_karyawan_3, karyawan_3.jabatan AS jabatan_karyawan_3
+        karyawan_3.nama AS nama_karyawan_3,karyawan_3.nip AS nip_karyawan_3, karyawan_3.file AS ttd_karyawan_3, karyawan_3.jabatan AS jabatan_karyawan_3, karyawan_2.norek AS norek2
         ')
         ->join('karyawan AS karyawan_1', 'karyawan_1.id = penatausahaan.karyawan_1')
         ->join('karyawan AS karyawan_2', 'karyawan_2.id = penatausahaan.karyawan_2')

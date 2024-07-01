@@ -121,7 +121,7 @@
                                                 </td>
                                                 <td>
                                                     <?php if ($row['verifikasi_bendahara'] == 'DITERIMA') : ?>
-                                                    <a href="/detailpenatausahaan/cetak/<?= $row['id']; ?>"
+                                                    <a href="/detailpenatausahaan/cetakbendahara/<?= $row['id']; ?>"
                                                         class="btn btn-sm btn-dark" target="_blank">Cetak</a>
                                                     <?php else : ?>
                                                     -

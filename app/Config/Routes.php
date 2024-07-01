@@ -233,7 +233,9 @@ $routes->group('detailpenatausahaan', ['filter' => 'auth'], function ($routes) {
    $routes->add('terima/(:num)', 'DetailPenatausahaanController::terima/$1');
    $routes->add('tolak/(:num)', 'DetailPenatausahaanController::tolak/$1');
    $routes->get('cetak/(:num)', 'DetailPenatausahaanController::cetak/$1');
+   $routes->get('cetakbendahara/(:num)', 'DetailPenatausahaanController::cetakbendahara/$1');
    $routes->get('preview/(:num)', 'DetailPenatausahaanController::preview/$1');
+   $routes->get('previewbendahara/(:num)', 'DetailPenatausahaanController::previewbendahara/$1');
    $routes->add('terima_bendahara/(:num)', 'DetailPenatausahaanController::terima_bendahara/$1');
    $routes->add('tolak_bendahara/(:num)', 'DetailPenatausahaanController::tolak_bendahara/$1');
    $routes->add('terima_kasubbag/(:num)', 'DetailPenatausahaanController::terima_kasubbag/$1');
@@ -311,5 +313,15 @@ $routes->group('bp_simpanan_bank', ['filter' => 'auth'], function ($routes) {
    $routes->get('edit/(:num)', 'BPSimpananBankController::edit/$1');
    $routes->get('delete/(:num)', 'BPSimpananBankController::destroy/$1');
    $routes->get('cetak/(:num)', 'BPSimpananBankController::cetak/$1');
+
+});
+$routes->group('laporan', ['filter' => 'auth'], function ($routes) {
+   $routes->get('/', 'LaporanController::index');
+   $routes->get('create', 'LaporanController::create');
+   $routes->post('store', 'LaporanController::store');
+   $routes->post('update/(:num)', 'LaporanController::update/$1');
+   $routes->get('edit/(:num)', 'LaporanController::edit/$1');
+   $routes->get('delete/(:num)', 'LaporanController::destroy/$1');
+   $routes->get('cetak/(:num)', 'LaporanController::cetak/$1');
 
 });
