@@ -21,7 +21,7 @@ class LaporanModel extends Model
     public function getRekening()
     {
         $query = $this->db->table('laporan')
-            ->select('laporan.id_detail_dpa, laporan.realisasi, laporan.tahun,
+            ->select('laporan.id_detail_dpa, laporan.realisasi, laporan.tahun,laporan.id as idlaporan,
                 detail_dpa.id, detail_dpa.id_dpa, detail_dpa.jumlah, detail_dpa.jumlah_perubahan, 
                 detail_dpa.id_subkegiatan, detail_dpa.id_rekening, 
                 subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, 

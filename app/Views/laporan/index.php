@@ -70,11 +70,11 @@
                                                 </td>
 
                                                 <td>
-                                                    <a href="/laporan/cetak/<?= $row['id']; ?>"
+                                                    <a href="/laporan/cetak/<?= $row['idlaporan']; ?>"
                                                         class="btn btn-sm btn-dark" target="_blank">Cetak</a>
-                                                    <a href="/laporan/edit/<?= $row['id']; ?>"
+                                                    <a href="/laporan/edit/<?= $row['idlaporan']; ?>"
                                                         class="btn btn-sm btn-primary">Edit</a>
-                                                    <a href="/laporan/delete/<?= $row['id']; ?>"
+                                                    <a href="/laporan/delete/<?= $row['idlaporan']; ?>"
                                                         class="btn btn-sm btn-danger">Delete</a>
                                                 </td>
                                             </tr>
