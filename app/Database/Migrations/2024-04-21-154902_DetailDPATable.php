@@ -38,6 +38,10 @@ class DetailDPATable extends Migration
                 'type' => 'VARCHAR', 
                 'constraint' => 50
             ],
+            'tahun' => [
+                'type' => 'VARCHAR', 
+                'constraint' => 4
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,

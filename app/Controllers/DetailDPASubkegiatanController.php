@@ -65,6 +65,7 @@ class DetailDPASubkegiatanController extends BaseController
             'ppn' => $this->request->getPost('ppn'),
             'jumlah' => $this->request->getPost('jumlah'),
             'keterangan' => $this->request->getPost('keterangan'),
+            'tahun' => session()->get('tahun'),
 
             // id_detail_dpa','uraian','koefisien','satuan','harga','ppn','jumlah','keterangan',
         ];

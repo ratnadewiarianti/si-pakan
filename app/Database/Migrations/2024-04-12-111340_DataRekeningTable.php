@@ -42,6 +42,10 @@ class DataRekeningTable extends Migration
             'uraian_akun' => [
                 'type' => 'LONGTEXT',
             ],
+            'tahun' => [
+                'type' => 'VARCHAR',
+                'constraint' => 4,
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,

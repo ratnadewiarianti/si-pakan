@@ -393,7 +393,7 @@ public function tolak_kasubbag($id)
 
     public function cetakbendahara($id)
     {
-        $detailpenatausahaan = $this->DetailPenatausahaanModel->getDetailById($id);
+        $detailpenatausahaan = $this->DetailPenatausahaanModel->getCetakBendahara($id);
         $id_p = $detailpenatausahaan['id_penatausahaan'];
         $idd = $detailpenatausahaan['id_detail_dpa'];
         $pajak = $this->PajakDPModel->getpajak($id);

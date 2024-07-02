@@ -197,8 +197,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <!-- <?php foreach ($nama as $row) : ?> -->
                         <tr>
-                            <td></td>
+                            <td><?=$nama['nama']; ?></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -206,6 +207,8 @@
                             <td></td>
                             <td></td>
                         </tr>
+                     <?php endforeach; ?>
+
                         <tr>
                             <td colspan="2" class="text-center"><d>Jumlah</d></td>
                             <td><?= number_format($jumlahdpa, 0, ',', '.'); ?>,00</td>

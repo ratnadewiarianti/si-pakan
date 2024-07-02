@@ -59,6 +59,7 @@ class BPPajakController extends BaseController
                 'tgl_selesai' => $this->request->getPost('tgl_selesai'),
                 'kepala_dinas' => $this->request->getPost('kepala_dinas'),
                 'bendahara_pengeluaran' => $this->request->getPost('bendahara_pengeluaran'),
+                'tahun' => session()->get('tahun'),
             ];
 
             // Cek data sebelum disimpan
