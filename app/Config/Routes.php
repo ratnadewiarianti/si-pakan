@@ -12,6 +12,17 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index', ['filter' => 'auth']);
 $routes->get('/starter', 'Home::starter', ['filter' => 'auth']);
 
+$routes->group('/berita', function ($routes) {
+   $routes->get('/', 'Home::berita');
+   $routes->get('create', 'Home::create');
+   $routes->post('store', 'Home::store');
+   $routes->post('update/(:num)', 'Home::update/$1');
+   $routes->post('aktivasi/(:num)', 'Home::aktivasi/$1');
+   $routes->get('edit/(:num)', 'Home::edit/$1');
+   $routes->get('delete/(:num)', 'Home::delete/$1');
+});
+
+
  // Rute untuk proses login
  $routes->post('auth/processLogin', 'AuthController::processLogin', ['as' => 'auth/processLogin']);
 
