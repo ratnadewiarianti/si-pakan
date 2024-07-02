@@ -19,7 +19,7 @@
                         <td style="white-space: nowrap;vertical-align: top; padding-right: 2"><b>Nama
                                 Subkegiatan</b></td>
                         <td style="text-align: left;padding-right: 8px;"> : </td>
-                        <td style="text-align: left;vertical-align: top;padding-right: 79px;"></td>
+                        <td style="text-align: left;vertical-align: top;padding-right: 79px;"><?= $laporan[0]['nama_subkegiatan']; ?></td>
                     </tr>
                 </table>
             </div>
@@ -27,12 +27,13 @@
             <div class="col-md-6">
                 <table class="table-borderless" style="text-align: left;">
                     <tr>
-                        <td style="white-space: nowrap;vertical-align: top;">Pagu Per Sub Kegiatan</td>
-                        <td style="text-align: right;"> : </td>
-                        <td style="vertical-align: top; white-space: nowrap;">100.000.000.000</td>
-                        <td style="white-space: nowrap;vertical-align: top;">Realisasi Sub Kegiatan</td>
-                        <td style="text-align: right;"> : </td>
-                        <td style="vertical-align: top; white-space: nowrap;">100.000.000.000</td>
+                        <td style="white-space: nowrap;vertical-align: top;"><b>Pagu Per Sub Kegiatan</b></td>
+                        <td style="text-align: right;"> <b>:</b> </td>
+                        <td style="vertical-align: top; white-space: nowrap;"><?= 'Rp ' . number_format($laporan[0]['jumlahdpa'], 0, ',', '.'); ?></td>
+                        <td style="text-align: right;padding-right: 50px;"></td>
+                        <td style="white-space: nowrap;vertical-align: top;"><b>Realisasi Sub Kegiatan</b></td>
+                        <td style="text-align: right;"> <b>:</b></td>
+                        <td style="vertical-align: top; white-space: nowrap;"><?= 'Rp ' . number_format($laporan[0]['realisasi'], 0, ',', '.'); ?></td>
                     </tr>
                 </table>
             </div>
