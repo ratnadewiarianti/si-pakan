@@ -16,7 +16,7 @@
                                 <select class="form-control" name="id_detail_dpa" required>
                                     <option selected disabled>-</option>
                                     <?php foreach ($detaildpa as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['nama_subkegiatan']; ?></option>
+                                        <option value="<?= $key['id']; ?>"><?= $key['nama_subkegiatan']; ?>, <?= $key['uraian_sub_rincian_objek']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

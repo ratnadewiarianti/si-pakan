@@ -9,7 +9,7 @@ class Detail2PenatausahaanModel extends Model
     protected $table            = 'detail2_penatausahaan';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['id_penatausahaan','id_karyawan'];
+    protected $allowedFields    = ['id_detail_penatausahaan','id_karyawan','tahun'];
 
  
     protected $useTimestamps = false;
@@ -22,7 +22,7 @@ class Detail2PenatausahaanModel extends Model
    {
         return $this->select('detail2_penatausahaan.*,karyawan.nama,karyawan.nip,karyawan.jabatan')
         ->join('karyawan', 'karyawan.id = detail2_penatausahaan.id_karyawan')
-        ->where('detail2_penatausahaan.id_penatausahaan', $id)
+        ->where('detail2_penatausahaan.id_detail_penatausahaan', $id)
             ->findAll();
    }
 }

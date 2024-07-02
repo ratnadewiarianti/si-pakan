@@ -34,6 +34,7 @@ class RincianObjekController extends BaseController
             'id_objek' => $this->request->getPost('id_objek'),
             'kode_rincian_objek' => $this->request->getPost('kode_rincian_objek'),
             'uraian_rincian_objek' => $this->request->getPost('uraian_rincian_objek'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->RincianObjekModel->insert($data);

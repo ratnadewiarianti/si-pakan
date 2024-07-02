@@ -197,26 +197,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <!-- <?php foreach ($nama as $row) : ?> -->
+                    <?php $no = 1; ?>
+                        <?php foreach ($nama as $n): ?>
                         <tr>
-                            <td><?=$nama['nama']; ?></td>
-                            <td></td>
+                            <td><?= $no++; ?></td>
+                            <td><?= $n['nama']; ?> <br> <?= $n['nip']; ?></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
-                     <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </tbody>
 
-                        <tr>
-                            <td colspan="2" class="text-center"><d>Jumlah</d></td>
-                            <td><?= number_format($jumlahdpa, 0, ',', '.'); ?>,00</td>
-                            <td><?= number_format($jumlahdpa, 0, ',', '.'); ?>,00</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td></td>
-                        </tr>
+                    <tr>
+                        <td colspan="2" class="text-center">
+                            <d>Jumlah</d>
+                        </td>
+                        <td><?= number_format($jumlahdpa, 0, ',', '.'); ?>,00</td>
+                        <td><?= number_format($jumlahdpa, 0, ',', '.'); ?>,00</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

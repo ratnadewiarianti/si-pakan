@@ -77,6 +77,7 @@ class KaryawanController extends BaseController
         'norek' => $this->request->getPost('norek'),
         'status_ttd' => $this->request->getPost('status_ttd'),
         'keterangan' => $this->request->getPost('keterangan'),
+        'tahun' => session()->get('tahun'),
     ];
 
     // Jika file diunggah, tambahkan atribut file ke data yang akan disimpan

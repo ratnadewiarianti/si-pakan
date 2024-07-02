@@ -10,7 +10,7 @@ class BPPajakModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
 
-    protected $allowedFields    = ['tanggal', 'tgl_mulai', 'tgl_selesai', 'kepala_dinas', 'bendahara_pengeluaran'];
+    protected $allowedFields    = ['tanggal', 'tgl_mulai', 'tgl_selesai', 'kepala_dinas', 'bendahara_pengeluaran','tahun'];
 
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
@@ -31,7 +31,7 @@ class BPPajakModel extends Model
 
     public function getCetak($id)
     {
-        return $this->select('bp_pajak.tanggal, bp_pajak.tgl_selesai, bp_pajak.tgl_mulai, bp_pajak.kepala_dinas, bp_pajak.bendahara_pengeluaran,
+        return $this->select('bp_pajak.tanggal, bp_pajak.tahun, bp_pajak.tgl_selesai, bp_pajak.tgl_mulai, bp_pajak.kepala_dinas, bp_pajak.bendahara_pengeluaran,
                               karyawan1.nama AS kepala_dinas_nama, karyawan1.jabatan AS jabatan_kepala_dinas, karyawan1.file AS ttd_kepala_dinas,
                               karyawan2.nama AS bendahara_nama, karyawan2.jabatan AS jabatan_bendahara, karyawan2.file AS ttd_bendahara')
             ->join('karyawan AS karyawan1', 'karyawan1.nip =bp_pajak.kepala_dinas')

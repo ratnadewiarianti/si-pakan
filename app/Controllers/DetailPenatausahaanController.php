@@ -7,6 +7,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Detail2PenatausahaanModel;
 use App\Models\DetailPenatausahaanModel;
 use App\Models\DetailDPAModel;
+use App\Models\DetailDPASubkegiatanModel;
 use App\Models\SubRincianObjekModel;
 use App\Models\KaryawanModel;
 use App\Models\PenatausahaanModel;
@@ -18,6 +19,7 @@ class DetailPenatausahaanController extends BaseController
 {
     protected $PenataUsahaanModel;
     protected $DetailDPAModel;
+    protected $DetailDPASubkegiatanModel;
     protected $SubRincianObjekModel;
     protected $DetailPenatausahaanModel;
     protected $Detail2PenatausahaanModel;
@@ -30,6 +32,7 @@ class DetailPenatausahaanController extends BaseController
     {
         $this->DetailPenatausahaanModel = new DetailPenatausahaanModel();
         $this->Detail2PenatausahaanModel = new Detail2PenatausahaanModel();
+        $this->DetailDPASubkegiatanModel = new DetailDPASubkegiatanModel();
         $this->DetailDPAModel = new DetailDPAModel();
         $this->SubRincianObjekModel = new SubRincianObjekModel();
         $this->KaryawanModel = new KaryawanModel();
@@ -53,23 +56,23 @@ class DetailPenatausahaanController extends BaseController
 
             $data = [
                 'detailpenatausahaan' => $detailpenatausahaan,
-                'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id),
+                // 'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id),
             ];
 
             return view('detailpenatausahaan/show', $data);
 
     }
 
-
-
     public function create($id)
     {
         $detaildpa = $this->DetailDPAModel->getDPA();
+        $detaildpasubkegiatan = $this->DetailDPASubkegiatanModel->getDetailDPASubkegiatan($id);
         // $rekening = $this->SubRincianObjekModel->getRekening();
         $pajak = $this->PajakModel->findAll();
         $data = [
             // 'dpa' => $this->DPAModel->findDatabyId($id),
             'detaildpa' => $detaildpa,
+            'detaildpasubkegiatan' => $detaildpasubkegiatan,
             // 'rekening' => $rekening,
             'pajak' => $pajak
         ];
@@ -102,6 +105,7 @@ class DetailPenatausahaanController extends BaseController
             'status_verifikasi' => $this->request->getPost('status_verifikasi'),
             'verifikasi_bendahara' => $this->request->getPost('verifikasi_bendahara'),
             'verifikasi_kasubbag' => $this->request->getPost('verifikasi_kasubbag'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->DetailPenatausahaanModel->insert($data);
@@ -132,17 +136,17 @@ class DetailPenatausahaanController extends BaseController
     public function store2()
     {
         $data = [
-            'id_penatausahaan' => $this->request->getPost('id_penatausahaan'),
+            'id_detail_penatausahaan' => $this->request->getPost('id_detail_penatausahaan'),
             'id_karyawan' => $this->request->getPost('id_karyawan'),
         ];
 
         $this->Detail2PenatausahaanModel->insert($data);
 
         // Ambil kembali id rak belanja dari data yang disimpan
-        $id_penatausahaan = $data['id_penatausahaan'];
+        $id_detail_penatausahaan = $data['id_detail_penatausahaan'];
 
         // Redirect kembali ke fungsi show dengan menyertakan id rak belanja
-        return redirect()->to("/detailpenatausahaan/show/$id_penatausahaan");
+        return redirect()->to("/keterangan/show/$id_detail_penatausahaan");
     }
 
     public function edit($id)
@@ -206,17 +210,17 @@ class DetailPenatausahaanController extends BaseController
     public function update2($id)
     {
         $data = [
-            'id_penatausahaan' => $this->request->getPost('id_penatausahaan'),
+            'id_detail_penatausahaan' => $this->request->getPost('id_detail_penatausahaan'),
             'id_karyawan' => $this->request->getPost('id_karyawan'),
         ];
 
         $this->Detail2PenatausahaanModel->update($id, $data);
 
         // Ambil kembali id rak belanja dari data yang disimpan
-        $id_penatausahaan = $data['id_penatausahaan'];
+        $id_detail_penatausahaan = $data['id_detail_penatausahaan'];
 
         // Redirect kembali ke fungsi show dengan menyertakan id rak belanja
-        return redirect()->to("/detailpenatausahaan/show/$id_penatausahaan");
+        return redirect()->to("/keterangan/show/$id_detail_penatausahaan");
     }
 
 
@@ -245,13 +249,13 @@ class DetailPenatausahaanController extends BaseController
         $detailpenatausahaan = $this->Detail2PenatausahaanModel->find($id);
 
         // Simpan id_rakbelanja sebelum melakukan delete
-        $id_penatausahaan = $detailpenatausahaan['id_penatausahaan'];
+        $id_detail_penatausahaan = $detailpenatausahaan['id_detail_penatausahaan'];
 
         // Lakukan penghapusan
         $this->Detail2PenatausahaanModel->delete($id);
 
         // Redirect kembali ke halaman show dengan id_rakbelanja
-        return redirect()->to("/detailpenatausahaan/show/$id_penatausahaan");
+        return redirect()->to("/keterangan/show/$id_detail_penatausahaan");
     }
 
     public function terima($id)
@@ -404,11 +408,13 @@ public function tolak_kasubbag($id)
             'detailpenatausahaan' => $detailpenatausahaan,
             'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan', $id)->findAll(),
             'penatausahaan' => $this->PenataUsahaanModel->getPenatausahaanById($id_p),
+            'nama' => $this->Detail2PenatausahaanModel->getAnggota($id),
             'kegiatan' => $this->DetailDPAModel->getKegiatan($idd),
             'program' => $this->DetailDPAModel->getProgram($idd),
             'pajak' => $pajak,
             'jumlahdpa' => $jumlahdpa,
             'jumlahdpaperubahan' => $jumlahdpaperubahan,
+            
         ];
 
         foreach ($data['keterangan'] as &$ket) {

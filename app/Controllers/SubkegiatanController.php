@@ -47,6 +47,7 @@ class SubkegiatanController extends BaseController
             'nama_subkegiatan' => $this->request->getPost('nama_subkegiatan'),
             'bidang' => $this->request->getPost('bidang'),
             'kode_bidang' => $this->request->getPost('kode_bidang'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->SubkegiatanModel->insert($data);

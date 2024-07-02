@@ -15,7 +15,7 @@ class Detail2Penatausahaan extends Migration
                 'unsigned' => true,
                 'auto_increment' => true
             ],
-            'id_penatausahaan' => [
+            'id_detail_penatausahaan' => [
                 'type' => 'INT',
                 'constraint' => 5,
                 'unsigned' => true,

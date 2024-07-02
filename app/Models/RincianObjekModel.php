@@ -13,7 +13,7 @@ class RincianObjekModel extends Model
 
     public function getData()
     {
-        return $this->select('rincian_objek.id, CONCAT(akun.kode_akun, \'.\', kelompok.kode_kelompok, \'.\', jenis.kode_jenis, \'.\', objek.kode_objek, \'.\', rincian_objek.kode_rincian_objek) AS kode_rincian_objek, uraian_rincian_objek' )
+        return $this->select('rincian_objek.id, rincian_objek.tahun, CONCAT(akun.kode_akun, \'.\', kelompok.kode_kelompok, \'.\', jenis.kode_jenis, \'.\', objek.kode_objek, \'.\', rincian_objek.kode_rincian_objek) AS kode_rincian_objek, uraian_rincian_objek' )
         ->join('objek', 'objek.id = rincian_objek.id_objek')
         ->join('jenis', 'jenis.id = objek.id_jenis')
         ->join('kelompok', 'kelompok.id = jenis.id_kelompok')

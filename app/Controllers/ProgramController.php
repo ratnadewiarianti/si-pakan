@@ -49,6 +49,7 @@ class ProgramController extends BaseController
             'id_bidang_urusan' => $this->request->getPost('id_bidang_urusan'),
             'kode_program' => $this->request->getPost('kode_program'),
             'nama_program' => $this->request->getPost('nama_program'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->ProgramModel->insert($data);

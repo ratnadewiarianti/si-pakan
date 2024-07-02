@@ -6,14 +6,17 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\DetailPenatausahaanModel;
 use App\Models\KeteranganModel;
+use App\Models\Detail2PenatausahaanModel;
 class KeteranganController extends BaseController
 {
     protected $KeteranganModel;
     protected $DetailPenatausahaanModel;
+    protected $Detail2PenatausahaanModel;
     public function __construct()
     {
         $this->DetailPenatausahaanModel = new DetailPenatausahaanModel();
         $this->KeteranganModel = new KeteranganModel();
+        $this->Detail2PenatausahaanModel = new Detail2PenatausahaanModel();
     }
 
 
@@ -22,7 +25,8 @@ class KeteranganController extends BaseController
     {
         $data = [
             'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan',$id)->findAll(),
-            'detailpenatausahaan' => $this->DetailPenatausahaanModel->find($id)
+            'detailpenatausahaan' => $this->DetailPenatausahaanModel->find($id),
+            'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id)
         ];
         foreach ($data['keterangan'] as &$ket) {
             $total = $ket['jumlah'] * $ket['harga'];
@@ -49,6 +53,7 @@ class KeteranganController extends BaseController
             'keperluan' => $this->request->getPost('keperluan'),
             'harga' => $this->request->getPost('harga'),
             'jumlah' => $this->request->getPost('jumlah'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->KeteranganModel->insert($data);

@@ -34,6 +34,7 @@ class JenisController extends BaseController
             'id_kelompok' => $this->request->getPost('id_kelompok'),
             'kode_jenis' => $this->request->getPost('kode_jenis'),
             'uraian_jenis' => $this->request->getPost('uraian_jenis'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->JenisModel->insert($data);
