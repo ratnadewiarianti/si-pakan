@@ -34,6 +34,7 @@ class ObjekController extends BaseController
             'id_jenis' => $this->request->getPost('id_jenis'),
             'kode_objek' => $this->request->getPost('kode_objek'),
             'uraian_objek' => $this->request->getPost('uraian_objek'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->ObjekModel->insert($data);

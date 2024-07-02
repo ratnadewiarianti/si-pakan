@@ -35,6 +35,7 @@ class KelompokController extends BaseController
             'id_akun' => $this->request->getPost('id_akun'),
             'kode_kelompok' => $this->request->getPost('kode_kelompok'),
             'uraian_kelompok' => $this->request->getPost('uraian_kelompok'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->KelompokModel->insert($data);

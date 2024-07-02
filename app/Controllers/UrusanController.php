@@ -30,6 +30,7 @@ class UrusanController extends BaseController
         $data = [
             'kode_urusan' => $this->request->getPost('kode_urusan'),
             'nama_urusan' => $this->request->getPost('nama_urusan'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->UrusanModel->insert($data);

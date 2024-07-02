@@ -52,6 +52,7 @@ class SubRincianObjekController extends BaseController
             'id_rincian_objek' => $this->request->getPost('id_rincian_objek'),
             'kode_sub_rincian_objek' => $this->request->getPost('kode_sub_rincian_objek'),
             'uraian_sub_rincian_objek' => $this->request->getPost('uraian_sub_rincian_objek'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->SubRincianObjekModel->insert($data);

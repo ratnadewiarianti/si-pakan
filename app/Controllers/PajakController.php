@@ -30,6 +30,7 @@ class PajakController extends BaseController
         $data = [
             'nama_pajak' => $this->request->getPost('nama_pajak'),
             'jenis_pajak' => $this->request->getPost('jenis_pajak'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->PajakModel->insert($data);

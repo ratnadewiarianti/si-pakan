@@ -24,6 +24,7 @@ class DetailPenatausahaanModel extends Model
         'status_verifikasi',
         'verifikasi_bendahara',
         'verifikasi_kasubbag',
+        'tahun',
     ];
 
     // Dates
@@ -242,11 +243,10 @@ public function getCetakBendahara($id)
         urusan.kode_urusan, 
         bidang_urusan.kode_bidang_urusan, 
         kegiatan.kode_kegiatan,  
-        program.kode_program,
-        karyawan.nama, karyawan.norek')  // Tambahkan kolom nama dari tabel karyawan
-    ->join('penatausahaan', 'penatausahaan.id = detail_penatausahaan.id_penatausahaan')
-    ->join('detail2_penatausahaan', 'penatausahaan.id = detail2_penatausahaan.id_penatausahaan')
-    ->join('karyawan', 'karyawan.id = detail2_penatausahaan.id_karyawan')
+        program.kode_program')  // Tambahkan kolom nama dari tabel karyawan
+    // ->join('penatausahaan', 'penatausahaan.id = detail_penatausahaan.id_penatausahaan')
+    // ->join('detail_penatausahaan', 'detail_penatausahaan.id = detail2_penatausahaan.id_detail_penatausahaan')
+    // ->join('karyawan', 'karyawan.id = detail2_penatausahaan.id_karyawan')
     ->join('detail_dpa', 'detail_dpa.id = detail_penatausahaan.id_detail_dpa')
     ->join('subkegiatan', 'subkegiatan.id = detail_dpa.id_subkegiatan')
     ->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
@@ -256,27 +256,14 @@ public function getCetakBendahara($id)
     ->where('detail_penatausahaan.id', $id)
     ->first();
 }
-public function getnamapinbuk($id)
-{
-    return $this->select('detail_penatausahaan.*,
-    subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, 
-    urusan.kode_urusan, 
-    bidang_urusan.kode_bidang_urusan, 
-    kegiatan.kode_kegiatan,  
-    program.kode_program,
-    karyawan.nama, karyawan.norek')  // Tambahkan kolom nama dari tabel karyawan
-->join('penatausahaan', 'penatausahaan.id = detail_penatausahaan.id_penatausahaan')
-->join('detail2_penatausahaan', 'penatausahaan.id = detail2_penatausahaan.id_penatausahaan')
-->join('karyawan', 'karyawan.id = detail2_penatausahaan.id_karyawan')
-->join('detail_dpa', 'detail_dpa.id = detail_penatausahaan.id_detail_dpa')
-->join('subkegiatan', 'subkegiatan.id = detail_dpa.id_subkegiatan')
-->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
-->join('program', 'program.id = kegiatan.id_program')
-->join('bidang_urusan', 'bidang_urusan.id = program.id_bidang_urusan')
-->join('urusan', 'urusan.id = bidang_urusan.id_urusan')
-->where('detail_penatausahaan.id', $id)
-->findAll();
-}
+
+// public function getAnggota($id)
+// {
+//      return $this->select('detail2_penatausahaan.*,karyawan.nama,karyawan.nip,karyawan.jabatan')
+//      ->join('karyawan', 'karyawan.id = detail2_penatausahaan.id_karyawan')
+//      ->where('detail2_penatausahaan.id_detail_penatausahaan', $id)
+//          ->findAll();
+// }
 
 
    

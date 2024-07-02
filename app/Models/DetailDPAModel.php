@@ -10,7 +10,7 @@ class DetailDPAModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
 
-    protected $allowedFields    = ['id_dpa', 'id_subkegiatan', 'id_rekening', 'jumlah', 'jumlah_perubahan'];
+    protected $allowedFields    = ['id_dpa', 'id_subkegiatan', 'id_rekening', 'jumlah', 'jumlah_perubahan', 'tahun'];
 
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
@@ -21,7 +21,7 @@ class DetailDPAModel extends Model
     {
         $query = $this->db->table('detail_dpa')
             ->select('
-            detail_dpa.id, detail_dpa.id_dpa, detail_dpa.jumlah, detail_dpa.jumlah_perubahan, 
+            detail_dpa.id, detail_dpa.tahun, detail_dpa.id_dpa, detail_dpa.jumlah, detail_dpa.jumlah_perubahan, 
             detail_dpa.id_subkegiatan, detail_dpa.id_rekening, 
             subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, 
             urusan.kode_urusan, bidang_urusan.kode_bidang_urusan, 
@@ -54,7 +54,7 @@ class DetailDPAModel extends Model
         $query = $this->db->table('detail_dpa')
             ->select(
                 '
-            detail_dpa.id, detail_dpa.id_dpa, detail_dpa.jumlah, detail_dpa.jumlah_perubahan, 
+            detail_dpa.id, detail_dpa.tahun, detail_dpa.id_dpa, detail_dpa.jumlah, detail_dpa.jumlah_perubahan, 
             detail_dpa.id_subkegiatan, detail_dpa.id_rekening, 
             subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, 
             urusan.kode_urusan, bidang_urusan.kode_bidang_urusan, 
@@ -82,16 +82,21 @@ class DetailDPAModel extends Model
 
 
     public function getDPA()
-    {
-        return  $this->select('detail_dpa.*, dpa.nomor_dpa, subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, urusan.kode_urusan, bidang_urusan.kode_bidang_urusan, kegiatan.kode_kegiatan, program.kode_program')
-            ->join('dpa', 'dpa.id = detail_dpa.id_dpa')
-            ->join('subkegiatan', 'subkegiatan.id = detail_dpa.id_subkegiatan')
-            ->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
-            ->join('program', 'program.id = kegiatan.id_program')
-            ->join('bidang_urusan', 'bidang_urusan.id = program.id_bidang_urusan')
-            ->join('urusan', 'urusan.id = bidang_urusan.id_urusan')
-            ->findAll();
-    }
+{
+    return $this->db->table('detail_dpa')
+        ->select('detail_dpa.*, dpa.nomor_dpa, subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, urusan.kode_urusan, bidang_urusan.kode_bidang_urusan, kegiatan.kode_kegiatan, program.kode_program, sub_rincian_objek.uraian_sub_rincian_objek')
+        ->join('dpa', 'dpa.id = detail_dpa.id_dpa')
+        // ->join('detail_dpa_subkegiatan', 'detail_dpa.id = detail_dpa_subkegiatan.id_detail_dpa')
+        ->join('sub_rincian_objek', 'sub_rincian_objek.id = detail_dpa.id_rekening')
+        ->join('subkegiatan', 'subkegiatan.id = detail_dpa.id_subkegiatan')
+        ->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
+        ->join('program', 'program.id = kegiatan.id_program')
+        ->join('bidang_urusan', 'bidang_urusan.id = program.id_bidang_urusan')
+        ->join('urusan', 'urusan.id = bidang_urusan.id_urusan')
+        ->get()
+        ->getResultArray();
+}
+
 
     public function getTotalJumlah($id)
     {

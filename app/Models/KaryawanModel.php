@@ -15,7 +15,8 @@ class KaryawanModel extends Model
         'norek',
         'keterangan',
         'status_ttd',
-        'file'
+        'file',
+        'tahun'
     ];
 
     // Dates

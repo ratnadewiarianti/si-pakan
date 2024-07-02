@@ -100,6 +100,7 @@ class DetailRakController extends BaseController
             'bulan' => $this->request->getPost('bulan'),
             'id_rakbelanja' => $this->request->getPost('id_rakbelanja'),
             'nilai' => $this->request->getPost('nilai'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->DetailRakBelanjaModel->insert($data);

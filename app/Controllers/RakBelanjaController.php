@@ -101,7 +101,8 @@ class RakBelanjaController extends BaseController
             // 'nm_subkegiatan' => $this->request->getPost('nm_subkegiatan'),
             'id_detail_dpa' => $this->request->getPost('id_detail_dpa'),
             'nilai_rincian' => $this->request->getPost('nilai_rincian'),
-            'waktu' => $this->request->getPost('waktu')
+            'waktu' => $this->request->getPost('waktu'),
+            'tahun' => session()->get('tahun')
         ];
         $waktu = $data['waktu'];
 

@@ -43,6 +43,7 @@ class DPAController extends BaseController
     {
         $data = [
             'nomor_dpa' => $this->request->getPost('nomor_dpa'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->DPAModel->insert($data);

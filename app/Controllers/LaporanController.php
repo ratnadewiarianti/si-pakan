@@ -47,6 +47,7 @@ class LaporanController extends BaseController
             $data = [
                 'id_detail_dpa' => $this->request->getPost('id_detail_dpa'),
                 'realisasi' => $this->request->getPost('realisasi'),
+                'tahun' => session()->get('tahun'),
             ];
     
             // Cek data sebelum disimpan

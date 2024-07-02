@@ -9,7 +9,7 @@
                         <h4 class="card-title">Edit Detail Penatausahaan (Anggota)</h4>
                         <form class="forms-sample" action="/detailpenatausahaan/update2/<?= $detail2['id']; ?>" method="post">
 
-                            <input type="hidden" name="id_penatausahaan" value="<?= $detail2['id_penatausahaan']; ?>" class="form-control" required>
+                            <input type="hidden" name="id_detail_penatausahaan" value="<?= $detail2['id_detail_penatausahaan']; ?>" class="form-control" required>
 
                             <!-- 'id_dpa','id_subkegiatan','id_rekening','jumlah','jumlah_perubahan' -->
 
@@ -26,7 +26,9 @@
 
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
-                            <a href="/detailpenatausahaan/show/<?= service('uri')->getSegment(3); ?>" class="btn btn-danger">Batal</a>
+                            <a href="/keterangan/show/<?= $detail2['id_detail_penatausahaan']; ?>"
+                            class="btn btn-danger">Batal</a>
+                            <!-- <a href="/keterangan/show/<?= service('uri')->getSegment(3); ?>" class="btn btn-danger">Batal</a> -->
                         </form>
                     </div>
                 </div>

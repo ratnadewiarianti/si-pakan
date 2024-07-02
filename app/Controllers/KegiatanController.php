@@ -53,6 +53,7 @@ class KegiatanController extends BaseController
             'id_program' => $this->request->getPost('id_program'),
             'kode_kegiatan' => $this->request->getPost('kode_kegiatan'),
             'nama_kegiatan' => $this->request->getPost('nama_kegiatan'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->KegiatanModel->insert($data);
