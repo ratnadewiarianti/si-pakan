@@ -41,7 +41,8 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-xl-4">
                                                     <div class="ml-xl-4 mt-3">
-                                                        <img src="<?= base_url('uploads/berita/' . $row['file']); ?>" alt="<?= $row['judul']; ?>">
+                                                    <img src="<?= base_url('uploads/berita/' . $row['file']); ?>" alt="<?= $row['judul']; ?>" width="350" height="350">
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
