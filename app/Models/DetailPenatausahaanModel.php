@@ -237,26 +237,17 @@ public function getCariDataVerifikasi()
 
 public function getCetakBendahara($id)
 {
-    return $this->select('detail_penatausahaan.*, dpa.nomor_dpa, 
-        CONCAT(akun.kode_akun, \'.\', kelompok.kode_kelompok, \'.\', jenis.kode_jenis, \'.\', objek.kode_objek, \'.\', rincian_objek.kode_rincian_objek, \'.\', sub_rincian_objek.kode_sub_rincian_objek) AS kode_rekening, 
-        sub_rincian_objek.uraian_sub_rincian_objek, 
+    return $this->select('detail_penatausahaan.*,
         subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, 
-        urusan.kode_urusan, urusan.nama_urusan, 
-        bidang_urusan.kode_bidang_urusan, bidang_urusan.nama_bidang_urusan, 
-        kegiatan.kode_kegiatan, kegiatan.nama_kegiatan, 
-        program.kode_program, program.nama_program, 
-        detail2_penatausahaan.id_penatausahaan, detail2_penatausahaan.id_karyawan,
-        karyawan.nama, karyawan.norek, karyawan.nip, karyawan.jabatan')
-    ->join('detail_penatausahaan', 'detail_penatausahaan.id = detail2_penatausahaan.id_penatausahaan')
+        urusan.kode_urusan, 
+        bidang_urusan.kode_bidang_urusan, 
+        kegiatan.kode_kegiatan,  
+        program.kode_program,
+        karyawan.nama, karyawan.norek')  // Tambahkan kolom nama dari tabel karyawan
+    ->join('penatausahaan', 'penatausahaan.id = detail_penatausahaan.id_penatausahaan')
+    ->join('detail2_penatausahaan', 'penatausahaan.id = detail2_penatausahaan.id_penatausahaan')
     ->join('karyawan', 'karyawan.id = detail2_penatausahaan.id_karyawan')
     ->join('detail_dpa', 'detail_dpa.id = detail_penatausahaan.id_detail_dpa')
-    ->join('dpa', 'dpa.id = detail_dpa.id_dpa')
-    ->join('sub_rincian_objek', 'sub_rincian_objek.id = detail_dpa.id_rekening')
-    ->join('rincian_objek', 'rincian_objek.id = sub_rincian_objek.id_rincian_objek')
-    ->join('objek', 'objek.id = rincian_objek.id_objek')
-    ->join('jenis', 'jenis.id = objek.id_jenis')
-    ->join('kelompok', 'kelompok.id = jenis.id_kelompok')
-    ->join('akun', 'akun.id = kelompok.id_akun')
     ->join('subkegiatan', 'subkegiatan.id = detail_dpa.id_subkegiatan')
     ->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
     ->join('program', 'program.id = kegiatan.id_program')
@@ -265,6 +256,29 @@ public function getCetakBendahara($id)
     ->where('detail_penatausahaan.id', $id)
     ->first();
 }
+public function getnamapinbuk($id)
+{
+    return $this->select('detail_penatausahaan.*,
+    subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, 
+    urusan.kode_urusan, 
+    bidang_urusan.kode_bidang_urusan, 
+    kegiatan.kode_kegiatan,  
+    program.kode_program,
+    karyawan.nama, karyawan.norek')  // Tambahkan kolom nama dari tabel karyawan
+->join('penatausahaan', 'penatausahaan.id = detail_penatausahaan.id_penatausahaan')
+->join('detail2_penatausahaan', 'penatausahaan.id = detail2_penatausahaan.id_penatausahaan')
+->join('karyawan', 'karyawan.id = detail2_penatausahaan.id_karyawan')
+->join('detail_dpa', 'detail_dpa.id = detail_penatausahaan.id_detail_dpa')
+->join('subkegiatan', 'subkegiatan.id = detail_dpa.id_subkegiatan')
+->join('kegiatan', 'kegiatan.id = subkegiatan.id_kegiatan')
+->join('program', 'program.id = kegiatan.id_program')
+->join('bidang_urusan', 'bidang_urusan.id = program.id_bidang_urusan')
+->join('urusan', 'urusan.id = bidang_urusan.id_urusan')
+->where('detail_penatausahaan.id', $id)
+->findAll();
+}
+
+
    
 
 }

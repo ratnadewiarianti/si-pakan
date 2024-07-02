@@ -75,6 +75,10 @@ class DetailDPASubkegiatanTable extends Migration
             'keterangan_perubahan' => [
                 'type' => 'LONGTEXT', 
             ],
+            'tahun' => [
+                'type' => 'VARCHAR', 
+                'constraint' => 4
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,

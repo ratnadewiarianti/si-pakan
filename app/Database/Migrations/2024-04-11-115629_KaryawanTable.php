@@ -47,6 +47,10 @@ class KaryawanTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 100,
             ],
+            'tahun' => [
+                'type' => 'VARCHAR',
+                'constraint' => 4,
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,

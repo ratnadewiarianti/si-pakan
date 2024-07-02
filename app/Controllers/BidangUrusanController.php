@@ -36,6 +36,7 @@ class BidangUrusanController extends BaseController
             'id_urusan' => $this->request->getPost('id_urusan'),
             'kode_bidang_urusan' => $this->request->getPost('kode_bidang_urusan'),
             'nama_bidang_urusan' => $this->request->getPost('nama_bidang_urusan'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->BidangUrusanModel->insert($data);

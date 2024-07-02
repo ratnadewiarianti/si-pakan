@@ -34,6 +34,7 @@ class DetailDPAController extends BaseController
         foreach ($data['detaildpa'] as &$item) {
             $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id']);
             $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id']);
+            
         }
     }
 
@@ -78,6 +79,7 @@ public function show1($id)
             'id_dpa' => $this->request->getPost('id_dpa'),
             'id_subkegiatan' => $this->request->getPost('id_subkegiatan'),
             'id_rekening' => $this->request->getPost('id_rekening'),
+            'tahun' => session()->get('tahun'),
             // 'jumlah' => $this->request->getPost('jumlah'),
         ];
 

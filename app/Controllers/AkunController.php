@@ -30,6 +30,7 @@ class AkunController extends BaseController
         $data = [
             'kode_akun' => $this->request->getPost('kode_akun'),
             'uraian_akun' => $this->request->getPost('uraian_akun'),
+            'tahun' => session()->get('tahun'),
         ];
 
         $this->AkunModel->insert($data);

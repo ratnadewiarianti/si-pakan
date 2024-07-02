@@ -35,6 +35,7 @@ class DataRekeningController extends BaseController
             'rincian_object' => $this->request->getPost('rincian_object'),
             'sub_rincian_objek' => $this->request->getPost('sub_rincian_objek'),
             'uraian_akun' => $this->request->getPost('uraian_akun'),
+            'tahun' => session()->get('tahun'),
 
         ];
 

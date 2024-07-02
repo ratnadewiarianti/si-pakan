@@ -37,6 +37,10 @@ class PenatausahaanTable extends Migration
             'tanggal' => [
                 'type' => 'DATE',
             ],
+            'tahun' => [
+                'type' => 'VARCHAR', 
+                'constraint' => 4
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
