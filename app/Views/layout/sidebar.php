@@ -4,12 +4,29 @@
 
    <nav class="sidebar sidebar-offcanvas" id="sidebar">
        <ul class="nav">
-           <li class="nav-item <?= (strpos($uri, '/home') !== false || $uri == '/') ? 'active' : '' ?>">
-               <a class="nav-link" href="/">
-                   <i class="ti-dashboard menu-icon"></i>
-                   <span class="menu-title">Dashboard</span>
-               </a>
-           </li>
+           <?php if (session()->get('role_id') == "admin") : ?>
+               <li class="nav-item  ">
+                   <a class="nav-link" data-toggle="collapse" href="#ui-basick" aria-expanded="false" aria-controls="ui-basick">
+                       <i class="ti-dashboard menu-icon"></i>
+                       <span class="menu-title">Dashboard</span>
+                       <i class="menu-arrow"></i>
+                   </a>
+                   <div class="collapse" id="ui-basick">
+                       <ul class="nav flex-column sub-menu">
+                           <li class="nav-item <?= (strpos($uri, '/home') !== false || $uri == '/') ? 'active' : '' ?>"> <a class="nav-link" href="/">Beranda</a></li>
+                           <li class="nav-item <?= (strpos($uri, '/berita') !== false || $uri == '/') ? 'active' : '' ?>"> <a class="nav-link" href="/berita">Berita</a></li>
+                       </ul>
+                   </div>
+               </li>
+           <?php else : ?>
+               <li class="nav-item <?= (strpos($uri, '/home') !== false || $uri == '/') ? 'active' : '' ?>">
+                   <a class="nav-link" href="/">
+                       <i class="ti-dashboard menu-icon"></i>
+                       <span class="menu-title">Dashboard</span>
+                   </a>
+               </li>
+           <?php endif; ?>
+
            <li class="nav-item  <?= (strpos($uri, '/starter') !== false) ? 'active' : '' ?>">
                <a class="nav-link" href="starter">
                    <i class="ti-write menu-icon"></i>
