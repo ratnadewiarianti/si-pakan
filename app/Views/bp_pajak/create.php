@@ -19,8 +19,8 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tambah Data Buku Pembantu Kas Tunai</h4>
-                        <form action="/bp_pajak/store/" method="post">
+                        <h4 class="card-title">Cetak Buku Pembantu Pajak</h4>
+                        <form action="/bp_pajak/cetak/" method="post" target="_blank">
                             <div class="form-group">
                                 <label>Periode</label>
                                 <div class="form-row">
@@ -58,9 +58,9 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-success mr-2">Simpan</button>
+                            <button type="submit" class="btn btn-success mr-2">Cetak</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
-                            <a href="<?= base_url('/bp_pajak'); ?>" class="btn btn-danger">Batal</a>
+                            <!-- <a href="<?= base_url('/bp_pajak'); ?>" class="btn btn-danger">Batal</a> -->
                         </form>
                     </div>
                 </div>

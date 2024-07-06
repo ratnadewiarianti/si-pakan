@@ -109,7 +109,17 @@ class BPSimpananBankController extends BaseController
 
     public function cetak($id)
     {
-        $bp_simpanan_bank = $this->BPSimpananBankModel->getCetak($id);
+        $bp_simpanan_bank  = [
+            'tanggal' => $this->request->getPost('tanggal'),
+            'tgl_mulai' => $this->request->getPost('tgl_mulai'),
+            'tgl_selesai' => $this->request->getPost('tgl_selesai'),
+            'kepala_dinas' => $this->request->getPost('kepala_dinas'),
+            'bendahara_pengeluaran' => $this->request->getPost('bendahara_pengeluaran'),
+            'tahun' => session()->get('tahun'),
+        ];
+        $kepala_dinas = $this->KaryawanModel->select('nama,nip,jabatan,file')->where('nip', $bp_simpanan_bank['kepala_dinas'])->first();
+        $bendahara_pengeluaran = $this->KaryawanModel->select('nama,nip,jabatan,file')->where('nip', $bp_simpanan_bank['bendahara_pengeluaran'])->first();
+
         $penatausahaan = $this->PenatausahaanModel->where('YEAR(tanggal)', session()->get('tahun'))->orderBy('tanggal', 'asc')->findAll();
         $tgl_awal = $this->PenatausahaanModel->where('YEAR(tanggal)', session()->get('tahun'))->orderBy('tanggal', 'asc')->first()['tanggal'] ?? 'Tidak ada data';
         $jumlahdpaArray = [];
@@ -178,6 +188,8 @@ class BPSimpananBankController extends BaseController
         $viewData = [
             'bp_simpanan_bank' =>  $bp_simpanan_bank,
             'data' => $data,
+            'kepala_dinas' => $kepala_dinas,
+            'bendahara_pengeluaran' => $bendahara_pengeluaran,
             'tgl_awal' => $tgl_awal,
             'saldo_awal' => $saldo_awal
         ];
