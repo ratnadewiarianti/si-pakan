@@ -116,6 +116,7 @@ public function getDetail($id)
         ->first();
     }
 
+   
     public function updateStatusVerifikasi($id, $status)
 {
     $data = [
