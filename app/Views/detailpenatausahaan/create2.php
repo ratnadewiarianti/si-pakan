@@ -29,7 +29,6 @@
                                         <span class="input-group-text">Rp.</span>
                                     </div>
                                     <input type="number" name="nominal" class="form-control" required>
-                                    <?= strtoupper(terbilang($detailpenatausahaan['jumlahdpa'])); ?>
                                 </div>
                             </div>
                            
