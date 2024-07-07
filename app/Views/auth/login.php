@@ -18,6 +18,14 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Custom CSS for Background Image -->
+    <style>
+        .content-wrapper {
+            background-image: url('assets/images/back.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,13 +34,13 @@
             <div class="content-wrapper d-flex align-items-center auth px-0">
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
-                        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <div class="auth-form-light text-left py-2 px-4 px-sm-5">
                             <div class="brand-logo" style="display: flex; justify-content: center; align-items: center;">
                                 <img src="assets/images/logo_sipakan.png" alt="logo" style="vertical-align: middle; margin-right: 10px; width: 100px; height: auto;">
                                 <b style="font-size: 40px;">SI-PAKAN</b>
                             </div>
 
-                            <h4>Halo, Selamat Datang Di Sistem Informasi Pelaporan Keuangan.</h4>
+                            <!-- <h4>Halo, Selamat Datang Di Sistem Informasi Pelaporan Keuangan.</h4> -->
                             <h6 class="font-weight-light">Sign in untuk melanjutkan.</h6>
                             <form method="POST" action="<?= base_url('auth/login'); ?>" class="pt-3">
                                 <div class="form-group">

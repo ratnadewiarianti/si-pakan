@@ -9,7 +9,7 @@ class Detail2PenatausahaanModel extends Model
     protected $table            = 'detail2_penatausahaan';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['id_detail_penatausahaan','id_karyawan','tahun'];
+    protected $allowedFields    = ['id_detail_penatausahaan','id_karyawan','nominal','tahun'];
 
  
     protected $useTimestamps = false;

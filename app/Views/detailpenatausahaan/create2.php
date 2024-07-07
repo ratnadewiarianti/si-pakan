@@ -22,7 +22,16 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-
+                            <div class="form-group">
+                                <label>Nominal</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Rp.</span>
+                                    </div>
+                                    <input type="number" name="nominal" class="form-control" required>
+                                    <?= strtoupper(terbilang($detailpenatausahaan['jumlahdpa'])); ?>
+                                </div>
+                            </div>
                            
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->

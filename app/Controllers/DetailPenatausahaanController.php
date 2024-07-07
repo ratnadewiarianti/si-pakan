@@ -138,6 +138,7 @@ class DetailPenatausahaanController extends BaseController
         $data = [
             'id_detail_penatausahaan' => $this->request->getPost('id_detail_penatausahaan'),
             'id_karyawan' => $this->request->getPost('id_karyawan'),
+            'nominal' => $this->request->getPost('nominal'),
         ];
 
         $this->Detail2PenatausahaanModel->insert($data);
@@ -212,6 +213,7 @@ class DetailPenatausahaanController extends BaseController
         $data = [
             'id_detail_penatausahaan' => $this->request->getPost('id_detail_penatausahaan'),
             'id_karyawan' => $this->request->getPost('id_karyawan'),
+            'nominal' => $this->request->getPost('nominal'),
         ];
 
         $this->Detail2PenatausahaanModel->update($id, $data);

@@ -30,7 +30,7 @@
                                 <select class="form-control js-example-basic-single w-100" name="id_detail_dpa" required>
                                     <option selected disabled>-</option>
                                     <?php foreach ($rekening as $key) : ?>
-                                        <option value="<?= $key['id']; ?>"><?= $key['uraian_sub_rincian_objek']; ?></option>
+                                        <option value="<?= $key['id']; ?>"><?= $key['nama_subkegiatan']; ?>, <?= $key['uraian_sub_rincian_objek']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

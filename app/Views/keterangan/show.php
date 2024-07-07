@@ -105,6 +105,7 @@
                                             <th>Nama</th>
                                             <th>NIP</th>
                                             <th>Jabatan</th>
+                                            <th>Nominal</th>
                                             <th>Action</th>
 
                                             <!-- 'id_dpa','id_subkegiatan','id_rekening','jumlah','jumlah_perubahan' -->
@@ -118,6 +119,7 @@
                                                 <td><?= $row['nama']; ?></td>
                                                 <td><?= $row['nip']; ?></td>
                                                 <td><?= $row['jabatan']; ?></td>
+                                                <td><?= $row['nominal']; ?></td>
                                                 <td>
                                                     <a href="/detailpenatausahaan/edit2/<?= $row['id']; ?>"
                                                         class="btn btn-sm btn-primary">Edit</a>
