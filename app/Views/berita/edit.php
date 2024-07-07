@@ -9,7 +9,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                         <li class="breadcrumb-item"><a href="/berita">Berita</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Tambah</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </div>
             </div>
@@ -19,7 +19,7 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tambah Berita Baru</h4>
+                        <h4 class="card-title">Edit Berita</h4>
                         <form action="/berita/update/<?= $berita['id']; ?>" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>Judul Berita</label>
@@ -28,21 +28,22 @@
                             <div class="form-group">
                                 <label>Isi Berita</label>
                                 <textarea id="summernote" style="height: 300px;" name="berita">
-                                <?= $berita['berita']; ?>
+                                    <?= $berita['berita']; ?>
                                 </textarea>
                             </div>
                             <div class="form-group">
-                                <label>File Gambar</label> <br>
-
+                                <label>File</label> <br>
                                 <div id="previewContainer">
-                                    <img id="previewImage" src="<?= base_url('uploads/berita/' . $berita['file']); ?>" alt="Gambar" width="200" height="200">
+                                    <?php if (strpos($berita['file'], '.pdf') !== false) : ?>
+                                        <iframe id="previewPdf" src="<?= base_url('uploads/berita/' . $berita['file']); ?>" width="200" height="200"></iframe>
+                                    <?php else : ?>
+                                        <img id="previewImage" src="<?= base_url('uploads/berita/' . $berita['file']); ?>" alt="Gambar" width="200" height="200">
+                                    <?php endif; ?>
                                 </div>
-                                <label><small>Upload dalam skala 1:1 / persegi</small></label> <br>
-
-                                <input type="file" name="file" id="fileUpload" class="form-control-file" accept=".jpg, .jpeg, .png">
+                                <label><small>Upload dalam skala 1:1 / persegi atau file PDF</small></label> <br>
+                                <input type="file" name="file" id="fileUpload" class="form-control-file" accept=".jpg, .jpeg, .png, .pdf">
                             </div>
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
-                            <!-- <button class="btn btn-light">Batal</button> -->
                             <a href="<?= base_url('/berita'); ?>" class="btn btn-danger">Batal</a>
                         </form>
                     </div>
@@ -58,20 +59,11 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<!-- link ref -->
-<!-- <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet"> -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
-
 <?= $this->section('javascript') ?>
-<!--  script src -->
-
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<!-- <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script> -->
 <script>
     $(document).ready(function() {
         $('#summernote').summernote({
@@ -80,41 +72,30 @@
             focus: true
         });
 
+        function previewFile(input) {
+            var file = input.files[0];
+            var previewImage = document.getElementById('previewImage');
+            var previewPdf = document.getElementById('previewPdf');
 
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
+            if (file) {
                 var reader = new FileReader();
-
                 reader.onload = function(e) {
-                    document.getElementById('previewImage').setAttribute('src', e.target.result);
-                    document.getElementById('previewContainer').style.display = 'block'; // Tampilkan pratinjau kontainer
-                }
-
-                reader.readAsDataURL(input.files[0]); // Membaca data URL gambar
+                    if (file.type === 'application/pdf') {
+                        previewImage.style.display = 'none';
+                        previewPdf.style.display = 'block';
+                        previewPdf.setAttribute('src', e.target.result);
+                    } else {
+                        previewPdf.style.display = 'none';
+                        previewImage.style.display = 'block';
+                        previewImage.setAttribute('src', e.target.result);
+                    }
+                };
+                reader.readAsDataURL(file);
             }
         }
 
-        // Panggil fungsi previewImage() ketika pengguna memilih gambar baru
         document.getElementById('fileUpload').addEventListener('change', function() {
-            previewImage(this);
-        });
-
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    document.getElementById('previewImage').setAttribute('src', e.target.result);
-                    document.getElementById('previewContainer').style.display = 'block'; // Tampilkan pratinjau kontainer
-                }
-
-                reader.readAsDataURL(input.files[0]); // Membaca data URL gambar
-            }
-        }
-
-        // Panggil fungsi previewImage() ketika pengguna memilih gambar baru
-        document.getElementById('fileUpload').addEventListener('change', function() {
-            previewImage(this);
+            previewFile(this);
         });
     });
 </script>

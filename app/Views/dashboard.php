@@ -3,15 +3,16 @@
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
+
             <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <p class="card-title">Target dan Realisasi</p>
-                            <a href="#" class="text-info">View all</a>
+
                         </div>
-                        <div id="dummy-legend" class="chartjs-legend mt-4 mb-2"></div>
-                        <canvas id="dummy-chart"></canvas>
+                        <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="sales-chart"></canvas>
                     </div>
                 </div>
             </div>
@@ -19,11 +20,11 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <p class="card-title">Target dan Realisasi</p>
-                            <a href="#" class="text-info">View all</a>
+                            <p class="card-title">Belanja</p>
+
                         </div>
-                        <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
-                        <canvas id="sales-chart"></canvas>
+                        <div id="dummy-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="dummy-chart"></canvas>
                     </div>
                 </div>
             </div>
@@ -41,7 +42,18 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-xl-4">
                                                     <div class="ml-xl-4 mt-3">
-                                                    <img src="<?= base_url('uploads/berita/' . $row['file']); ?>" alt="<?= $row['judul']; ?>" width="350" height="350">
+                                                        <?php if (pathinfo($row['file'], PATHINFO_EXTENSION) == 'pdf') : ?>
+                                                            <div style="width: 350px; height: 350px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center;">
+                                                                <a href="<?= base_url('uploads/berita/' . $row['file']); ?>" target="_blank" style="display: block; text-align: center; color: #000;">
+                                                                    <i class="ti-file" style="font-size: 5em;"></i>
+                                                                    <p>PDF File</p>
+                                                                </a>
+                                                            </div>
+                                                        <?php else : ?>
+                                                            <a href="<?= base_url('uploads/berita/' . $row['file']); ?>" target="_blank">
+                                                                <img src="<?= base_url('uploads/berita/' . $row['file']); ?>" width="350" height="350" alt="<?= $row['judul']; ?>">
+                                                            </a>
+                                                        <?php endif; ?>
 
                                                     </div>
                                                 </div>
@@ -91,11 +103,22 @@
 <script type="text/javascript">
     // Ambil data dari PHP ke JavaScript
     var laporanData = <?= json_encode($laporan) ?>;
+    var detailData = <?= json_encode($detailp) ?>;
+
 
     var labels = [];
     var paguData = [];
     var realisasiData = [];
 
+    var labelDetail = [];
+    var paguDetail = [];
+    var realisasiDetail = [];
+
+    detailData.forEach(function(row) {
+        labelDetail.push(row.uraian);
+        paguDetail.push(row.jumlahdpa);
+        realisasiDetail.push(row.totalket);
+    });
     // Loop data untuk mengisi array labels, paguData, dan realisasiData
     laporanData.forEach(function(row) {
         labels.push(row.bidang);
@@ -142,7 +165,7 @@
                     },
                     ticks: {
                         display: true,
-                        min: 1000,
+                        min: 50000,
                         max: Math.max(...paguData, ...realisasiData) + 100, // Sesuaikan dengan nilai maksimum dari data
                         callback: function(value, index, values) {
                             return 'Rp' + value;
@@ -175,22 +198,22 @@
             }
         },
     });
-    document.getElementById('dummy-legend').innerHTML = SalesChart.generateLegend();
+    document.getElementById('sales-legend').innerHTML = SalesChart.generateLegend();
     // DUMMY
     // SCRIPT
-    var SalesChartCanvas = $("#dummy-chart").get(0).getContext("2d");
-    var SalesChart = new Chart(SalesChartCanvas, {
+    var DummyChartCanvas = $("#dummy-chart").get(0).getContext("2d");
+    var DummyChart = new Chart(DummyChartCanvas, {
         type: 'bar',
         data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+            labels: labelDetail,
             datasets: [{
-                    label: 'Offline Sales',
-                    data: [480, 230, 470, 210, 330],
+                    label: 'Pagu',
+                    data: paguDetail,
                     backgroundColor: '#98BDFF'
                 },
                 {
-                    label: 'Online Sales',
-                    data: [400, 340, 550, 480, 170],
+                    label: 'Realisasi',
+                    data: realisasiDetail,
                     backgroundColor: '#4B49AC'
                 }
             ]
@@ -217,10 +240,10 @@
                     },
                     ticks: {
                         display: true,
-                        min: 0,
-                        max: 560,
+                        min: 50000,
+                        max: Math.max(...paguDetail, ...realisasiDetail) + 100, // Sesuaikan dengan nilai maksimum dari data
                         callback: function(value, index, values) {
-                            return value + '$';
+                            return 'Rp' + value;
                         },
                         autoSkip: true,
                         maxTicksLimit: 10,
@@ -248,8 +271,8 @@
                     radius: 0
                 }
             }
-        },
+        }
     });
-    document.getElementById('sales-legend').innerHTML = SalesChart.generateLegend();
+    document.getElementById('dummy-legend').innerHTML = DummyChart.generateLegend();
 </script>
 <?= $this->endSection() ?>

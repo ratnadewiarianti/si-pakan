@@ -39,9 +39,9 @@
 
     // Pastikan $bp_kas_tunai tidak kosong dan memiliki kunci 'tanggal', 'tgl_mulai', dan 'tgl_selesai'
     if (!empty($bp_simpanan_bank)) {
-        $tanggal_formatted = isset($bp_simpanan_bank[0]['tanggal']) ? formatTanggalIndonesia($bp_simpanan_bank[0]['tanggal'], $bulan) : 'Tanggal tidak ditemukan';
-        $tgl_mulai_formatted = isset($bp_simpanan_bank[0]['tgl_mulai']) ? formatTanggalIndonesia($bp_simpanan_bank[0]['tgl_mulai'], $bulan) : 'Tanggal mulai tidak ditemukan';
-        $tgl_selesai_formatted = isset($bp_simpanan_bank[0]['tgl_selesai']) ? formatTanggalIndonesia($bp_simpanan_bank[0]['tgl_selesai'], $bulan) : 'Tanggal selesai tidak ditemukan';
+        $tanggal_formatted = isset($bp_simpanan_bank['tanggal']) ? formatTanggalIndonesia($bp_simpanan_bank['tanggal'], $bulan) : 'Tanggal tidak ditemukan';
+        $tgl_mulai_formatted = isset($bp_simpanan_bank['tgl_mulai']) ? formatTanggalIndonesia($bp_simpanan_bank['tgl_mulai'], $bulan) : 'Tanggal mulai tidak ditemukan';
+        $tgl_selesai_formatted = isset($bp_simpanan_bank['tgl_selesai']) ? formatTanggalIndonesia($bp_simpanan_bank['tgl_selesai'], $bulan) : 'Tanggal selesai tidak ditemukan';
     } else {
         $tanggal_formatted = 'Tanggal tidak ditemukan';
         $tgl_mulai_formatted = 'Tanggal mulai tidak ditemukan';
@@ -204,26 +204,26 @@
         <div class="row mt-2">
             <div class="col-md-6">
                 <div class="sub-title2">Mengetahui,</div>
-                <div class="sub-title2"><b><?= $bp_simpanan_bank[0]['jabatan_kepala_dinas']; ?></b></div>
+                <div class="sub-title2"><b><?= $kepala_dinas['jabatan']; ?></b></div>
             </div>
 
             <div class="col-md-6">
                 <div class="sub-title2">Pelaihari, <?= $tanggal_formatted; ?></div>
-                <div class="sub-title2"><b><?= $bp_simpanan_bank[0]['jabatan_bendahara']; ?></b></div>
+                <div class="sub-title2"><b><?= $bendahara_pengeluaran['jabatan']; ?></b></div>
             </div>
         </div>
 
         <div class="row mt-3">
             <div class="col-md-6 text-center">
-                <?php if (!empty($bp_simpanan_bank[0]['ttd_kepala_dinas'])) : ?>
-                    <img src="<?= base_url('uploads/ttd/' . $bp_simpanan_bank[0]['ttd_kepala_dinas']) ?>" alt="Gambar" width="100" height="100">
+                <?php if (!empty($kepala_dinas['file'])) : ?>
+                    <img src="<?= base_url('uploads/ttd/' . $kepala_dinas['file']) ?>" alt="Gambar" width="100" height="100">
                 <?php else : ?>
                     -
                 <?php endif; ?>
             </div>
             <div class="col-md-6 text-center">
-                <?php if (!empty($bp_simpanan_bank[0]['ttd_bendahara'])) : ?>
-                    <img src="<?= base_url('uploads/ttd/' . $bp_simpanan_bank[0]['ttd_bendahara']) ?>" alt="Gambar" width="100" height="100">
+                <?php if (!empty($bendahara_pengeluaran['file'])) : ?>
+                    <img src="<?= base_url('uploads/ttd/' . $bendahara_pengeluaran['file']) ?>" alt="Gambar" width="100" height="100">
                 <?php else : ?>
                     -
                 <?php endif; ?>
@@ -232,20 +232,20 @@
 
         <div class="row mt-2">
             <div class="col-md-6">
-                <div class="sub-title2"><?= $bp_simpanan_bank[0]['kepala_dinas_nama']; ?></div>
+                <div class="sub-title2"><?= $kepala_dinas['nama']; ?></div>
             </div>
 
             <div class="col-md-6">
-                <div class="sub-title2"><?= $bp_simpanan_bank[0]['bendahara_nama']; ?></div>
+                <div class="sub-title2"><?= $bendahara_pengeluaran['nama']; ?></div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="sub-title2">NIP. <?= $bp_simpanan_bank[0]['kepala_dinas']; ?></div>
+                <div class="sub-title2">NIP. <?= $kepala_dinas['nip']; ?></div>
             </div>
 
             <div class="col-md-6">
-                <div class="sub-title2">NIP. <?= $bp_simpanan_bank[0]['bendahara_pengeluaran']; ?></div>
+                <div class="sub-title2">NIP. <?= $bendahara_pengeluaran['nip']; ?></div>
             </div>
         </div>
 

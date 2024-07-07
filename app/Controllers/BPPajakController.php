@@ -107,11 +107,23 @@ class BPPajakController extends BaseController
     }
 
 
-    public function cetak($id)
+    public function cetak()
     {
-        $bp_pajak = $this->BPPajakModel->getCetak($id);
+         
+        $bp_pajak = [
+            'tanggal' => $this->request->getPost('tanggal'),
+            'tgl_mulai' => $this->request->getPost('tgl_mulai'),
+            'tgl_selesai' => $this->request->getPost('tgl_selesai'),
+            'kepala_dinas' => $this->request->getPost('kepala_dinas'),
+            'bendahara_pengeluaran' => $this->request->getPost('bendahara_pengeluaran'),
+            'tahun' => session()->get('tahun')
+        ];
+
         $penatausahaan = $this->PenatausahaanModel->where('YEAR(tanggal)', session()->get('tahun'))->findAll();
         $data = [];
+
+        $kepala_dinas = $this->KaryawanModel->select('nama,nip,jabatan,file')->where('nip',$bp_pajak['kepala_dinas'])->first();
+        $bendahara_pengeluaran = $this->KaryawanModel->select('nama,nip,jabatan,file')->where('nip', $bp_pajak['bendahara_pengeluaran'])->first();
 
         foreach ($penatausahaan as $p) {
             $detailpenatausahaan = $this->DetailPenatausahaanModel
@@ -170,6 +182,8 @@ class BPPajakController extends BaseController
 
         $viewData = [
             'bp_pajak' => $bp_pajak,
+            'kepala_dinas' => $kepala_dinas,
+            'bendahara_pengeluaran' => $bendahara_pengeluaran,
             'data' => $data
         ];
 

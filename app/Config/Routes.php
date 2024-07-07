@@ -287,13 +287,13 @@ $routes->group('verifikasi', ['filter' => 'auth'], function ($routes) {
 });
 
 $routes->group('bp_kas_tunai', ['filter' => 'auth'], function ($routes) {
-   $routes->get('/', 'BPKasTunaiController::show');
-   $routes->get('create', 'BPKasTunaiController::create');
-   $routes->post('store', 'BPKasTunaiController::store');
-   $routes->post('update/(:num)', 'BPKasTunaiController::update/$1');
-   $routes->get('edit/(:num)', 'BPKasTunaiController::edit/$1');
-   $routes->get('delete/(:num)', 'BPKasTunaiController::destroy/$1');
-   $routes->get('cetak/(:num)', 'BPKasTunaiController::cetak/$1');
+   // $routes->get('/', 'BPKasTunaiController::show');
+   $routes->get('/', 'BPKasTunaiController::create');
+   // $routes->post('store', 'BPKasTunaiController::store');
+   // $routes->post('update/(:num)', 'BPKasTunaiController::update/$1');
+   // $routes->get('edit/(:num)', 'BPKasTunaiController::edit/$1');
+   // $routes->get('delete/(:num)', 'BPKasTunaiController::destroy/$1');
+   $routes->post('cetak/', 'BPKasTunaiController::cetak');
 
 });
 
@@ -307,23 +307,23 @@ $routes->group('pajak', ['filter' => 'auth'], function ($routes) {
 });
 
 $routes->group('bp_pajak', ['filter' => 'auth'], function ($routes) {
-   $routes->get('/', 'BPPajakController::show');
-   $routes->get('create', 'BPPajakController::create');
-   $routes->post('store', 'BPPajakController::store');
-   $routes->post('update/(:num)', 'BPPajakController::update/$1');
-   $routes->get('edit/(:num)', 'BPPajakController::edit/$1');
-   $routes->get('delete/(:num)', 'BPPajakController::destroy/$1');
-   $routes->get('cetak/(:num)', 'BPPajakController::cetak/$1');
+   // $routes->get('/', 'BPPajakController::show');
+   $routes->get('/', 'BPPajakController::create');
+   // $routes->post('store', 'BPPajakController::store');
+   // $routes->post('update/(:num)', 'BPPajakController::update/$1');
+   // $routes->get('edit/(:num)', 'BPPajakController::edit/$1');
+   // $routes->get('delete/(:num)', 'BPPajakController::destroy/$1');
+   $routes->post('cetak', 'BPPajakController::cetak');
 
 });
 $routes->group('bp_simpanan_bank', ['filter' => 'auth'], function ($routes) {
-   $routes->get('/', 'BPSimpananBankController::show');
-   $routes->get('create', 'BPSimpananBankController::create');
-   $routes->post('store', 'BPSimpananBankController::store');
-   $routes->post('update/(:num)', 'BPSimpananBankController::update/$1');
-   $routes->get('edit/(:num)', 'BPSimpananBankController::edit/$1');
-   $routes->get('delete/(:num)', 'BPSimpananBankController::destroy/$1');
-   $routes->get('cetak/(:num)', 'BPSimpananBankController::cetak/$1');
+   // $routes->get('/', 'BPSimpananBankController::show');
+   $routes->get('/', 'BPSimpananBankController::create');
+   // $routes->post('store', 'BPSimpananBankController::store');
+   // $routes->post('update/(:num)', 'BPSimpananBankController::update/$1');
+   // $routes->get('edit/(:num)', 'BPSimpananBankController::edit/$1');
+   // $routes->get('delete/(:num)', 'BPSimpananBankController::destroy/$1');
+   $routes->post('cetak/', 'BPSimpananBankController::cetak/');
 
 });
 $routes->group('laporan', ['filter' => 'auth'], function ($routes) {

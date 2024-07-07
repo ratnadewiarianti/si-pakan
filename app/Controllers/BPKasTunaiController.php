@@ -89,11 +89,23 @@ class BPKasTunaiController extends BaseController
         return redirect()->to('/bp_kas_tunai');
     }
 
-    public function cetak($id)
+    public function cetak()
     {
-        $bp_kas_tunai = $this->BPKasTunaiModel->getCetak($id);
+        $bp_kas_tunai = [
+            'tanggal' => $this->request->getPost('tanggal'),
+            'tgl_mulai' => $this->request->getPost('tgl_mulai'),
+            'tgl_selesai' => $this->request->getPost('tgl_selesai'),
+            'kepala_dinas' => $this->request->getPost('kepala_dinas'),
+            'jabatan_kepala_dinas' => $this->request->getPost('jabatan_kepala_dinas'),
+            'bendahara_pengeluaran' => $this->request->getPost('bendahara_pengeluaran'),
+        ];
+        $kepala_dinas = $this->KaryawanModel->select('nama,nip,jabatan,file')->where('nip', $bp_kas_tunai['kepala_dinas'])->first();
+        $bendahara_pengeluaran = $this->KaryawanModel->select('nama,nip,jabatan,file')->where('nip', $bp_kas_tunai['bendahara_pengeluaran'])->first();
+
         $data = [
             'bp_kas_tunai' =>  $bp_kas_tunai,
+            'kepala_dinas' => $kepala_dinas,
+            'bendahara_pengeluaran' => $bendahara_pengeluaran
         ];
         return view('bp_kas_tunai/cetak',$data);
     }

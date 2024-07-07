@@ -19,8 +19,8 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tambah Data Buku Pembantu Kas Tunai</h4>
-                        <form action="/bp_simpanan_bank/store/" method="post">
+                        <h4 class="card-title">Cetak Buku Pembantu Simpanan Bank</h4>
+                        <form action="/bp_simpanan_bank/cetak/" method="post" target="_blank">
                             <div class="form-group">
                                 <label>Periode</label>
                                 <div class="form-row">

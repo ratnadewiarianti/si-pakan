@@ -4,29 +4,85 @@ namespace App\Controllers;
 
 use App\Models\BeritaModel;
 use App\Models\LaporanModel;
+use CodeIgniter\Files\File;
+use App\Models\DetailPenatausahaanModel;
+use App\Models\JenisModel;
+use App\Models\KeteranganModel;
 class Home extends BaseController
 {
 
     protected $BeritaModel;
     protected $LaporanModel;
+    protected $DetailPenatausahaanModel;
+    protected $KeteranganModel;
+protected $JenisModel;
     public function __construct()
     {
         $this->BeritaModel = new BeritaModel();
         $this->LaporanModel = new LaporanModel();
+        $this->DetailPenatausahaanModel = new DetailPenatausahaanModel();
+        $this->KeteranganModel = new KeteranganModel();
+        $this->JenisModel = new JenisModel();
     }
 
-    public function index()
+    public function index1()
     {
-        $laporan = $this->LaporanModel->getDiagram(); 
+        $laporan = $this->LaporanModel->getDiagram();
         if (!empty($laporan)) {
             foreach ($laporan as &$item) {
                 $item['jumlahdpa'] = $this->LaporanModel->getTotalJumlah($item['id_detail_dpa']);
             }
         }
+
         $data['laporan'] = $laporan;
-        $data['berita'] = $this->BeritaModel->where('status','on')->findAll();
-        return view('dashboard',$data);
+        $data['berita'] = $this->BeritaModel->where('status', 'on')->findAll();
+        return view('dashboard', $data);
     }
+    public function index()
+    {
+        $laporan = $this->LaporanModel->getDiagram();
+        if (!empty($laporan)) {
+            foreach ($laporan as &$item) {
+                $item['jumlahdpa'] = $this->LaporanModel->getTotalJumlah($item['id_detail_dpa']);
+            }
+        }
+
+        $detailp = $this->DetailPenatausahaanModel->where('verifikasi_kasubbag', 'DITERIMA')->findAll();
+        $detaildata = []; // Initialize detaildata array
+
+        foreach ($detailp as $detail) {
+            $jumlahdpa = $this->LaporanModel->getTotalJumlah($detail['id_detail_dpa']);
+            $uraian =  $this->JenisModel->getUraianJenis($detail['id']);
+            $keterangan = $this->KeteranganModel->where('id_detail_penatausahaan', $detail['id'])->findAll();
+
+            // Only proceed if keterangan exists
+            if (!empty($keterangan)) {
+                $totalKet = 0; // Initialize totalKet for accumulating totals from keterangan
+
+                foreach ($keterangan as $ket) {
+                    $total = $ket['jumlah'] * $ket['harga'];
+                    $totalKet += $total; // Accumulate total from each keterangan entry
+                }
+
+                // Push the complete data set for each detail into detaildata
+                $detaildata[] = [
+                    'uraian' => $uraian,
+                    'jumlahdpa' => $jumlahdpa,
+                    'totalket' => $totalKet, // Assign accumulated totalKet
+                ];
+            }
+        }
+
+        // // Log the data for debugging
+        // var_dump('info', 'Detailp Data: ' . print_r($detaildata, true));
+
+        $data['detailp'] = $detaildata;
+        $data['laporan'] = $laporan;
+        $data['berita'] = $this->BeritaModel->where('status', 'on')->findAll();
+        return view('dashboard', $data);
+    }
+
+
 
     public function berita()
     {
@@ -42,20 +98,25 @@ class Home extends BaseController
     public function store()
     {
         $validationRules = [
-            'file' => 'uploaded[file]|is_image[file]|mime_in[file,image/jpg,image/jpeg,image/gif,image/png]'
+            'file' => 'uploaded[file]|max_size[file,10240]|ext_in[file,jpg,jpeg,gif,png,pdf]'
         ];
 
         if (!$this->validate($validationRules)) {
-            // Jika validasi gagal, kembalikan ke halaman create dengan pesan error
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
+
         $file = $this->request->getFile('file');
         if ($file->isValid() && !$file->hasMoved()) {
             $namaFile = $file->getRandomName();
             $filePath = ROOTPATH . 'public/uploads/berita/' . $namaFile;
-            // Pindahkan file ke folder yang diinginkan
+
             $file->move(ROOTPATH . 'public/uploads/berita/', $namaFile);
-            $this->centerCropSquare($filePath);
+
+            $mimeType = $file->getClientMimeType();
+            if (in_array($mimeType, ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'])) {
+                $this->centerCropSquare($filePath);
+            }
+
             $data = [
                 'status' => 'off',
                 'judul' => $this->request->getPost('judul'),
@@ -63,12 +124,15 @@ class Home extends BaseController
                 'berita' => $this->request->getPost('berita'),
                 'tahun' => session()->get('tahun'),
             ];
+
             $this->BeritaModel->insert($data);
             return redirect()->to('/berita');
         } else {
             return redirect()->back()->withInput()->with('error', 'Gagal mengunggah file. Silakan coba lagi.');
         }
     }
+
+
 
     public function edit($id)
     {
@@ -82,30 +146,29 @@ class Home extends BaseController
         $file = $this->request->getFile('file');
 
         if (empty($file) || !$file->isValid()) {
-            // Jika tidak ada file yang diunggah atau tidak valid, update data berita
+            // Jika tidak ada file yang diunggah atau tidak valid, update data berita tanpa mengubah file
             $data = [
-                'status' => 'off',
                 'judul' => $this->request->getPost('judul'),
-
                 'berita' => $this->request->getPost('berita'),
                 'tahun' => session()->get('tahun'),
             ];
         } else {
             // Jika ada file yang diunggah, simpan file ke direktori yang diinginkan
             if ($file->isValid() && !$file->hasMoved()) {
-                // Hapus foto lama jika ada
+                // Hapus file lama jika ada
                 if ($berita['file']) {
                     $filePath = ROOTPATH . 'public/uploads/berita/' . $berita['file'];
                     if (file_exists($filePath)) {
-                        unlink($filePath); // Hapus file
+                        unlink($filePath); // Hapus file lama
                     }
                 }
 
-                // Pindahkan foto baru ke direktori yang diinginkan
+                // Pindahkan file baru ke direktori yang diinginkan
                 $newName = $file->getRandomName();
                 $file->move(ROOTPATH . 'public/uploads/berita/', $newName);
+
+                // Update data berita termasuk nama file baru
                 $data = [
-                    'status' => 'off',
                     'judul' => $this->request->getPost('judul'),
                     'file' => $newName,
                     'berita' => $this->request->getPost('berita'),
@@ -113,17 +176,17 @@ class Home extends BaseController
                 ];
             } else {
                 // Handle error jika file tidak valid atau tidak dapat dipindahkan
-                // Misalnya, file terlalu besar atau tidak didukung
-                // Anda dapat menambahkan kode yang sesuai di sini
-                // Di sini, kita hanya mengembalikan perintah redirect karena tidak ada pembaruan data yang dilakukan.
                 return redirect()->back()->with('error', 'Failed to upload file. Please try again.');
             }
         }
 
+        // Update data berita di database
         $this->BeritaModel->update($id, $data);
 
+        // Redirect ke halaman berita setelah berhasil diupdate
         return redirect()->to('/berita');
     }
+
     private function centerCropSquare($filePath)
     {
         $image = \Config\Services::image()
