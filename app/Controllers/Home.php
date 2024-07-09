@@ -52,8 +52,8 @@ protected $JenisModel;
 
         foreach ($detailp as $detail) {
             $jumlahdpa = $this->LaporanModel->getTotalJumlah($detail['id_detail_dpa']);
-            $uraian =  $this->JenisModel->getUraianJenis($detail['id']);
-            $keterangan = $this->KeteranganModel->where('id_detail_penatausahaan', $detail['id'])->findAll();
+            $uraian    = $this->JenisModel->getUraianJenis($detail['id']);
+            $keterangan = $this->KeteranganModel->getKeterangan($detail['id']);
 
             // Only proceed if keterangan exists
             if (!empty($keterangan)) {
@@ -73,7 +73,7 @@ protected $JenisModel;
             }
         }
 
-        // // Log the data for debugging
+        // Log the data for debugging
         // var_dump('info', 'Detailp Data: ' . print_r($detaildata, true));
 
         $data['detailp'] = $detaildata;
