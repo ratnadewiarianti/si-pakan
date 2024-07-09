@@ -202,8 +202,8 @@
                         <tr>
                             <td><?= $no++; ?></td>
                             <td><?= $n['nama']; ?> <br> <?= $n['nip']; ?></td>
-                            <td></td>
-                            <td></td>
+                            <td><?= $n['nominal']; ?></td>
+                            <td><?= $n['nominal']; ?></td>
                             <td></td>
                             <td></td>
                             <td></td>
