@@ -19,8 +19,8 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tambah Data Laporan</h4>
-                        <form action="/laporan/store/" method="post">
+                        <h4 class="card-title">Cetak Laporan SI SPJ</h4>
+                        <form action="/laporan/cetak/" method="post">
                             <div class="form-group">
                                 <label>DPA</label>
                                 <select class="form-control js-example-basic-single w-100" name="id_detail_dpa" required>

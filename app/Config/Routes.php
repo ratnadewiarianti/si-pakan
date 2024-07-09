@@ -327,12 +327,12 @@ $routes->group('bp_simpanan_bank', ['filter' => 'auth'], function ($routes) {
 
 });
 $routes->group('laporan', ['filter' => 'auth'], function ($routes) {
-   $routes->get('/', 'LaporanController::index');
-   $routes->get('create', 'LaporanController::create');
-   $routes->post('store', 'LaporanController::store');
-   $routes->post('update/(:num)', 'LaporanController::update/$1');
-   $routes->get('edit/(:num)', 'LaporanController::edit/$1');
-   $routes->get('delete/(:num)', 'LaporanController::destroy/$1');
-   $routes->get('cetak/(:num)', 'LaporanController::cetak/$1');
+   // $routes->get('/', 'LaporanController::index');
+   $routes->get('/', 'LaporanController::create');
+   // $routes->post('store', 'LaporanController::store');
+   // $routes->post('update/(:num)', 'LaporanController::update/$1');
+   // $routes->get('edit/(:num)', 'LaporanController::edit/$1');
+   // $routes->get('delete/(:num)', 'LaporanController::destroy/$1');
+   $routes->post('cetak/', 'LaporanController::cetak/');
 
 });

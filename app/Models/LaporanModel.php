@@ -49,11 +49,11 @@ class LaporanModel extends Model
         return $query->getResultArray();
     }
 
-    public function getTotalJumlah($id)
+    public function getTotalJumlah()
     {
         $query = $this->db->table('detail_dpa_subkegiatan')
             ->selectSum('jumlah', 'total_jumlah') // Menggunakan alias untuk hasil sum
-            ->where('id_detail_dpa', $id)
+            // ->where('id_detail_dpa', $id)
             ->get();
     
         $result = $query->getRow();

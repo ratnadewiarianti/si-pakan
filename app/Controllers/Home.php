@@ -39,39 +39,39 @@ protected $JenisModel;
         return view('dashboard', $data);
     }
     public function index()
-    {
-        $laporan = $this->LaporanModel->getDiagram();
-        if (!empty($laporan)) {
-            foreach ($laporan as &$item) {
-                $item['jumlahdpa'] = $this->LaporanModel->getTotalJumlah($item['id_detail_dpa']);
-            }
+{
+    $laporan = $this->LaporanModel->getDiagram();
+    if (!empty($laporan)) {
+        foreach ($laporan as &$item) {
+            $item['jumlahdpa'] = $this->LaporanModel->getTotalJumlah($item['id_detail_dpa']);
         }
+    }
 
-        $detailp = $this->DetailPenatausahaanModel->where('verifikasi_kasubbag', 'DITERIMA')->findAll();
-        $detaildata = []; // Initialize detaildata array
+    $detailp = $this->DetailPenatausahaanModel->where('verifikasi_kasubbag', 'DITERIMA')->findAll();
+    $detaildata = []; // Initialize detaildata array
 
-        foreach ($detailp as $detail) {
-            $jumlahdpa = $this->LaporanModel->getTotalJumlah($detail['id_detail_dpa']);
-            $uraian =  $this->JenisModel->getUraianJenis($detail['id']);
-            $keterangan = $this->KeteranganModel->where('id_detail_penatausahaan', $detail['id'])->findAll();
+    foreach ($detailp as $detail) {
+        $jumlahdpa = $this->LaporanModel->getTotalJumlah($detail['id_detail_dpa']);
+        $uraian =  $this->JenisModel->getUraianJenis($detail['id']);
+        $keterangan = $this->KeteranganModel->getKeterangan($detail['id']); // Adjusted to use new model method
 
-            // Only proceed if keterangan exists
-            if (!empty($keterangan)) {
-                $totalKet = 0; // Initialize totalKet for accumulating totals from keterangan
+        // Only proceed if keterangan exists
+        if (!empty($keterangan)) {
+            $totalKet = 0; // Initialize totalKet for accumulating totals from keterangan
 
-                foreach ($keterangan as $ket) {
-                    $total = $ket['jumlah'] * $ket['harga'];
-                    $totalKet += $total; // Accumulate total from each keterangan entry
-                }
-
-                // Push the complete data set for each detail into detaildata
-                $detaildata[] = [
-                    'uraian' => $uraian,
-                    'jumlahdpa' => $jumlahdpa,
-                    'totalket' => $totalKet, // Assign accumulated totalKet
-                ];
+            foreach ($keterangan as $ket) {
+                $total = $ket['jumlah'] * $ket['harga']; // Ensure this calculation uses correct fields from the model
+                $totalKet += $total; // Accumulate total from each keterangan entry
             }
+
+            // Push the complete data set for each detail into detaildata
+            $detaildata[] = [
+                'uraian' => $uraian,
+                'jumlahdpa' => $jumlahdpa,
+                'totalket' => $totalKet, // Assign accumulated totalKet
+            ];
         }
+    }
 
         // // Log the data for debugging
         // var_dump('info', 'Detailp Data: ' . print_r($detaildata, true));
