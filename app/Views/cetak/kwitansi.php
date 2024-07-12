@@ -261,7 +261,7 @@
                             <?php foreach ($keterangan as $row) : ?>
                                 <tr>
                                     <td><?= $no++; ?></td>
-                                    <td><?= $row['uraian']; ?>, <?= $row['koefisien']; ?> <?= $row['satuan']; ?>, Total: <?= 'Rp ' . number_format($row['jumlah_dpa_subkegiatan'], 0, ',', '.'); ?></td>
+                                    <td><?= $row['uraian']; ?>, <?= $row['koefisien']; ?> <?= $row['satuan']; ?></td>
                                                 
                                     <td><?= $row['jumlah']; ?></td>
                                    </tr>

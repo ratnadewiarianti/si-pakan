@@ -70,9 +70,7 @@
                                                     <?= $row['kode_rekening']; ?> -
                                                     <?= $row['uraian_sub_rincian_objek']; ?>
                                                 </td>
-                                                <!-- <td>
-                                                            <?= strtoupper(terbilang($row['jumlahdpa'])); ?>
-                                                        </td> -->
+                                                
                                                 <td style="text-align: justify;">
                                                     <?php
                                                             $wrapped_text = wordwrap($row['untuk_pembayaran'], 70, "<br>\n", true);
@@ -80,7 +78,7 @@
                                                             ?>
                                                 </td>
                                                 <td>
-                                                    <?= 'Rp ' . number_format($row['jumlahdpa'], 0, ',', '.'); ?>
+                                                    <?= 'Rp ' . number_format($sumTotal, 0, ',', '.'); ?>
                                                 </td>
                                                 <td>
                                                     <ol>

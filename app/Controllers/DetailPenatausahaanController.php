@@ -46,21 +46,31 @@ class DetailPenatausahaanController extends BaseController
     {
         $detailpenatausahaan = $this->DetailPenatausahaanModel->getDetail($id);
 
-            foreach ($detailpenatausahaan as &$item) {
-                $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id_detail_dpa']);
-                $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id_detail_dpa']);
-                $item['pajak'] = $this->PajakDPModel->getpajak($item['id']);
-            }
+        foreach ($detailpenatausahaan as &$item) {
+            $item['jumlahdpa'] = $this->DetailDPAModel->getTotalJumlah($item['id_detail_dpa']);
+            $item['jumlahdpaperubahan'] = $this->DetailDPAModel->getTotalJumlahPerubahan($item['id_detail_dpa']);
+            $item['pajak'] = $this->PajakDPModel->getpajak($item['id']);
+            $item['keterangan'] = $this->KeteranganModel->getKeterangan($item['id']);
+        }
 
-            $data = [
-                'detailpenatausahaan' => $detailpenatausahaan,
-                'keterangan' => $this->KeteranganModel->getKeterangan($id),
-                // 'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id),
-            ];
 
-            return view('detailpenatausahaan/show', $data);
+        $sumTotal = 0;
+        foreach ($item['keterangan'] as &$ket) {
+            $total = $ket['jumlah'] * $ket['harga'];
+            $ket['total'] = $total;
+            $sumTotal += $total;
+        }
+        // Calculate nilai_pajak for each pajak item
 
+        $data = [
+            'detailpenatausahaan' => $detailpenatausahaan,
+            'sumTotal' => $sumTotal
+            // 'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id),
+        ];
+
+        return view('detailpenatausahaan/show', $data);
     }
+
 
     public function create($id)
     {
@@ -161,7 +171,6 @@ class DetailPenatausahaanController extends BaseController
             // 'pajak' => $pajak
         ];
         return view('detailpenatausahaan/edit', $data);
-        
     }
 
 
@@ -284,52 +293,52 @@ class DetailPenatausahaanController extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
         }
     }
-    
+
     public function terima_bendahara($id)
-{
-    $model = new DetailPenatausahaanModel();
-    $updated = $model->updateStatusBendahara($id, 'DITERIMA');
-    if ($updated) {
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil diterima']);
-    } else {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+    {
+        $model = new DetailPenatausahaanModel();
+        $updated = $model->updateStatusBendahara($id, 'DITERIMA');
+        if ($updated) {
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil diterima']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+        }
     }
-}
 
-public function tolak_bendahara($id)
-{
-    $model = new DetailPenatausahaanModel();
-    $updated = $model->updateStatusBendahara($id, 'DITOLAK');
-    if ($updated) {
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil ditolak']);
-    } else {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+    public function tolak_bendahara($id)
+    {
+        $model = new DetailPenatausahaanModel();
+        $updated = $model->updateStatusBendahara($id, 'DITOLAK');
+        if ($updated) {
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil ditolak']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+        }
     }
-}
 
-    
 
-public function terima_kasubbag($id)
-{
-    $model = new DetailPenatausahaanModel();
-    $updated = $model->updateStatusKasubbag($id, 'DITERIMA');
-    if ($updated) {
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil diterima']);
-    } else {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+
+    public function terima_kasubbag($id)
+    {
+        $model = new DetailPenatausahaanModel();
+        $updated = $model->updateStatusKasubbag($id, 'DITERIMA');
+        if ($updated) {
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil diterima']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+        }
     }
-}
 
-public function tolak_kasubbag($id)
-{
-    $model = new DetailPenatausahaanModel();
-    $updated = $model->updateStatusKasubbag($id, 'DITOLAK');
-    if ($updated) {
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil ditolak']);
-    } else {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+    public function tolak_kasubbag($id)
+    {
+        $model = new DetailPenatausahaanModel();
+        $updated = $model->updateStatusKasubbag($id, 'DITOLAK');
+        if ($updated) {
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil ditolak']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal memperbarui status.']);
+        }
     }
-}
 
 
     public function cetak($id)
@@ -359,7 +368,7 @@ public function tolak_kasubbag($id)
             $sumTotal += $total;
         }
         // Calculate nilai_pajak for each pajak item
-   
+
         $data['sumTotal'] = $sumTotal;
         unset($ket); // Unset reference to the last element
         unset($pajak_item); // Unset reference to the last element
@@ -393,7 +402,7 @@ public function tolak_kasubbag($id)
             $ket['total'] = $total;
         }
         // Calculate nilai_pajak for each pajak item
-   
+
         unset($ket); // Unset reference to the last element
         unset($pajak_item); // Unset reference to the last element
 
@@ -419,7 +428,7 @@ public function tolak_kasubbag($id)
             'pajak' => $pajak,
             'jumlahdpa' => $jumlahdpa,
             'jumlahdpaperubahan' => $jumlahdpaperubahan,
-            
+
         ];
 
         foreach ($data['keterangan'] as &$ket) {
@@ -427,7 +436,7 @@ public function tolak_kasubbag($id)
             $ket['total'] = $total;
         }
         // Calculate nilai_pajak for each pajak item
-   
+
         unset($ket); // Unset reference to the last element
         unset($pajak_item); // Unset reference to the last element
 
