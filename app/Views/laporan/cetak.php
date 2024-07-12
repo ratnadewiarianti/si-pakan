@@ -58,12 +58,7 @@
         <tr>
             <td>1</td> <!-- Hanya menampilkan satu baris -->
             <td>
-                <?= $laporanData['kode_akun']; ?>.
-                <?= $laporanData['kode_kelompok']; ?>.
-                <?= $laporanData['kode_jenis']; ?>.
-                <?= $laporanData['kode_objek']; ?>.
-                <?= $laporanData['kode_rincian_objek']; ?>.
-                <?= $laporanData['kode_sub_rincian_objek']; ?>
+                <?= $laporanData['kode_akun']; ?>.<?= $laporanData['kode_kelompok']; ?>.<?= $laporanData['kode_jenis']; ?>.<?= $laporanData['kode_objek']; ?>.<?= $laporanData['kode_rincian_objek']; ?>.<?= $laporanData['kode_sub_rincian_objek']; ?>
             </td>
             <td><?= $laporanData['uraian_sub_rincian_objek']; ?></td>
             <td><?= 'Rp ' . number_format($laporanData['jumlahdpa'], 0, ',', '.'); ?></td>

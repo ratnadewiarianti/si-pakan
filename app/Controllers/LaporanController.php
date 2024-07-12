@@ -13,6 +13,7 @@ use App\Models\ObjekModel;
 use App\Models\JenisModel;
 use App\Models\KelompokModel;
 use App\Models\AkunModel;
+use App\Models\KeteranganModel;
 
 
 class LaporanController extends BaseController
@@ -26,6 +27,7 @@ class LaporanController extends BaseController
     protected $JenisModel;
     protected $KelompokModel;
     protected $AkunModel;
+    protected $KeteranganModel;
     public function __construct()
     {
         $this->LaporanModel = new LaporanModel();
@@ -37,6 +39,7 @@ class LaporanController extends BaseController
         $this->JenisModel = new JenisModel();
         $this->KelompokModel = new KelompokModel();
         $this->AkunModel = new AkunModel();
+        $this->KeteranganModel = new KeteranganModel();
     }
 
     public function index()
@@ -50,6 +53,14 @@ class LaporanController extends BaseController
         }
         return view('laporan/index', ['laporan' => $laporan]);
     }
+
+    public function getJumlahByIdDetailDpa($id_detail_dpa)
+    {
+        $keteranganModel = new KeteranganModel();
+        $data = $keteranganModel->where('id_detail_dpa', $id_detail_dpa)->first();
+
+    }
+
 
     public function create()
     {

@@ -334,5 +334,6 @@ $routes->group('laporan', ['filter' => 'auth'], function ($routes) {
    // $routes->get('edit/(:num)', 'LaporanController::edit/$1');
    // $routes->get('delete/(:num)', 'LaporanController::destroy/$1');
    $routes->post('cetak/', 'LaporanController::cetak/');
+   $routes->get('getJumlahByIdDetailDpa/(:num)', 'LaporanController::getJumlahByIdDetailDpa/$1');
 
 });

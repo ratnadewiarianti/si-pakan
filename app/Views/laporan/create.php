@@ -21,21 +21,47 @@
                     <div class="card-body">
                         <h4 class="card-title">Cetak Laporan SI SPJ</h4>
                         <form action="/laporan/cetak/" method="post">
-                            <div class="form-group">
-                                <label>DPA</label>
-                                <select class="form-control js-example-basic-single w-100" name="id_detail_dpa" required>
-                                    <option selected disabled>-</option>
-                                    <?php foreach ($subkegiatan as $key) : ?>
-                                    <option value="<?= $key['id']; ?>"><?= $key['nama_subkegiatan']; ?> - <?= $key['uraian_sub_rincian_objek']; ?>, Pagu Rp. <?= 'Rp ' . number_format($key['jumlahdpa'], 0, ',', '.'); ?>
-                                    </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
+                        <div class="form-group">
+    <label>DPA</label>
+    <select class="form-control js-example-basic-single w-100" name="id_detail_dpa" id="id_detail_dpa" required>
+        <option selected disabled>-</option>
+        <?php foreach ($subkegiatan as $key) : ?>
+            <option value="<?= $key['id']; ?>"><?= $key['nama_subkegiatan']; ?> - <?= $key['uraian_sub_rincian_objek']; ?>, Pagu Rp. <?= 'Rp ' . number_format($key['jumlahdpa'], 0, ',', '.'); ?></option>
+        <?php endforeach; ?>
+    </select>
+</div>
 
-                            <div class="form-group">
-                                <label>Realisasi</label>
-                                <input type=" number" name="realisasi" required class="form-control">
-                            </div>
+<div class="form-group">
+    <label>Realisasi</label>
+    <input type="number" name="realisasi" id="realisasi" required class="form-control">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#id_detail_dpa').change(function() {
+            var id_detail_dpa = $(this).val();
+            $.ajax({
+                url: '<?= base_url('laporancontroller/getJumlahByIdDetailDpa'); ?>/' + id_detail_dpa,
+                method: 'GET',
+                success: function(response) {
+                    console.log(response);
+                    if(response.jumlah !== undefined) {
+                        $('#realisasi').val(response.jumlah);
+                    } else {
+                        $('#realisasi').val('');
+                        alert('Data not found');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error: ', status, error);
+                    alert('AJAX Error: ' + status + ' - ' + error);
+                }
+            });
+        });
+    });
+</script>
+
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
                             <a href="<?= base_url('/laporan'); ?>" class="btn btn-danger">Batal</a>
