@@ -24,9 +24,12 @@
                                 <p class="card-title">Detail Data DPA Subkegiatan</p>
                             </div>
                             <div>
+                            <?php $role_id = session()->get('role_id'); ?>
+                            <?php if ($role_id != 'staff') : ?>
                                 <a class="btn btn-success btn-sm"
                                     href="/detaildpa_subkegiatan/create/<?= service('uri')->getSegment(3); ?>">Tambah
                                     Data</a>
+                                    <?php endif; ?>
                                 <!-- <a class="btn btn-dark btn-sm" href="/detaildpa/show">Kembali</a> -->
                                 <a href="/detaildpa/show/<?= service('uri')->getSegment(3); ?>" class="btn btn-dark btn-sm">Kembali</a>
 
@@ -55,9 +58,10 @@
                                                     Sebelum Perubahan</th>
                                                 <th colspan="6" style="text-align:center; background-color: #D3D3D3;">
                                                     Sesudah Perubahan</th>
+                                                    <?php if ($role_id != 'staff') : ?>
                                                 <th rowspan="2"
                                                     style="text-align:center; vertical-align:middle; background-color: #D3D3D3;">
-                                                    Action</th>
+                                                    Action</th> <?php endif; ?>
                                             </tr>
                                             <tr>
                                                 <th style="background-color: #A0A0A0;">Koefisien</th>
@@ -145,7 +149,7 @@
                                                     ?>
                                                 </td>
 
-
+                                                <?php if ($role_id != 'staff') : ?>
                                                 <td>
 
                                                     <?php if (empty($row['koefisien_perubahan'])): ?>
@@ -158,6 +162,7 @@
                                                     <a href="/detaildpa_subkegiatan/delete/<?= $row['id']; ?>"
                                                         class="btn btn-sm btn-danger">Delete</a>
                                                 </td>
+                                                <?php endif; ?>
                                             </tr>
                                             <?php endforeach; ?>
                                             <?php else : ?>

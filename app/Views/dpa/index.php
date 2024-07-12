@@ -23,9 +23,13 @@
                             <div class="col-10">
                                 <p class="card-title"> Data DPA</p>
                             </div>
+                            <?php $role_id = session()->get('role_id'); ?>
+                            <?php if ($role_id != 'staff') : ?>
                             <div class="col-2 text-end">
                                 <a class="btn btn-success btn-sm" href="/dpa/create">Tambah Data</a>
                             </div>
+                            <?php endif; ?>
+
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -40,23 +44,32 @@
                                         </thead>
                                         <tbody>
                                             <?php if (!empty($dpa)) : ?>
-                                                <?php $no = 1; ?>
-                                                <?php foreach ($dpa as $row) : ?>
-                                                    <tr>
-                                                        <td><?= $no++; ?></td>
-                                                        <td><?= $row['nomor_dpa']; ?></td>
-                                                        <td>
-                                                            <a href="/dpa/cetak/<?= $row['id']; ?>" class="btn btn-sm btn-dark">Cetak</a>
-                                                            <a href="/detaildpa/show/<?= $row['id']; ?>" class="btn btn-sm btn-success">Detail</a>
-                                                            <a href="/dpa/edit/<?= $row['id']; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                                            <a href="/dpa/delete/<?= $row['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
+                                            <?php $no = 1; ?>
+                                            <?php foreach ($dpa as $row) : ?>
+                                            <tr>
+                                                <td><?= $no++; ?></td>
+                                                <td><?= $row['nomor_dpa']; ?></td>
+                                                <td>
+                                                    <a href="/dpa/cetak/<?= $row['id']; ?>"
+                                                        class="btn btn-sm btn-dark">Cetak</a>
+                                                    <a href="/detaildpa/show/<?= $row['id']; ?>"
+                                                        class="btn btn-sm btn-success">Detail</a>
+
+                                                   
+                                                    <?php if ($role_id != 'staff') : ?>
+                                                    <a href="/dpa/edit/<?= $row['id']; ?>"
+                                                        class="btn btn-sm btn-primary">Edit</a>
+                                                    <a href="/dpa/delete/<?= $row['id']; ?>"
+                                                        class="btn btn-sm btn-danger">Delete</a>
+                                                    <?php endif; ?>
+
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
                                             <?php else : ?>
-                                                <tr>
-                                                    <td colspan="3" class="text-center">Tidak ada data DPA.</td>
-                                                </tr>
+                                            <tr>
+                                                <td colspan="3" class="text-center">Tidak ada data DPA.</td>
+                                            </tr>
                                             <?php endif; ?>
 
                                         </tbody>
@@ -88,7 +101,7 @@
 
 <?= $this->section('javascript') ?>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#table-1').DataTable();
     });
 </script>

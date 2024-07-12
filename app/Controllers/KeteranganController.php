@@ -23,23 +23,42 @@ class KeteranganController extends BaseController
      
     }
 
-
+    // public function show($id)
+    // {
+    //     $data = [
+    //         'keterangan' => $this->KeteranganModel->getKeterangan($id),
+    //         'detailpenatausahaan' => $this->DetailPenatausahaanModel->find($id),
+    //         'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id)
+    //     ];
+    //     foreach ($data['keterangan'] as &$ket) {
+    //         $total = $ket['jumlah'] * $ket['harga'];
+    //         $ket['total'] = $total;
+    //     }
+    //     // $penatausahaans = $this->penatausahaanModel->getPenatausahaan2();
+    //     return view('keterangan/show', $data);
+    // }
 
     public function show($id)
-    {
-        $data = [
-            'keterangan' => $this->KeteranganModel->getKeterangan($id),
-            'detailpenatausahaan' => $this->DetailPenatausahaanModel->find($id),
-            'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id)
-        ];
-        foreach ($data['keterangan'] as &$ket) {
-            $total = $ket['jumlah'] * $ket['harga'];
+{
+    $data = [
+        'keterangan' => $this->KeteranganModel->getKeterangan($id),
+        'detailpenatausahaan' => $this->DetailPenatausahaanModel->find($id),
+        'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id)
+    ];
 
-            $ket['total'] = $total;
-        }
-        // $penatausahaans = $this->penatausahaanModel->getPenatausahaan2();
-        return view('keterangan/show', $data);
+    $sumTotal = 0; // Variable untuk menyimpan total keseluruhan
+
+    foreach ($data['keterangan'] as &$ket) {
+        $total = $ket['jumlah'] * $ket['harga'];
+        $ket['total'] = $total;
+        $sumTotal += $total; // Menambahkan total ke sumTotal
     }
+
+    $data['sumTotal'] = $sumTotal; // Menyimpan sumTotal dalam data
+
+    return view('keterangan/show', $data);
+}
+
 
 
     public function create($id)
