@@ -344,7 +344,7 @@ public function tolak_kasubbag($id)
 
         $data = [
             'detailpenatausahaan' => $detailpenatausahaan,
-            'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan', $id)->findAll(),
+            'keterangan' => $this->KeteranganModel->getKeterangan($detailpenatausahaan['id']),
             'penatausahaan' => $this->PenataUsahaanModel->getPenatausahaanById($id_p),
             'kegiatan' => $this->DetailDPAModel->getKegiatan($idd),
             'program' => $this->DetailDPAModel->getProgram($idd),
@@ -376,7 +376,7 @@ public function tolak_kasubbag($id)
 
         $data = [
             'detailpenatausahaan' => $detailpenatausahaan,
-            'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan', $id)->findAll(),
+            'keterangan' =>  $this->KeteranganModel->getKeterangan($detailpenatausahaan['id']),
             'penatausahaan' => $this->PenataUsahaanModel->getPenatausahaanById($id_p),
             'kegiatan' => $this->DetailDPAModel->getKegiatan($idd),
             'program' => $this->DetailDPAModel->getProgram($idd),
@@ -408,7 +408,7 @@ public function tolak_kasubbag($id)
 
         $data = [
             'detailpenatausahaan' => $detailpenatausahaan,
-            'keterangan' => $this->KeteranganModel->where('id_detail_penatausahaan', $id)->findAll(),
+            'keterangan' =>  $this->KeteranganModel->getKeterangan($detailpenatausahaan['id']),
             'penatausahaan' => $this->PenataUsahaanModel->getPenatausahaanById($id_p),
             'nama' => $this->Detail2PenatausahaanModel->getAnggota($id),
             'kegiatan' => $this->DetailDPAModel->getKegiatan($idd),

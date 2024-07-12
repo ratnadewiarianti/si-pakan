@@ -20,6 +20,7 @@ class KeteranganController extends BaseController
         $this->KeteranganModel = new KeteranganModel();
         $this->Detail2PenatausahaanModel = new Detail2PenatausahaanModel();
         $this->DetailDPASubkegiatanModel = new DetailDPASubkegiatanModel();
+     
     }
 
 
@@ -44,6 +45,7 @@ class KeteranganController extends BaseController
     public function create($id)
     {
         $data = [
+           
             'detailpenatausahaan' => $this->DetailPenatausahaanModel->find($id),
             'detaildpasubkegiatan' => $this->DetailDPASubkegiatanModel->getKeterangan()
         ];
@@ -54,6 +56,7 @@ class KeteranganController extends BaseController
     {
         $data = [
             'id_detail_penatausahaan' => $this->request->getPost('id_detail_penatausahaan'),
+            'id_dpa_subkegiatan' => $this->request->getPost('id_dpa_subkegiatan'),
             'id_dpa_subkegiatan' => $this->request->getPost('id_dpa_subkegiatan'),
             'jumlah' => $this->request->getPost('jumlah'),
             'tahun' => session()->get('tahun'),
@@ -84,6 +87,7 @@ class KeteranganController extends BaseController
     {
         $data = [
             'id_detail_penatausahaan' => $this->request->getPost('id_detail_penatausahaan'),
+            'id_dpa_subkegiatan' => $this->request->getPost('id_dpa_subkegiatan'),
             'id_dpa_subkegiatan' => $this->request->getPost('id_dpa_subkegiatan'),
             'jumlah' => $this->request->getPost('jumlah'),
         ];
