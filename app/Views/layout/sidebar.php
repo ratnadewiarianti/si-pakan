@@ -27,12 +27,12 @@
                </li>
            <?php endif; ?>
 
-           <li class="nav-item  <?= (strpos($uri, '/starter') !== false) ? 'active' : '' ?>">
+           <!-- <li class="nav-item  <?= (strpos($uri, '/starter') !== false) ? 'active' : '' ?>">
                <a class="nav-link" href="starter">
                    <i class="ti-write menu-icon"></i>
                    <span class="menu-title">Starter</span>
                </a>
-           </li>
+           </li> -->
            <li class="nav-item  ">
                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                    <i class="ti-folder menu-icon"></i>

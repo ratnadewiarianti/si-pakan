@@ -64,7 +64,7 @@ public function getDetail($id)
     return $this->select('detail_penatausahaan.*, dpa.nomor_dpa, 
         CONCAT(akun.kode_akun, \'.\', kelompok.kode_kelompok, \'.\', jenis.kode_jenis, \'.\', objek.kode_objek, \'.\', rincian_objek.kode_rincian_objek, \'.\', sub_rincian_objek.kode_sub_rincian_objek) AS kode_rekening, 
         sub_rincian_objek.uraian_sub_rincian_objek, 
-        subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, 
+        subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, subkegiatan.kode_bidang,
         urusan.kode_urusan, urusan.nama_urusan, 
         bidang_urusan.kode_bidang_urusan, bidang_urusan.nama_bidang_urusan, 
         kegiatan.kode_kegiatan, kegiatan.nama_kegiatan, 
@@ -240,7 +240,7 @@ public function getCariDataVerifikasi()
 public function getCetakBendahara($id)
 {
     return $this->select('detail_penatausahaan.*,
-        subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, 
+        subkegiatan.kode_subkegiatan, subkegiatan.nama_subkegiatan, subkegiatan.kode_bidang,
         urusan.kode_urusan, 
         bidang_urusan.kode_bidang_urusan, 
         kegiatan.kode_kegiatan,  

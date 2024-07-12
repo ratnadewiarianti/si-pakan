@@ -20,13 +20,10 @@ class KeteranganDPATable extends Migration
                 'constraint' => 5,
                 'unsigned' => true,
             ],
-            'keperluan' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50
-            ],
-            'harga' => [
+            'id_dpa_subkegiatan' => [
                 'type' => 'INT',
-                'constraint' => 50
+                'constraint' => 5,
+                'unsigned' => true,
             ],
             'jumlah' => [
                 'type' => 'INT',

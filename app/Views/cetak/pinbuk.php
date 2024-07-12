@@ -57,7 +57,7 @@
                     <tr>
                         <td style="vertical-align: top;white-space: nowrap; padding-right: 50px;">Nomor</td>
                         <td style="text-align: right;vertical-align: top; padding-right: 10px;"> : </td>
-                        <td>900/ -PERCNKEU/DISPUSIP/BP/2023</td>
+                        <td>900/<?= $detailpenatausahaan['id']; ?>-PERCNKEU/DISPUSIP/BP/<?= session()->get('tahun') ?></td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top;white-space: nowrap;">Lampiran</td>
@@ -202,8 +202,8 @@
                         <tr>
                             <td><?= $no++; ?></td>
                             <td><?= $n['nama']; ?> <br> <?= $n['nip']; ?></td>
-                            <td></td>
-                            <td></td>
+                            <td><?= $n['nominal']; ?></td>
+                            <td><?= $n['nominal']; ?></td>
                             <td></td>
                             <td></td>
                             <td></td>

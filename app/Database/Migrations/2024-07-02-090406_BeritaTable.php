@@ -12,6 +12,7 @@ class BeritaTable extends Migration
             'id' => ['type' => 'INT', 'constraint' => 5, 'unsigned' => true, 'auto_increment' => true],
             'status' => ['type' => 'VARCHAR', 'constraint' => 10],
             'file' => ['type' => 'VARCHAR', 'constraint' => 200],
+            'judul' => ['type' => 'VARCHAR', 'constraint' => 200],
             'berita' => ['type' => 'LONGTEXT'],
             'created_at' => [
                 'type' => 'DATETIME',

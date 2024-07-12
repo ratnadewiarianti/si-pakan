@@ -50,8 +50,8 @@
                                                 <?php foreach ($keterangan as $row) : ?>
                                                     <tr>
                                                         <td><?= $no++; ?></td>
-                                                        <td><?= $row['keperluan']; ?></td>
-                                                        <td><?= 'Rp ' . number_format($row['harga'], 0, ',', '.'); ?></td>
+                                                        <td><?= $row['uraian']; ?>, <?= $row['koefisien']; ?> <?= $row['satuan']; ?>, Total: <?= 'Rp ' . number_format($row['jumlah_dpa_subkegiatan'], 0, ',', '.'); ?></td>
+                                                     <td>   <?= 'Rp ' . number_format($row['harga'], 0, ',', '.'); ?></td>
                                                         <td><?= $row['jumlah']; ?></td>
                                                         <td><?= 'Rp ' . number_format($row['total'], 0, ',', '.'); ?></td>
                                                         <td>
@@ -105,6 +105,7 @@
                                             <th>Nama</th>
                                             <th>NIP</th>
                                             <th>Jabatan</th>
+                                            <th>Nominal</th>
                                             <th>Action</th>
 
                                             <!-- 'id_dpa','id_subkegiatan','id_rekening','jumlah','jumlah_perubahan' -->
@@ -118,6 +119,7 @@
                                                 <td><?= $row['nama']; ?></td>
                                                 <td><?= $row['nip']; ?></td>
                                                 <td><?= $row['jabatan']; ?></td>
+                                                <td><?= $row['nominal']; ?></td>
                                                 <td>
                                                     <a href="/detailpenatausahaan/edit2/<?= $row['id']; ?>"
                                                         class="btn btn-sm btn-primary">Edit</a>

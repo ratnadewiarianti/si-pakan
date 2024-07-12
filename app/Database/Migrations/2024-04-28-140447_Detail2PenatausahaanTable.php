@@ -25,6 +25,10 @@ class Detail2Penatausahaan extends Migration
                 'constraint' => 5, 
                 'unsigned' => true, 
             ],
+            'nominal' => [
+                'type' => 'VARCHAR', 
+                'constraint' => 50
+            ],
             'tahun' => [
                 'type' => 'VARCHAR', 
                 'constraint' => 4

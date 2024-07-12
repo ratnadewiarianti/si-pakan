@@ -55,7 +55,7 @@
                     <tr>
                         <td style="white-space: nowrap;vertical-align: top;">TAHUN ANGGARAN</td>
                         <td style="text-align: right;"> : </td>
-                        <td>2023</td>
+                        <td><?= session()->get('tahun') ?></td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top;white-space: nowrap;">PROGRAM</td>
@@ -85,7 +85,7 @@
                     <tr>
                         <td style="white-space: nowrap;vertical-align: top;">NO. BK. UMUM</td>
                         <td style="text-align: right;"> : </td>
-                        <td style="vertical-align: top; white-space: nowrap;"> <?= $detailpenatausahaan['no_bk_umum']; ?></td>
+                        <td style="vertical-align: top; white-space: nowrap;"> <?= $detailpenatausahaan['id']; ?>/DISP/<?= $detailpenatausahaan['kode_bidang']; ?>/<?= session()->get('tahun') ?></td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top;white-space: nowrap;">NO. BK. PEMBANTU</td>
@@ -262,7 +262,8 @@
                             <?php foreach ($keterangan as $row) : ?>
                                 <tr>
                                     <td><?= $no++; ?></td>
-                                    <td><?= $row['keperluan']; ?></td>
+                                    <td><?= $row['uraian']; ?>, <?= $row['koefisien']; ?> <?= $row['satuan']; ?>, Total: <?= 'Rp ' . number_format($row['jumlah_dpa_subkegiatan'], 0, ',', '.'); ?></td>
+                                                    
                                     <td><?= 'Rp ' . number_format($row['harga'], 0, ',', '.'); ?></td>
                                     <td><?= $row['jumlah']; ?></td>
                                     <td><?= 'Rp ' . number_format($row['total'], 0, ',', '.'); ?></td>

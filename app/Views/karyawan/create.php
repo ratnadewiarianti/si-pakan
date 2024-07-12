@@ -58,6 +58,7 @@
                                     <option value="PNS">PNS</option>
                                     <option value="PTT">PTT</option>
                                     <option value="Tenaga Ahli">Tenaga Ahli</option>
+                                    <option value="NON PNS">NON PNS</option>
                                 </select>
                             </div>
 
