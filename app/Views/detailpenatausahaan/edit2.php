@@ -23,6 +23,11 @@
                                 </select>
                             </div>
 
+                            <div class="form-group">
+                                <label>Nominal</label>
+                                <input type="text" name="nominal" required class="form-control"
+                                    value="<?= $detail2['nominal']; ?>">
+                            </div>
 
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
