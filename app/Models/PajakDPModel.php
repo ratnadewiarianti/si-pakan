@@ -22,4 +22,11 @@ class PajakDPModel extends Model
     {
         return $this->where('id_dp', $id_dp)->findAll();
     }
+
+    public function getTotalJumlahP($id){
+        return $this->selectSum('pajak_dp.jumlah_p')
+            ->join('pajak', 'pajak.id = pajak_dp.id_pajak')
+            ->where('pajak_dp.id_dp', $id)
+            ->first();
+    }
 }

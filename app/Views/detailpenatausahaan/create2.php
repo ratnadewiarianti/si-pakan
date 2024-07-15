@@ -22,6 +22,7 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
+                            
                             <div class="form-group">
                                 <label>Nominal</label>
                                 <div class="input-group">
@@ -29,9 +30,10 @@
                                         <span class="input-group-text">Rp.</span>
                                     </div>
                                     <input type="number" name="nominal" class="form-control" required>
+                                    <!-- <?php $pajak?> -->
                                 </div>
                             </div>
-                           
+                            <?php $pajak?>
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
                             <a href="/keterangan/show/<?= service('uri')->getSegment(3); ?>" class="btn btn-danger">Batal</a>

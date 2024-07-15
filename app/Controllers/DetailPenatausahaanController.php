@@ -82,10 +82,11 @@ class DetailPenatausahaanController extends BaseController
     public function create2($id)
     {
         $karyawan = $this->KaryawanModel->findAll();
-
+        $pajak = $this->PajakDPModel->getTotalJumlahP($id);
         $data = [
             // 'dpa' => $this->DPAModel->findDatabyId($id),
             'karyawan' => $karyawan,
+            'pajak' => $pajak,
         ];
 
         return view('detailpenatausahaan/create2', $data);

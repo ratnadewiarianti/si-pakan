@@ -31,12 +31,16 @@
     </select>
 </div>
 
-<div class="form-group">
+<!-- <div class="form-group">
     <label>Realisasi</label>
     <input type="number" name="realisasi" id="realisasi" required class="form-control">
+</div> -->
+<div class="form-group">
+    <label>Realisasi</label>
+    <input type="number" name="realisasi" required class="form-control">
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#id_detail_dpa').change(function() {
@@ -60,7 +64,7 @@
             });
         });
     });
-</script>
+</script> -->
 
                             <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             <!-- <button class="btn btn-light">Batal</button> -->
