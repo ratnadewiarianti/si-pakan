@@ -103,8 +103,8 @@
                                         <thead>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>NIP</th>
-                                            <th>Jabatan</th>
+                                            <!-- <th>NIP</th>
+                                            <th>Jabatan</th> -->
                                             <th>Nominal</th>
                                             <th>Action</th>
 
@@ -117,8 +117,8 @@
                                             <tr>
                                                 <td><?= $no++; ?></td>
                                                 <td><?= $row['nama']; ?></td>
-                                                <td><?= $row['nip']; ?></td>
-                                                <td><?= $row['jabatan']; ?></td>
+                                                <!-- <td><?= $row['nip']; ?></td>
+                                                <td><?= $row['jabatan']; ?></td> -->
                                                 <td><?= $row['nominal']; ?></td>
                                                 <td>
                                                     <a href="/detailpenatausahaan/edit2/<?= $row['id']; ?>"
@@ -130,7 +130,7 @@
                                             <?php endforeach; ?>
                                             <?php else : ?>
                                             <tr>
-                                                <td colspan="6" class="text-center">Tidak ada data detail penatausahaan.
+                                                <td colspan="4" class="text-center">Tidak ada data detail penatausahaan.
                                                 </td>
                                             </tr>
                                             <?php endif; ?>
