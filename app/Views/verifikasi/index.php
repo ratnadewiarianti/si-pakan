@@ -64,7 +64,7 @@
                                                     <?= $row['uraian_sub_rincian_objek']; ?>
                                                 </td>
                                                 <td>
-                                                    <?= 'Rp ' . number_format($row['jumlahdpa'], 0, ',', '.'); ?>
+                                                    <?= 'Rp ' . number_format($sumTotal, 0, ',', '.'); ?>
                                                 </td>
                                                 <td style="text-align: justify;">
                                                     <?php

@@ -60,6 +60,17 @@ class LaporanModel extends Model
         return $result ? $result->total_jumlah : 0; // Mengakses alias dari hasil sum, cek null
     }
 
+        public function getTotalJumlahbyId($id)
+    {
+        $query = $this->db->table('detail_dpa_subkegiatan')
+            ->selectSum('jumlah', 'total_jumlah') // Menggunakan alias untuk hasil sum
+            ->where('id_detail_dpa', $id)
+            ->get();
+    
+        $result = $query->getRow();
+        return $result ? $result->total_jumlah : 0; // Mengakses alias dari hasil sum, cek null
+    }
+
     public function getCetak($id)
 {
     $query = $this->db->table('laporan')

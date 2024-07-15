@@ -120,7 +120,7 @@
                         <td style="vertical-align: top;white-space: nowrap;"><b>UANG SEBANYAK</b></td>
                         <td style="text-align: right;vertical-align: top;"> : </td>
                         <td class="border-jajar-genjang">
-                            <p style="text-align: center; margin: 10px;font-weight: bold; font-size: 12px;"> <?= strtoupper(terbilang($jumlahdpa)); ?></p>
+                            <p style="text-align: center; margin: 10px;font-weight: bold; font-size: 12px;"> <?= strtoupper(terbilang($sumTotal)); ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -166,7 +166,7 @@
                         <b>Terbilang Rp. </b>
                         <span class="jajar-genjang">
                             <span class="skew-fix">
-                                <b><?= number_format($jumlahdpa, 0, ',', '.'); ?></b>
+                                <b><?= number_format($sumTotal, 0, ',', '.'); ?></b>
                             </span>
                         </span>
                     </div>
@@ -252,26 +252,24 @@
                         <thead>
                             <th>No</th>
                             <th>Keperluan</th>
-                            <th>Harga</th>
+                          
                             <th>Jumlah</th>
-                            <th>Total</th>
                         </thead>
                         <tbody>
                             <?php $no = 1; ?>
-                            <?php $total_semua = 0; ?> <!-- Variabel untuk menyimpan total -->
+                            <?php $total_jumlah = 0; ?> <!-- Variabel untuk menyimpan total -->
                             <?php foreach ($keterangan as $row) : ?>
                                 <tr>
                                     <td><?= $no++; ?></td>
-                                    <td><?= $row['uraian']; ?>, <?= $row['koefisien']; ?> <?= $row['satuan']; ?>, Total: <?= 'Rp ' . number_format($row['jumlah_dpa_subkegiatan'], 0, ',', '.'); ?></td>
-                                    <td>   <?= 'Rp ' . number_format($row['harga'], 0, ',', '.'); ?></td>
+                                    <td><?= $row['uraian']; ?>, <?= $row['koefisien']; ?> <?= $row['satuan']; ?></td>
+                                                
                                     <td><?= $row['jumlah']; ?></td>
-                                    <td><?= 'Rp ' . number_format($row['total'], 0, ',', '.'); ?></td>
-                                </tr>
-                                <?php $total_semua += $row['total']; ?> <!-- Menambahkan total pada setiap iterasi -->
+                                   </tr>
+                                <?php $total_jumlah += $row['jumlah']; ?> <!-- Menambahkan total pada setiap iterasi -->
                             <?php endforeach; ?>
                             <tr>
-                                <td colspan="4"><b>Jumlah Total</b></td>
-                                <td><b><?= 'Rp ' . number_format($total_semua, 0, ',', '.'); ?></b></td>
+                                <td colspan="2"><b>Total Jumlah</b></td>
+                                <td><b><?= $total_jumlah; ?></b></td>
                             </tr>
                         </tbody>
                     </table>
