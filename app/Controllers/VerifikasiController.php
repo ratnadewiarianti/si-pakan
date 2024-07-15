@@ -61,13 +61,17 @@ class VerifikasiController extends BaseController
             }
         }
 
-        $sumTotal = 0;
-        foreach ($item['keterangan'] as &$ket) {
-            $total = $ket['jumlah'] * $ket['harga'];
-            $ket['total'] = $total;
-            $sumTotal += $total;
-        }
 
+        if (!empty($item['keterangan'])) {
+            $sumTotal = 0;
+            foreach ($item['keterangan'] as &$ket) {
+                $total = $ket['jumlah'] * $ket['harga'];
+                $ket['total'] = $total;
+                $sumTotal += $total;
+            }
+        } else {
+            $sumTotal = 0;
+        }
         $data = [
             'penatausahaan' => $penatausahaan,
             'sumTotal' => $sumTotal
@@ -88,11 +92,16 @@ class VerifikasiController extends BaseController
             }
         }
 
-        $sumTotal = 0;
-        foreach ($item['keterangan'] as &$ket) {
-            $total = $ket['jumlah'] * $ket['harga'];
-            $ket['total'] = $total;
-            $sumTotal += $total;
+
+        if (!empty($item['keterangan'])) {
+            $sumTotal = 0;
+            foreach ($item['keterangan'] as &$ket) {
+                $total = $ket['jumlah'] * $ket['harga'];
+                $ket['total'] = $total;
+                $sumTotal += $total;
+            }
+        } else {
+            $sumTotal = 0;
         }
 
         $data = [
@@ -116,11 +125,15 @@ class VerifikasiController extends BaseController
             }
         }
 
-        $sumTotal = 0;
-        foreach ($item['keterangan'] as &$ket) {
-            $total = $ket['jumlah'] * $ket['harga'];
-            $ket['total'] = $total;
-            $sumTotal += $total;
+        if (!empty($item['keterangan'])) {
+            $sumTotal = 0;
+            foreach ($item['keterangan'] as &$ket) {
+                $total = $ket['jumlah'] * $ket['harga'];
+                $ket['total'] = $total;
+                $sumTotal += $total;
+            }
+        } else {
+            $sumTotal = 0;
         }
 
         $data = [

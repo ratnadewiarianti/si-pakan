@@ -54,12 +54,17 @@ class DetailPenatausahaanController extends BaseController
         }
 
 
-        $sumTotal = 0;
-        foreach ($item['keterangan'] as &$ket) {
-            $total = $ket['jumlah'] * $ket['harga'];
-            $ket['total'] = $total;
-            $sumTotal += $total;
+        if (!empty($item['keterangan'])) {
+            $sumTotal = 0;
+            foreach ($item['keterangan'] as &$ket) {
+                $total = $ket['jumlah'] * $ket['harga'];
+                $ket['total'] = $total;
+                $sumTotal += $total;
+            }
+        } else {
+            $sumTotal = 0;
         }
+       
         // Calculate nilai_pajak for each pajak item
 
         $data = [
