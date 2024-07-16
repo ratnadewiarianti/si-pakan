@@ -49,10 +49,11 @@ class KeteranganController extends BaseController
         'detail2' => $this->Detail2PenatausahaanModel->getAnggota($id)
     ];
 
-   
-        if (!empty($item['keterangan'])) {
+    $sumTotal = 0; // Variable untuk menyimpan total keseluruhan
+
+    if (!empty($data['keterangan'])) {
             $sumTotal = 0;
-            foreach ($item['keterangan'] as &$ket) {
+            foreach ($data['keterangan'] as &$ket) {
                 $jumlah = is_numeric($ket['jumlah']) ? (float)$ket['jumlah'] : 0;
                 $harga = is_numeric($ket['harga']) ? (float)$ket['harga'] : 0;
                 $total = $jumlah * $harga;

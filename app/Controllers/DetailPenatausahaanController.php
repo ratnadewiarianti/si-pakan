@@ -386,9 +386,9 @@ class DetailPenatausahaanController extends BaseController
             'jumlahdpaperubahan' => $jumlahdpaperubahan,
         ];
 
-        if (!empty($item['keterangan'])) {
+        if (!empty($data['keterangan'])) {
             $sumTotal = 0;
-            foreach ($item['keterangan'] as &$ket) {
+            foreach ($data['keterangan'] as &$ket) {
                 $jumlah = is_numeric($ket['jumlah']) ? (float)$ket['jumlah'] : 0;
                 $harga = is_numeric($ket['harga']) ? (float)$ket['harga'] : 0;
                 $total = $jumlah * $harga;
