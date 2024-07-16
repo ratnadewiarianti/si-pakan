@@ -8,9 +8,25 @@
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/kwitansi.css" rel="stylesheet">
+    <style>
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
+            color: rgba(0, 0, 0, 0.1);
+            z-index: -1;
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 
 <body class="bg-light">
+    <!-- Watermark -->
+    <div class="watermark">DRAFT KWITANSI</div>
     <?php
     // SET Lokalisasi Tanggal ke Indonesia
     $bulan = array(
@@ -82,10 +98,10 @@
             </div>
             <div class="col-md-4">
                 <table class="table-borderless" style="text-align: left;">
-                    <tr>
+                <tr>
                         <td style="white-space: nowrap;vertical-align: top;">NO. BK. UMUM</td>
                         <td style="text-align: right;"> : </td>
-                        <td style="vertical-align: top; white-space: nowrap;"> <?= $detailpenatausahaan['no_bk_umum']; ?></td>
+                        <td style="vertical-align: top; white-space: nowrap;"> <?= $detailpenatausahaan['id']; ?>/DISP/<?= $detailpenatausahaan['kode_bidang']; ?>/<?= session()->get('tahun') ?></td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top;white-space: nowrap;">NO. BK. PEMBANTU</td>
@@ -194,13 +210,13 @@
         </div>
         <div class="row mt-3">
             <div class="col-md-4 text-center">
-                <?= !empty($penatausahaan['ttd_karyawan_1']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_1']) . '" alt="Gambar" width="100" height="100">' : '-' ?>
+                <?= !empty($penatausahaan['ttd_karyawan_1']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_1']) . '" alt="Gambar" width="100" height="100">' : '' ?>
             </div>
             <div class="col-md-4 text-center">
-                <?= !empty($penatausahaan['ttd_karyawan_2']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_2']) . '" alt="Gambar" width="100" height="100">' : '-' ?>
+                <?= !empty($penatausahaan['ttd_karyawan_2']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_2']) . '" alt="Gambar" width="100" height="100">' : '' ?>
             </div>
             <div class="col-md-4 text-center">
-                <?= !empty($penatausahaan['ttd_karyawan_3']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_3']) . '" alt="Gambar" width="100" height="100">' : '-' ?>
+                <?= !empty($penatausahaan['ttd_karyawan_3']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_3']) . '" alt="Gambar" width="100" height="100">' : '' ?>
             </div>
         </div>
         <div class="row mt-2 mb-3">
@@ -262,7 +278,7 @@
                             <?php foreach ($keterangan as $row) : ?>
                                 <tr>
                                     <td><?= $no++; ?></td>
-                                    <td><?= $row['keperluan']; ?></td>
+                                    <td><?= $row['uraian']; ?>, <?= $row['koefisien']; ?> <?= $row['satuan']; ?></td>
                                     <td><?= 'Rp ' . number_format($row['harga'], 0, ',', '.'); ?></td>
                                     <td><?= $row['jumlah']; ?></td>
                                     <td><?= 'Rp ' . number_format($row['total'], 0, ',', '.'); ?></td>
