@@ -21,6 +21,10 @@
                                 </select>
                             </div>
 
+                            <div class="form-group" id="rincian-container">
+                                <!-- Dynamic fields will be added here -->
+                            </div>
+
                             <div class="form-group">
                                 <label>Untuk Pembayaran</label>
                                 <textarea name="untuk_pembayaran" required class="form-control" style="min-height:100px"></textarea>
@@ -132,5 +136,85 @@
         container.appendChild(div);
     }
 </script>
+
+<script>
+    function loadRincian(id) {
+        if (id) {
+            $.ajax({
+                url: `/detailpenatausahaan/selectrincian/${id}`,
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    let rincianContainer = document.getElementById('rincian-container');
+                    rincianContainer.innerHTML = ''; // Clear existing options
+
+                    if (data.length > 0) {
+                        addRincianField(data);
+                        let addButton = document.getElementById('add-rincian-btn');
+                        if (!addButton) {
+                            addButton = document.createElement('button');
+                            addButton.type = 'button';
+                            addButton.className = 'btn btn-primary mt-2';
+                            addButton.id = 'add-rincian-btn';
+                            addButton.innerText = 'Tambah Rincian';
+                            addButton.onclick = function() {
+                                addRincianField(data);
+                            };
+                            rincianContainer.appendChild(addButton);
+                        }
+                    }
+                },
+                error: function() {
+                    alert('Gagal memuat rincian.');
+                }
+            });
+        }
+    }
+
+    function addRincianField(data) {
+        var container = document.getElementById('rincian-container');
+
+        var div = document.createElement('div');
+        div.className = 'rincian-entry form-group';
+        div.style.display = 'flex';
+        div.style.alignItems = 'center';
+        div.style.marginBottom = '10px';
+
+        var label = document.createElement('label');
+        label.innerText = 'Rincian';
+        label.style.marginRight = '10px';
+        div.appendChild(label);
+
+        var select = document.createElement('select');
+        select.name = 'id_detail_dpa_subkegiatan[]';
+        select.className = 'form-control js-example-basic-single w-100';
+        select.required = true;
+        select.style.marginRight = '10px';
+
+        select.innerHTML = `<option selected disabled>Pilih Rincian</option>`;
+        data.forEach(function(item) {
+            select.innerHTML += `<option value="${item.id}">${item.uraian}, koefisien: ${item.koefisien}, satuan: ${item.satuan}, harga: ${item.harga}</option>`;
+        });
+
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn btn-danger';
+        button.innerText = 'Hapus';
+        button.onclick = function() {
+            container.removeChild(div);
+        };
+
+        div.appendChild(select);
+        div.appendChild(button);
+
+        container.insertBefore(div, container.querySelector('#add-rincian-btn') || null);
+    }
+
+    document.querySelector('[name="id_detail_dpa"]').addEventListener('change', function() {
+        loadRincian(this.value);
+    });
+</script>
+
+
 
 <?= $this->endSection() ?>

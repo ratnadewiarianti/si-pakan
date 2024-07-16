@@ -13,7 +13,7 @@ class KeteranganModel extends Model
     protected $allowedFields    = [
         'id_detail_penatausahaan',
         'id_dpa_subkegiatan',
-        // 'harga',
+        'harga',
         'jumlah',
         'tahun'
 
@@ -23,7 +23,7 @@ public function getKeterangan($id)
 {
     return $this->select('keterangan_penatausahaan.*, detail_dpa_subkegiatan.id_detail_dpa, detail_dpa_subkegiatan.uraian, 
                   detail_dpa_subkegiatan.koefisien, detail_dpa_subkegiatan.satuan, 
-                  detail_dpa_subkegiatan.harga, detail_dpa_subkegiatan.ppn, 
+                   detail_dpa_subkegiatan.ppn, 
                   detail_dpa_subkegiatan.jumlah AS jumlah_dpa_subkegiatan, detail_dpa_subkegiatan.keterangan, 
                   detail_dpa_subkegiatan.koefisien_perubahan, detail_dpa_subkegiatan.satuan_perubahan, 
                   detail_dpa_subkegiatan.harga_perubahan, detail_dpa_subkegiatan.ppn_perubahan, 

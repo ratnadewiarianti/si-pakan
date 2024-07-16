@@ -8,18 +8,21 @@ use App\Models\DetailPenatausahaanModel;
 use App\Models\DetailDPASubkegiatanModel;
 use App\Models\KeteranganModel;
 use App\Models\Detail2PenatausahaanModel;
+use App\Models\RincianPajakModel;
 class KeteranganController extends BaseController
 {
     protected $KeteranganModel;
     protected $DetailPenatausahaanModel;
     protected $Detail2PenatausahaanModel;
     protected $DetailDPASubkegiatanModel;
+    protected $RincianPajakModel;
     public function __construct()
     {
         $this->DetailPenatausahaanModel = new DetailPenatausahaanModel();
         $this->KeteranganModel = new KeteranganModel();
         $this->Detail2PenatausahaanModel = new Detail2PenatausahaanModel();
         $this->DetailDPASubkegiatanModel = new DetailDPASubkegiatanModel();
+        $this->RincianPajakModel = new RincianPajakModel();
      
     }
 
@@ -66,7 +69,8 @@ class KeteranganController extends BaseController
         $data = [
            
             'detailpenatausahaan' => $this->DetailPenatausahaanModel->find($id),
-            'detaildpasubkegiatan' => $this->DetailDPASubkegiatanModel->getKeterangan()
+            // 'detaildpasubkegiatan' => $this->DetailDPASubkegiatanModel->getKeterangan(),
+            'detaildpasubkegiatan' => $this->RincianPajakModel->getKeterangan($id),
         ];
         return view('keterangan/create', $data);
     }
@@ -76,8 +80,8 @@ class KeteranganController extends BaseController
         $data = [
             'id_detail_penatausahaan' => $this->request->getPost('id_detail_penatausahaan'),
             'id_dpa_subkegiatan' => $this->request->getPost('id_dpa_subkegiatan'),
-            'id_dpa_subkegiatan' => $this->request->getPost('id_dpa_subkegiatan'),
             'jumlah' => $this->request->getPost('jumlah'),
+            'harga' => $this->request->getPost('harga'),
             'tahun' => session()->get('tahun'),
         ];
 
@@ -93,10 +97,12 @@ class KeteranganController extends BaseController
 
     public function edit($id)
     {
+        $keterangan = $this->KeteranganModel->find($id);
+        $detaildpasubkegiatan = $this->RincianPajakModel->getKeterangan($keterangan['id_detail_penatausahaan']);
         $data = [
-            'keterangan' => $this->KeteranganModel->find($id),
-           'detaildpasubkegiatan' => $this->DetailDPASubkegiatanModel->getKeterangan()
-          
+            'keterangan' => $keterangan,
+            //    'detaildpasubkegiatan' => $this->DetailDPASubkegiatanModel->getKeterangan()
+            'detaildpasubkegiatan' => $detaildpasubkegiatan,
         ];
 
         return view('keterangan/edit', $data);
@@ -107,7 +113,7 @@ class KeteranganController extends BaseController
         $data = [
             'id_detail_penatausahaan' => $this->request->getPost('id_detail_penatausahaan'),
             'id_dpa_subkegiatan' => $this->request->getPost('id_dpa_subkegiatan'),
-            'id_dpa_subkegiatan' => $this->request->getPost('id_dpa_subkegiatan'),
+            'harga' => $this->request->getPost('harga'),
             'jumlah' => $this->request->getPost('jumlah'),
         ];
 

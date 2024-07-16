@@ -48,5 +48,10 @@ class DetailDPASubkegiatanModel extends Model
     return $query->getResultArray();
 }
 
+public function getRincianById($id)
+{
+    return $this->where('id_detail_dpa', $id)->findAll();
+}
+
    
 }

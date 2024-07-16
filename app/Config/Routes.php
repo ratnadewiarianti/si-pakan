@@ -251,6 +251,8 @@ $routes->group('detailpenatausahaan', ['filter' => 'auth'], function ($routes) {
    $routes->add('tolak_bendahara/(:num)', 'DetailPenatausahaanController::tolak_bendahara/$1');
    $routes->add('terima_kasubbag/(:num)', 'DetailPenatausahaanController::terima_kasubbag/$1');
    $routes->add('tolak_kasubbag/(:num)', 'DetailPenatausahaanController::tolak_kasubbag/$1');
+   $routes->post('selectrincian/(:any)', 'DetailPenatausahaanController::selectRincian/$1');
+
 });
 
 $routes->group('keterangan', ['filter' => 'auth'], function ($routes) {

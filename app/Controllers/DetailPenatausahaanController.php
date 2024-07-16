@@ -14,6 +14,7 @@ use App\Models\PenatausahaanModel;
 use App\Models\KeteranganModel;
 use App\Models\PajakModel;
 use App\Models\PajakDPModel;
+use App\Models\RincianPajakModel;
 
 class DetailPenatausahaanController extends BaseController
 {
@@ -27,6 +28,7 @@ class DetailPenatausahaanController extends BaseController
     protected $KeteranganModel;
     protected $PajakModel;
     protected $PajakDPModel;
+    protected $RincianPajakModel;
 
     public function __construct()
     {
@@ -40,6 +42,7 @@ class DetailPenatausahaanController extends BaseController
         $this->KeteranganModel = new KeteranganModel();
         $this->PajakModel = new PajakModel();
         $this->PajakDPModel = new PajakDPModel();
+        $this->RincianPajakModel = new RincianPajakModel();
     }
 
     public function show($id)
@@ -64,7 +67,7 @@ class DetailPenatausahaanController extends BaseController
         } else {
             $sumTotal = 0;
         }
-       
+
         // Calculate nilai_pajak for each pajak item
 
         $data = [
@@ -144,6 +147,20 @@ class DetailPenatausahaanController extends BaseController
             }
         }
 
+        // Handling detail dpa subkegiatan if present
+        $id_detail_dpa_subkegiatan = $this->request->getPost('id_detail_dpa_subkegiatan');
+
+        if ($id_detail_dpa_subkegiatan) {
+            $rincianData = [];
+            foreach ($id_detail_dpa_subkegiatan as $rincian) {
+                $rincianData[] = [
+                    'id_dp' => $id_detail_penatausahaan,
+                    'id_detail_dpa_subkegiatan' => $rincian,
+                    'tahun' => session()->get('tahun')
+                ];
+            }
+            $this->RincianPajakModel->insertBatch($rincianData);
+        }
         return redirect()->to("/detailpenatausahaan/show/{$data['id_penatausahaan']}");
     }
 
@@ -447,5 +464,14 @@ class DetailPenatausahaanController extends BaseController
         unset($pajak_item); // Unset reference to the last element
 
         return view('cetak/pinbuk', $data);
+    }
+
+    public function selectrincian($id)
+    {
+        if ($this->request->isAJAX()) {
+            $rincian = $this->DetailDPASubkegiatanModel->getRincianById($id);
+
+            return $this->response->setJSON($rincian);
+        }
     }
 }
