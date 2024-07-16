@@ -65,7 +65,9 @@ class VerifikasiController extends BaseController
         if (!empty($item['keterangan'])) {
             $sumTotal = 0;
             foreach ($item['keterangan'] as &$ket) {
-                $total = $ket['jumlah'] * $ket['harga'];
+                $jumlah = is_numeric($ket['jumlah']) ? (float)$ket['jumlah'] : 0;
+                $harga = is_numeric($ket['harga']) ? (float)$ket['harga'] : 0;
+                $total = $jumlah * $harga;
                 $ket['total'] = $total;
                 $sumTotal += $total;
             }
@@ -96,7 +98,9 @@ class VerifikasiController extends BaseController
         if (!empty($item['keterangan'])) {
             $sumTotal = 0;
             foreach ($item['keterangan'] as &$ket) {
-                $total = $ket['jumlah'] * $ket['harga'];
+                $jumlah = is_numeric($ket['jumlah']) ? (float)$ket['jumlah'] : 0;
+                $harga = is_numeric($ket['harga']) ? (float)$ket['harga'] : 0;
+                $total = $jumlah * $harga;
                 $ket['total'] = $total;
                 $sumTotal += $total;
             }
@@ -128,7 +132,9 @@ class VerifikasiController extends BaseController
         if (!empty($item['keterangan'])) {
             $sumTotal = 0;
             foreach ($item['keterangan'] as &$ket) {
-                $total = $ket['jumlah'] * $ket['harga'];
+                $jumlah = is_numeric($ket['jumlah']) ? (float)$ket['jumlah'] : 0;
+                $harga = is_numeric($ket['harga']) ? (float)$ket['harga'] : 0;
+                $total = $jumlah * $harga;
                 $ket['total'] = $total;
                 $sumTotal += $total;
             }
