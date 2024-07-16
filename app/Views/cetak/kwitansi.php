@@ -194,13 +194,13 @@
         </div>
         <div class="row mt-3">
             <div class="col-md-4 text-center">
-                <?= !empty($penatausahaan['ttd_karyawan_1']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_1']) . '" alt="Gambar" width="100" height="100">' : '-' ?>
+                <?= !empty($penatausahaan['ttd_karyawan_1']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_1']) . '" alt="Gambar" width="100" height="100">' : '' ?>
             </div>
             <div class="col-md-4 text-center">
-                <?= !empty($penatausahaan['ttd_karyawan_2']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_2']) . '" alt="Gambar" width="100" height="100">' : '-' ?>
+                <?= !empty($penatausahaan['ttd_karyawan_2']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_2']) . '" alt="Gambar" width="100" height="100">' : '' ?>
             </div>
             <div class="col-md-4 text-center">
-                <?= !empty($penatausahaan['ttd_karyawan_3']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_3']) . '" alt="Gambar" width="100" height="100">' : '-' ?>
+                <?= !empty($penatausahaan['ttd_karyawan_3']) ? '<img src="' . base_url('uploads/ttd/' . $penatausahaan['ttd_karyawan_3']) . '" alt="Gambar" width="100" height="100">' : '' ?>
             </div>
         </div>
         <div class="row mt-2 mb-3">
