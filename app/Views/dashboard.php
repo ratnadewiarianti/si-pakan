@@ -122,7 +122,7 @@
     // Loop data untuk mengisi array labels, paguData, dan realisasiData
     laporanData.forEach(function(row) {
         labels.push(row.bidang);
-        paguData.push(row.jumlahdpa);
+        paguData.push(row.pagu);
         realisasiData.push(row.realisasi);
     });
 
