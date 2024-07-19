@@ -60,8 +60,10 @@ protected $JenisModel;
             $totalKet = 0; // Initialize totalKet for accumulating totals from keterangan
 
             foreach ($keterangan as $ket) {
-                $total = $ket['jumlah'] * $ket['harga']; // Ensure this calculation uses correct fields from the model
-                $totalKet += $total; // Accumulate total from each keterangan entry
+                    $jumlah = is_numeric($ket['jumlah']) ? (float)$ket['jumlah'] : 0;
+                    $harga = is_numeric($ket['harga']) ? (float)$ket['harga'] : 0;
+                    $total = $jumlah * $harga;
+                    $totalKet += $total; // Accumulate total from each keterangan entry
             }
 
             // Push the complete data set for each detail into detaildata

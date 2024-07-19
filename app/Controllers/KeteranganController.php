@@ -51,11 +51,18 @@ class KeteranganController extends BaseController
 
     $sumTotal = 0; // Variable untuk menyimpan total keseluruhan
 
-    foreach ($data['keterangan'] as &$ket) {
-        $total = $ket['jumlah'] * $ket['harga'];
-        $ket['total'] = $total;
-        $sumTotal += $total; // Menambahkan total ke sumTotal
-    }
+    if (!empty($data['keterangan'])) {
+            $sumTotal = 0;
+            foreach ($data['keterangan'] as &$ket) {
+                $jumlah = is_numeric($ket['jumlah']) ? (float)$ket['jumlah'] : 0;
+                $harga = is_numeric($ket['harga']) ? (float)$ket['harga'] : 0;
+                $total = $jumlah * $harga;
+                $ket['total'] = $total;
+                $sumTotal += $total;
+            }
+        } else {
+            $sumTotal = 0;
+        }
 
     $data['sumTotal'] = $sumTotal; // Menyimpan sumTotal dalam data
 
