@@ -52,7 +52,7 @@ class LaporanModel extends Model
     public function getTotalJumlah()
     {
         $query = $this->db->table('detail_dpa_subkegiatan')
-            ->selectSum('jumlah', 'total_jumlah') // Menggunakan alias untuk hasil sum
+            ->select('SUM(jumlah * harga) AS total_jumlah') // Menggunakan alias untuk hasil sum
             // ->where('id_detail_dpa', $id)
             ->get();
     
@@ -63,10 +63,10 @@ class LaporanModel extends Model
         public function getTotalJumlahbyId($id)
     {
         $query = $this->db->table('detail_dpa_subkegiatan')
-            ->selectSum('jumlah', 'total_jumlah') // Menggunakan alias untuk hasil sum
+            ->select('SUM(jumlah * harga) AS total_jumlah') // Menggunakan alias untuk hasil sum
             ->where('id_detail_dpa', $id)
             ->get();
-    
+            
         $result = $query->getRow();
         return $result ? $result->total_jumlah : 0; // Mengakses alias dari hasil sum, cek null
     }
