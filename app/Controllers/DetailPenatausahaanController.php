@@ -420,10 +420,15 @@ class DetailPenatausahaanController extends BaseController
             'jumlahdpaperubahan' => $jumlahdpaperubahan,
         ];
 
+        $sumTotal = 0;
         foreach ($data['keterangan'] as &$ket) {
             $total = $ket['jumlah'] * $ket['harga'];
             $ket['total'] = $total;
+            $sumTotal += $total;
         }
+        // Calculate nilai_pajak for each pajak item
+
+        $data['sumTotal'] = $sumTotal;
         // Calculate nilai_pajak for each pajak item
 
         unset($ket); // Unset reference to the last element

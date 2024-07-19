@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preview Kwitansi</title>
+    <title> Preview Kwitansi</title>
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/kwitansi.css" rel="stylesheet">
@@ -71,7 +71,7 @@
                     <tr>
                         <td style="white-space: nowrap;vertical-align: top;">TAHUN ANGGARAN</td>
                         <td style="text-align: right;"> : </td>
-                        <td>2023</td>
+                        <td><?= session()->get('tahun') ?></td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top;white-space: nowrap;">PROGRAM</td>
@@ -98,7 +98,7 @@
             </div>
             <div class="col-md-4">
                 <table class="table-borderless" style="text-align: left;">
-                <tr>
+                    <tr>
                         <td style="white-space: nowrap;vertical-align: top;">NO. BK. UMUM</td>
                         <td style="text-align: right;"> : </td>
                         <td style="vertical-align: top; white-space: nowrap;"> <?= $detailpenatausahaan['id']; ?>/DISP/<?= $detailpenatausahaan['kode_bidang']; ?>/<?= session()->get('tahun') ?></td>
@@ -136,7 +136,7 @@
                         <td style="vertical-align: top;white-space: nowrap;"><b>UANG SEBANYAK</b></td>
                         <td style="text-align: right;vertical-align: top;"> : </td>
                         <td class="border-jajar-genjang">
-                            <p style="text-align: center; margin: 10px;font-weight: bold; font-size: 12px;"> <?= strtoupper(terbilang($jumlahdpa)); ?></p>
+                            <p style="text-align: center; margin: 10px;font-weight: bold; font-size: 12px;"> <?= strtoupper(terbilang($sumTotal)); ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -182,7 +182,7 @@
                         <b>Terbilang Rp. </b>
                         <span class="jajar-genjang">
                             <span class="skew-fix">
-                                <b><?= number_format($jumlahdpa, 0, ',', '.'); ?></b>
+                                <b><?= number_format($sumTotal, 0, ',', '.'); ?></b>
                             </span>
                         </span>
                     </div>
@@ -268,26 +268,24 @@
                         <thead>
                             <th>No</th>
                             <th>Keperluan</th>
-                            <th>Harga</th>
+                          
                             <th>Jumlah</th>
-                            <th>Total</th>
                         </thead>
                         <tbody>
                             <?php $no = 1; ?>
-                            <?php $total_semua = 0; ?> <!-- Variabel untuk menyimpan total -->
+                            <?php $total_jumlah = 0; ?> <!-- Variabel untuk menyimpan total -->
                             <?php foreach ($keterangan as $row) : ?>
                                 <tr>
                                     <td><?= $no++; ?></td>
                                     <td><?= $row['uraian']; ?>, <?= $row['koefisien']; ?> <?= $row['satuan']; ?></td>
-                                    <td><?= 'Rp ' . number_format($row['harga'], 0, ',', '.'); ?></td>
+                                                
                                     <td><?= $row['jumlah']; ?></td>
-                                    <td><?= 'Rp ' . number_format($row['total'], 0, ',', '.'); ?></td>
-                                </tr>
-                                <?php $total_semua += $row['total']; ?> <!-- Menambahkan total pada setiap iterasi -->
+                                   </tr>
+                                <?php $total_jumlah += $row['jumlah']; ?> <!-- Menambahkan total pada setiap iterasi -->
                             <?php endforeach; ?>
                             <tr>
-                                <td colspan="4"><b>Jumlah Total</b></td>
-                                <td><b><?= 'Rp ' . number_format($total_semua, 0, ',', '.'); ?></b></td>
+                                <td colspan="2"><b>Total Jumlah</b></td>
+                                <td><b><?= $total_jumlah; ?></b></td>
                             </tr>
                         </tbody>
                     </table>
