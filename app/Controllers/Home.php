@@ -81,7 +81,7 @@ class Home extends BaseController
         }
 
         // // Log the data for debugging
-        var_dump('info', 'Detailp Data: ' . print_r($detaildata, true));
+        // var_dump('info', 'Detailp Data: ' . print_r($detaildata, true));
 
         $data['detailp'] = $detaildata;
         $data['laporan'] = $laporan;

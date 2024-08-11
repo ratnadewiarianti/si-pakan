@@ -120,7 +120,12 @@ class BPSimpananBankController extends BaseController
         $kepala_dinas = $this->KaryawanModel->select('nama,nip,jabatan,file')->where('nip', $bp_simpanan_bank['kepala_dinas'])->first();
         $bendahara_pengeluaran = $this->KaryawanModel->select('nama,nip,jabatan,file')->where('nip', $bp_simpanan_bank['bendahara_pengeluaran'])->first();
 
-        $penatausahaan = $this->PenatausahaanModel->where('YEAR(tanggal)', session()->get('tahun'))->orderBy('tanggal', 'asc')->findAll();
+        // $penatausahaan = $this->PenatausahaanModel->where('YEAR(tanggal)', session()->get('tahun'))->orderBy('tanggal', 'asc')->findAll();
+        $penatausahaan = $this->PenatausahaanModel
+        ->where('tanggal >=', $bp_simpanan_bank['tgl_mulai'])
+        ->where('tanggal <=', $bp_simpanan_bank['tgl_selesai'])
+        ->orderBy('tanggal', 'asc')
+            ->findAll();
         $tgl_awal = $this->PenatausahaanModel->where('YEAR(tanggal)', session()->get('tahun'))->orderBy('tanggal', 'asc')->first()['tanggal'] ?? 'Tidak ada data';
         $jumlahdpaArray = [];
         $saldo_awal = 0;
