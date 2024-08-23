@@ -119,7 +119,12 @@ class BPPajakController extends BaseController
             'tahun' => session()->get('tahun')
         ];
 
-        $penatausahaan = $this->PenatausahaanModel->where('YEAR(tanggal)', session()->get('tahun'))->findAll();
+        // $penatausahaan = $this->PenatausahaanModel->where('YEAR(tanggal)', session()->get('tahun'))->findAll();
+        $penatausahaan = $this->PenatausahaanModel
+        ->where('tanggal >=', $bp_pajak['tgl_mulai'])
+        ->where('tanggal <=', $bp_pajak['tgl_selesai'])
+        ->orderBy('tanggal', 'asc')
+        ->findAll();
         $data = [];
 
         $kepala_dinas = $this->KaryawanModel->select('nama,nip,jabatan,file')->where('nip',$bp_pajak['kepala_dinas'])->first();
